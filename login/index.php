@@ -1,6 +1,6 @@
 <?php
  session_start();
- include_once('../classSessaoUsuario.php');
+ include_once('../classes/classSessaoUsuario.php');
  $autenticandoUsuario = new sessaoUsuario();
  $autenticandoUsuario->fazerLogof();
 ?>
@@ -70,6 +70,6 @@
             <h3 class="rodape"></h3>
         </div>
     </footer>
-    <script src="/fapi/script.js" defer></script>
+    <script src="/sapd/script.js" defer></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
  session_start();
- include_once('../classSessaoUsuario.php');
+ include_once('../classes/classSessaoUsuario.php');
  $autenticandoUsuario = new sessaoUsuario();
  $autenticandoUsuario->fazerLogof();
 ?>

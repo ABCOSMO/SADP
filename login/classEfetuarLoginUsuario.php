@@ -1,6 +1,6 @@
 <?php
 
-include_once('../classConectarBD.php');
+include_once('../classes/classConectarBD.php');
 
 class efetuarLoginUsuario extends conectarBD
 {
@@ -43,7 +43,7 @@ class efetuarLoginUsuario extends conectarBD
             else 
             {
                 // Usuário não logado, redireciona para a página de login
-                header('Location: /sadp/login/errorLogin.php');
+                header('Location: ../login/errorLogin.php');
                 exit;
             }
             $stmt->close();

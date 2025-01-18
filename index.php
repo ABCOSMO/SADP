@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('classSessaoUsuario.php');
+include_once('classes/classSessaoUsuario.php');
 $autenticandoUsuario = new sessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
@@ -26,8 +26,8 @@ $unidade = $_SESSION['unidade'];
         </nav>
         <nav class="links">
         <a href="/sadp/login/index.php?logout=logout">Fazer Logoff</a>
-        <a href="/sadp/digitalizacao/">FAPI Digitalização</a>
-        <a href="/sadp/producao/">FAPI Produção</a>
+        <a href="/sadp/digitalizacao/">SADP Digitalização</a>
+        <a href="/sadp/producao/">SADP Produção</a>
         <a href="#">SGD</a>
         <a href="#">e-Carta</a>
         <a href="/sadp/">Home</a>
