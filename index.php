@@ -25,12 +25,12 @@ $unidade = $_SESSION['unidade'];
         <p><?php echo $nome." - ".$unidade;?></p>
         </nav>
         <nav class="links">
-        <a href="/fapi/login/login.php?logout=logout">Fazer Logoff</a>
-        <a href="/fapi/digitalizacao/">FAPI Digitalização</a>
-        <a href="/fapi/producao/">FAPI Produção</a>
+        <a href="/sadp/login/index.php?logout=logout">Fazer Logoff</a>
+        <a href="/sadp/digitalizacao/">FAPI Digitalização</a>
+        <a href="/sadp/producao/">FAPI Produção</a>
         <a href="#">SGD</a>
         <a href="#">e-Carta</a>
-        <a href="/fapi/">Home</a>
+        <a href="/sadp/">Home</a>
         </nav>
     </header>
     <section class="container__botao">

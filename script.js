@@ -141,7 +141,7 @@ form.addEventListener('submit', (event) => {
     const formData = new FormData(form);
     console.log(formData);
 
-    fetch('/fapi/cadastro/controllerCadastro.php', {
+    fetch('/sadp/cadastro/controllerCadastro.php', {
         method: 'POST',
         body: formData
     })
@@ -152,7 +152,7 @@ form.addEventListener('submit', (event) => {
         // Processa a resposta JSON, por exemplo, exibindo uma mensagem
         if (data.success) {
             alert('Dados enviados com sucesso');
-            window.location.href = '/fapi/producao/';
+            window.location.href = '/sadp/producao/';
             /*verMensagem('p', 'Dados enviados com sucesso');*/
         } else {
             alert('Erro ao enviar os dados: ' + data.error);

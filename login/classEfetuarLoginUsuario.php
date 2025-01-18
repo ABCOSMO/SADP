@@ -35,7 +35,7 @@ class efetuarLoginUsuario extends conectarBD
                     $_SESSION['unidade'] = $row['unidadeUsuario'];
                     if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
                         // Usuário logado, redireciona para a área restrita
-                        header('Location: /fapi/');
+                        header('Location: /sadp/');
                         exit;
                     }
                 }
@@ -43,7 +43,7 @@ class efetuarLoginUsuario extends conectarBD
             else 
             {
                 // Usuário não logado, redireciona para a página de login
-                header('Location: /fapi/login/errorLogin.php');
+                header('Location: /sadp/login/errorLogin.php');
                 exit;
             }
             $stmt->close();

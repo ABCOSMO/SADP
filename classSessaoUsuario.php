@@ -6,7 +6,7 @@ class sessaoUsuario
         if (!isset($_SESSION['logado']) || empty($_SESSION['logado'])) 
         {
             // Usuário não está logado, redirecionar para a página de login
-            header('Location: /fapi/login/login.php');
+            header('Location: /sadp/login/');
             exit();
         }    
     }   
@@ -19,7 +19,7 @@ class sessaoUsuario
         {
             session_unset();
             session_destroy();
-            header("Location: /fapi/login/login.php"); 
+            header("Location: /sadp/login/"); 
             exit;
         } else 
         {
@@ -32,7 +32,7 @@ class sessaoUsuario
         if(isset($_GET['logout'])) {
             session_unset();
             session_destroy();
-            header("Location: /fapi/login/login.php");
+            header("Location: /sadp/login/");
             exit;
         }
     }

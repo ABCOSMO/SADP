@@ -18,7 +18,7 @@
 }
 
 body {
-    background-image: url("/fapi/assets/FAPI.png");
+    background-image: url("/sadp/assets/FAPI.png");
     background-color: var(--cor-quarta);
     height: 100vh;
     background-size: 100% 100%;
