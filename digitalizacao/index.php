@@ -28,23 +28,26 @@ $unidade = $_SESSION['unidade'];
             <a href="../login/index.php?logout=logout">Fazer Logoff</a>
             <a href="../digitalizacao/">SADP Digitalização</a>
             <a href="../producao/">SADP Produção</a>
+            <a href="#">Consulta e-Carta</a>
             <a href="#">SGD</a>
             <a href="#">e-Carta</a>
             <a href="../">Home</a>
         </nav>
     </header>
     <div class="container__caminho">
-        <div class="caminhos">
-            <a href="../">Home</a>  >
-            <a href="/sadp/digitalizacao/">SADP Digitalização</a>
+        <div class="caminhos linha">
+            <a href="../">Home</a> 
+            <p class="seta">  > </p>
+            <a href="../digitalizacao/">SADP Digitalização</a>
         </div>
     </div>
     <section class="container__botao">
         <div class="container__margem">
-            <a href="#">Cadastrar Usuário</a>
+            <a href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a>
             <a href="#">Alterar/Excluir Usuário</a>
             <a href="#">Lançar Dados Digitalização</a>
             <a href="#">Excluir Dados Digitalização</a>
+            <a href="#">Relatório de Acesso</a>
             <a href="#">Relatório Digitalização</a>
         </div>
     </section>

@@ -70,6 +70,6 @@
             <h3 class="rodape"></h3>
         </div>
     </footer>
-    <script src="/sapd/script.js" defer></script>
+    <script src="../script.js" defer></script>
 </body>
 </html>

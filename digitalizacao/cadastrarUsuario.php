@@ -15,14 +15,14 @@ $unidade = $_SESSION['unidade'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleDigitalizacao.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="scriptCadastro.js" defer></script>
     <title>SADP - DELOG</title>
-    <script src="../script.js" defer></script>
 </head>
 <body>
     <header class="container__links">
@@ -43,28 +43,27 @@ $unidade = $_SESSION['unidade'];
         <div class="caminhos linha">
             <a href="../">Home</a>  
             <p class="seta"> > </p>
-            <a href="../producao/">SADP Produção</a>
+            <a href="../digitalizacao/">SADP Digitalização</a>
+            <p class="seta">  > </p>
+            <a href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a>
         </div>
     </div>
     <section class="container__botao">
         <div class="container__margem">
-            <button class="open-modal" data-modal="modal-1">Cadastrar Usuário</button> 
+            <a href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a> 
             <a href="#">Alterar/Excluir Usuário</a>
-            <a href="#">Lançar Dados Produção</a>
-            <a href="#">Excluir Dados Produção</a>
+            <a href="#">Lançar Dados Digitalização</a>
+            <a href="#">Excluir Dados Digitalização</a>
             <a href="#">Relatório de Acesso</a>
-            <a href="#">Relatório Produção</a>
+            <a href="#">Relatório Digitalização</a>
         </div>
-        <div>
-        <dialog id="modal-1"><!--action="/fapi/cadastro/controllerCadastro.php" -->
+        <div class="container__cadastro">
+            <div class="menuCadastro" id="modal-1">
                 <form method="post" id="myForm" name="autenticar" onSubmit="return validaFormulario()">
                     <div class="modal-header">
                         <h1 class="modal-title">
-                            Cadastrar novo usuário<!--Sign in to our plataform-->
+                            Cadastrar novo usuário
                         </h1>
-                        <button class="close-modal" data-modal="modal-1" type="button">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
@@ -115,36 +114,16 @@ $unidade = $_SESSION['unidade'];
                             </label>
                             <input type="text" id="password" name="newPassword" placeholder="••••••••" maxlength="9">
                         </div>
-                        <!--<div class="passaword-options">
-                            <div class="remember-passaword">
-                                <input type="checkbox" name="remember-passaword" id="remember-passaword">
-                                <label for="remember-passaword">
-                                    Remember me
-                                </label>
-                            </div>
-                            <a href="#" class="forgot-passaword">Forgot password?</a>
-                        </div>-->
                         <input value="Cadastrar" type="submit" id="login-button">
-                            <!--Login to your account-->
                         </input>
-                        <!--<div class="register">
-                            <span>Not registered?</span>
-                            <a href="#">Login here</a>
-                        </div>-->
                     </div>
                 </form>
-            </dialog>
-            <p></p>
-                <!--<div class="menuCadastro">
-                    <div class="modal-header">
-                        <p class="modal-title"></p>
-                    </div>
-                </div>-->
-             <div class="loading"></div>
+            </div>
+            <dialog class="loading"></dialog>
+        </div>
     </section>
     <footer>
         <div>
-            <h3 class="rodape"></h3>
         </div>
     </footer>
 </body>

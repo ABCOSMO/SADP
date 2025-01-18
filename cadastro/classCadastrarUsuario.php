@@ -1,5 +1,5 @@
 <?php
-include_once('../classConectarBD.php');
+include_once('../classes/classConectarBD.php');
 
 class cadastroUsuario extends conectarBD
 {

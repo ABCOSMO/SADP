@@ -28,6 +28,7 @@ $unidade = $_SESSION['unidade'];
         <a href="/sadp/login/index.php?logout=logout">Fazer Logoff</a>
         <a href="/sadp/digitalizacao/">SADP Digitalização</a>
         <a href="/sadp/producao/">SADP Produção</a>
+        <a href="#">Consulta e-Carta</a>
         <a href="#">SGD</a>
         <a href="#">e-Carta</a>
         <a href="/sadp/">Home</a>
