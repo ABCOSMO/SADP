@@ -21,7 +21,7 @@ $unidade = $_SESSION['unidade'];
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>FAPI - DELOG</title>
+    <title>SADP - DELOG</title>
     <script src="../script.js" defer></script>
 </head>
 <body>
