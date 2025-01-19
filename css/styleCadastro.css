@@ -250,7 +250,7 @@ footer {
     text-align: justify;
     width: 70rem;
     border-radius: 4vh;  
-    padding: 3vh;
+    padding: 1vh;
 }
 
 
@@ -259,7 +259,7 @@ footer {
     font-weight: 500;
     color: #9ca3af;
     border: 1px solid #9ca3af;
-    padding: 0 0.5rem;
+    padding: 0 0.3rem;
     margin: 0;
 }
 

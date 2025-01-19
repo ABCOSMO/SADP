@@ -2,10 +2,12 @@
 session_start();
 include_once('../classes/classSessaoUsuario.php');
 include_once('../classes/classSeletorUnidade.php');
+include_once('../classes/classListarUsuario.php');
 $autenticandoUsuario = new sessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
 $escolherUnidade = new selecionarUnidade();
+$listarUsuarios = new listarUsuario();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
@@ -51,7 +53,7 @@ $unidade = $_SESSION['unidade'];
     <section class="container__botao">
         <div class="container__margem">
             <a href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a> 
-            <a href="../digitalização/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
+            <a href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
             <a href="#">Lançar Dados Digitalização</a>
             <a href="#">Excluir Dados Digitalização</a>
             <a href="#">Relatório de Acesso</a>
@@ -64,60 +66,7 @@ $unidade = $_SESSION['unidade'];
                         Alterar ou excluir usuário
                     </h1>
                 </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                         <label for="nome">
-                            Administrador
-                        </label>
-                        <table class="container__usuario">
-                            <tr>
-                                <th id="usuario">Usuário</th>
-                                <th id="usuario">Matrícula</th>
-                                <th id="usuario">e-mail</th>
-                                <th id="usuario">Telefone</th>
-                                <th id="usuario">Perfil</th>
-                                <th id="usuario">Alterar</th>
-                                <th id="usuario">Excluir</th>
-                            </tr>
-                            <tr class="container__usuario">
-                                <td id="usuario">Alexandre Bruno Cosmo</td>
-                                <td id="usuario">8.134.249-7</td>
-                                <td id="usuario">abcosmo04@gmail.com</td>
-                                <td id="usuario">(61) 2141-8132</td>
-                                <td id="usuario">Administrador</td>
-                                <td id="usuario"><button><i class="fa-solid fa-pencil"></i></button></td>
-                                <td id="usuario"><button><i class="fa-solid fa-trash"></i></button></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                         <label for="nome">
-                            Gestor
-                        </label>
-                        <table class="container__usuario">
-                            <tr>
-                                <th id="usuario">Usuário</th>
-                                <th id="usuario">Matrícula</th>
-                                <th id="usuario">e-mail</th>
-                                <th id="usuario">Telefone</th>
-                                <th id="usuario">Perfil</th>
-                                <th id="usuario">Alterar</th>
-                                <th id="usuario">Excluir</th>
-                            </tr>
-                            <tr class="container__usuario">
-                                <td id="usuario">Cristiane de Jesus Feitosa</td>
-                                <td id="usuario">8.888.888-8</td>
-                                <td id="usuario">crisjfferreira@gmail.com</td>
-                                <td id="usuario">(61) 2141-9136</td>
-                                <td id="usuario">Gestor</td>
-                                <td id="usuario"><button><i class="fa-solid fa-pencil"></i></button></td>
-                                <td id="usuario"><button><i class="fa-solid fa-trash"></i></button></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+                    <?php $listarUsuarios -> mostrarUsuario(); ?> 
             </div>
             <dialog class="loading"></dialog>
         </div>

@@ -1,0 +1,78 @@
+<?php
+
+class listarUsuario extends conectarBD
+{
+    function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function formatarMatricula($matricula) 
+    {
+        // Remove todos os caracteres não numéricos
+        $matricula = preg_replace('/[^0-9]/', '', $matricula);
+    
+        // Divide a matrícula em partes para facilitar a formatação
+        $parte1 = substr($matricula, 0, 1);
+        $parte2 = substr($matricula, 1, 3);
+        $parte3 = substr($matricula, 4, 3);
+        $parte4 = substr($matricula, 7, 1);
+    
+        // Junta as partes com os pontos e hífen
+        $matriculaFormatada = $parte1 . '.' . $parte2 . '.' . $parte3 . '-' . $parte4;
+    
+        return $matriculaFormatada;
+    }
+    
+    public function mostrarUsuario()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM usuario GROUP BY unidadeUsuario");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) 
+        {
+            // Autenticação bem-sucedida
+            while($row = $result->fetch_assoc())
+            {
+                $unidade = $row['unidadeUsuario'];
+                $usuario = $row['usuario'];
+                $matricula = $row['matricula'];
+                $matriculaFormatada = $this -> formatarMatricula($matricula);
+                $email = $row['email'];
+                $telefone = $row['telefone'];
+                $perfil = $row['privilegioUsuario'];
+                
+                echo "<div class='modal-body'>
+                    <div class='input-group'>
+                         <label for='nome'>
+                            $unidade
+                        </label>
+                        <table class='container__usuario'>
+                            <tr>
+                                <th id='usuario'>Usuário</th>
+                                <th id='usuario'>Matrícula</th>
+                                <th id='usuario'>e-mail</th>
+                                <th id='usuario'>Telefone</th>
+                                <th id='usuario'>Perfil</th>
+                                <th id='usuario'>Alterar</th>
+                                <th id='usuario'>Excluir</th>
+                            </tr>
+                            <tr class='container__usuario'>
+                                <td id='usuario'>$usuario</td>
+                                <td id='usuario'>$matriculaFormatada</td>
+                                <td id='usuario'>$email</td>
+                                <td id='usuario'>$telefone</td>
+                                <td id='usuario'>$perfil</td>
+                                <td id='usuario'><button><i class='fa-solid fa-pencil'></i></button></td>
+                                <td id='usuario'><button><i class='fa-solid fa-trash'></i></button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>";
+            }
+        } 
+    }
+}
+
+?>

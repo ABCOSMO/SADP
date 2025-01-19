@@ -56,7 +56,7 @@ $unidade = $_SESSION['unidade'];
             <a href="#">Relatório Produção</a>
         </div>
         <div>
-        <dialog id="modal-1"><!--action="/fapi/cadastro/controllerCadastro.php" -->
+            <dialog id="modal-1"><!--action="/fapi/cadastro/controllerCadastro.php" -->
                 <form method="post" id="myForm" name="autenticar" onSubmit="return validaFormulario()">
                     <div class="modal-header">
                         <h1 class="modal-title">
@@ -134,6 +134,7 @@ $unidade = $_SESSION['unidade'];
                     </div>
                 </form>
             </dialog>
+        </div>
             <p></p>
                 <!--<div class="menuCadastro">
                     <div class="modal-header">

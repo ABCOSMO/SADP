@@ -155,6 +155,18 @@ class cadastroUsuario extends conectarBD
             $stmt->close(); // Fecha a última consulta
         }
     }
+
+    public function deletarUsuario () 
+    {
+        $tratarMatricula = $this->getMatricula();
+        $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
+
+        $stmt = $this->conn->prepare("DELETE FROM usuario WHERE matricula = ?");
+        $stmt->bind_param("s", $matricula);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    }
+
 }
 
 ?>
