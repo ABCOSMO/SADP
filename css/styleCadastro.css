@@ -164,15 +164,23 @@ nav {
     margin-left: 0%;
 }
 
+.container__cadastro_usuario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0vh;
+    margin-left: 10vh;
+   
+}
+
 .container__cadastro {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 24vb;
+    margin-top: 24vh;
     margin-left: 45vh;
     height: 80%;
 }
-
 .corpo {
     font-family: var(--fonte-principal);
     font-size: 16px;
@@ -233,6 +241,32 @@ footer {
     font-size: 14px;
     font-weight: 500;
 }
+
+.menuAlterarUsuario {
+    display: grid;
+    grid-template-columns: 100%;
+    background-color: white;
+    color: var(--cor-secundaria);
+    text-align: justify;
+    width: 70rem;
+    border-radius: 4vh;  
+    padding: 3vh;
+}
+
+
+#usuario {
+    font-size: 12px;
+    font-weight: 500;
+    color: #9ca3af;
+    border: 1px solid #9ca3af;
+    padding: 0 0.5rem;
+    margin: 0;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
 
 .input-group input {
     border: 1px solid #d1d5db;

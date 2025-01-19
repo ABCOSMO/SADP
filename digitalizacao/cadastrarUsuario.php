@@ -15,7 +15,7 @@ $unidade = $_SESSION['unidade'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styleDigitalizacao.css">
+    <link rel="stylesheet" href="../css/styleCadastro.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@ $unidade = $_SESSION['unidade'];
     <section class="container__botao">
         <div class="container__margem">
             <a href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a> 
-            <a href="#">Alterar/Excluir Usuário</a>
+            <a href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
             <a href="#">Lançar Dados Digitalização</a>
             <a href="#">Excluir Dados Digitalização</a>
             <a href="#">Relatório de Acesso</a>
