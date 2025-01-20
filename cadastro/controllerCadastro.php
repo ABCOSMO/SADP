@@ -1,9 +1,10 @@
 <?php
     session_start();
-    include('classCadastrarUsuario.php');
-        
+    include('classCadastrarUsuario.php');        
+    
     if(isset($_POST['novaMatricula']))
     {  
+        
         $newUsuario = $_POST['novoNome'];
         $newMatricula = $_POST['novaMatricula'];
         $newEmail = $_POST['novoEmail'];

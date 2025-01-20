@@ -137,7 +137,6 @@ class cadastroUsuario extends conectarBD
             $stmt->close(); // Fecha a consulta anterior
         } else {
             // Usuário não existe, então insere          
-            $stmt->close(); // Fecha a consulta anterior
             $stmt = $this->conn->prepare("INSERT INTO usuario (usuario, matricula, email, telefone, unidadeUsuario, privilegioUsuario, senha) VALUES (?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssssss", $nomeUsuario, $matricula, $email, $telefone, $unidade, $perfil, $senha);
             $stmt->execute();
@@ -153,20 +152,47 @@ class cadastroUsuario extends conectarBD
             header('Content-Type: application/json');
             echo json_encode($response);
             $stmt->close(); // Fecha a última consulta
+            $conn->close();
         }
     }
 
-    public function deletarUsuario () 
+    public function deletarUsuario() 
     {
         $tratarMatricula = $this->getMatricula();
         $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
 
         $stmt = $this->conn->prepare("DELETE FROM usuario WHERE matricula = ?");
-        $stmt->bind_param("s", $matricula);
+        $stmt->bind_param("i", $matricula);
         $stmt->execute();
-        $result = $stmt->get_result();
+
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => $stmt->error]);
+        }
+    
+        $stmt->close();
     }
 
+    public function editarUsuario()
+    {
+        $stmt = $this->conn->prepare("UPDATE usuario SET privilegioUsuario = ?, unidadeUsuario = ?, usuario = ?, matricula = ?,
+                                        email = ?, telefone = ? WHERE matricula = ?");
+        $stmt->bind_param("sssssss", $this->getPerfil(), $this->getUnidade, $this->getNomeUsuario(), $this->getMatricula(),
+                            $this->getEmail(), $this->getTelefone(), $this->getMatricula());
+        $stmt->execute();
+
+        // Verificando se a atualização ocorreu com sucesso
+        if ($stmt->affected_rows > 0) {
+            echo "Registro atualizado com sucesso!";
+        } else {
+            echo "Não foi possível atualizar o registro.";
+        }
+
+        // Fechando o statement
+        $stmt->close();
+        $conn->close();
+    }
 }
 
 ?>

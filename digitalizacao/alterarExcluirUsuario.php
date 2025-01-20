@@ -23,7 +23,7 @@ $unidade = $_SESSION['unidade'];
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="scriptCadastro.js" defer></script>
+    <script src="scriptExcluirCadastro.js" defer></script>
     <title>SADP - DELOG</title>
 </head>
 <body>
@@ -66,7 +66,7 @@ $unidade = $_SESSION['unidade'];
                         Alterar ou excluir usuário
                     </h1>
                 </div>
-                    <?php $listarUsuarios -> mostrarUsuario(); ?> 
+                    <?php $listarUsuarios -> mostrarUsuario(); ?>
             </div>
             <dialog class="loading"></dialog>
         </div>

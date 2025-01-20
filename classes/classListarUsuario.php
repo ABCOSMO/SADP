@@ -29,6 +29,7 @@ class listarUsuario extends conectarBD
         $stmt = $this->conn->prepare("SELECT * FROM usuario GROUP BY unidadeUsuario");
         $stmt->execute();
         $result = $stmt->get_result();
+        $returnValue = array();
 
         if ($result->num_rows > 0) 
         {
@@ -36,13 +37,7 @@ class listarUsuario extends conectarBD
             while($row = $result->fetch_assoc())
             {
                 $unidade = $row['unidadeUsuario'];
-                $usuario = $row['usuario'];
-                $matricula = $row['matricula'];
-                $matriculaFormatada = $this -> formatarMatricula($matricula);
-                $email = $row['email'];
-                $telefone = $row['telefone'];
-                $perfil = $row['privilegioUsuario'];
-                
+
                 echo "<div class='modal-body'>
                     <div class='input-group'>
                          <label for='nome'>
@@ -57,21 +52,48 @@ class listarUsuario extends conectarBD
                                 <th id='usuario'>Perfil</th>
                                 <th id='usuario'>Alterar</th>
                                 <th id='usuario'>Excluir</th>
-                            </tr>
-                            <tr class='container__usuario'>
-                                <td id='usuario'>$usuario</td>
-                                <td id='usuario'>$matriculaFormatada</td>
-                                <td id='usuario'>$email</td>
-                                <td id='usuario'>$telefone</td>
-                                <td id='usuario'>$perfil</td>
-                                <td id='usuario'><button><i class='fa-solid fa-pencil'></i></button></td>
-                                <td id='usuario'><button><i class='fa-solid fa-trash'></i></button></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>";
+                            </tr>";
+
+                $stmt = $this->conn->prepare("SELECT * FROM usuario WHERE unidadeUsuario = ?");
+                $stmt->bind_param("s", $unidade);
+                $stmt->execute();
+                $result2 = $stmt->get_result();
+                    
+                if ($result2->num_rows > 0) 
+                {
+                    // Autenticação bem-sucedida
+                    while($row = $result2->fetch_assoc())
+                    {
+                        $usuario = $row['usuario'];
+                        $matricula = $row['matricula'];
+                        $matriculaFormatada = $this -> formatarMatricula($matricula);
+                        $email = $row['email'];
+                        $telefone = $row['telefone'];
+                        $perfil = $row['privilegioUsuario'];
+                                    
+                        echo "  <tr class='container__usuario'>
+                                    <td id='usuario'>$usuario</td>
+                                    <td id='usuario'>$matriculaFormatada</td>
+                                    <td id='usuario'>$email</td>
+                                    <td id='usuario'>$telefone</td>
+                                    <td id='usuario'>$perfil</td>
+                                    <td id='usuario'><button><i class='fa-solid fa-pencil'></i></button></td>
+                                    <td id='usuario'><button data-id='$matriculaFormatada' class='botao__excluir'>
+                                    <i class='fa-solid fa-trash'></i></button></td>
+                                </tr>";
+                       
+                    }
+                echo "     </table>
+                        </div>
+                    </div>";
+                    
+                } 
             }
-        } 
+        }
+
+        
+        $stmt->close();
+        $this->conn->close();
     }
 }
 
