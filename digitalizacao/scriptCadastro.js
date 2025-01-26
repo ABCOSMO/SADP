@@ -20,6 +20,50 @@ closeButtons.forEach(button => {
     });
 });
 
+
+function enviarDadosFormulario()
+		{
+			const form = document.getElementById('myForm');
+			const loading = document.querySelector('.loading');
+			
+			
+				event.preventDefault();
+				// Mostrar a animação
+				loading.style.display = 'block';
+				const formData = new FormData(form);
+				console.log(formData);
+			
+				fetch('../cadastro/controllerCadastro.php', {
+					method: 'POST',
+					body: formData
+				})
+				.then(response => {
+					if (!response.ok) {
+					throw new Error('Rede não responde');
+					}
+					return response.json();
+				}) 
+				// Recebe a resposta como JSON
+				.then(data => {
+					// Ocultar a animação e exibir uma mensagem
+					loading.style.display = 'none';
+					console.log(data);
+					// Processa a resposta JSON, por exemplo, exibindo uma mensagem
+					if (data.success) {
+						alert(data.message);
+						window.location.href = '../digitalizacao/cadastrarUsuario.php';
+					} else {
+						alert('Erro ao enviar os dados: ' + data.error);
+					}
+				})
+				.catch(error => {
+					loading.style.display = 'none';
+					console.error('Erro ao enviar os dados:', error);
+					alert('Erro ao enviar os dados');
+				});
+			
+		}
+
 function mascaraMatricula(matricula) {
     // Remove todos os caracteres não numéricos
     matricula = matricula.replace(/\D/g, "");
@@ -120,45 +164,18 @@ function validaFormulario(){
         return false; // Formulário inválido
     }else
     {
-    return true; // Formulário válido
+		 return true; // Formulário inválido
     }
 }
 
-function enviarDadosFormulario()
-{
 const form = document.getElementById('myForm');
-const loading = document.querySelector('.loading');
-
 form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    loading.style.display = 'block';
-    const formData = new FormData(form);
-    console.log(formData);
+    event.preventDefault(); // Impede o envio padrão do formulário
 
-    fetch('../cadastro/controllerCadastro.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json()) // Recebe a resposta como JSON
-    .then(data => {
-        loading.style.display = 'none';
-        console.log(data);
-        // Processa a resposta JSON, por exemplo, exibindo uma mensagem
-        if (data.success) {
-            alert('Dados enviados com sucesso');
-            window.location.href = '../digitalizacao/';
-            /*verMensagem('p', 'Dados enviados com sucesso');*/
-        } else {
-            alert('Erro ao enviar os dados: ' + data.error);
-        }
-    })
-    .catch(error => {
-        loading.style.display = 'none';
-        console.error('Erro ao enviar os dados:', error);
-        alert('Erro ao enviar os dados');
-    });
+    if (validaFormulario()) {
+        // Se o formulário for válido, envie os dados
+       enviarDadosFormulario();
+    }
 });
-}
 
-enviarDadosFormulario();
 

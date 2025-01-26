@@ -1,0 +1,4 @@
+<?php
+$teste=$_GET['cadastro'];
+echo $teste;
+?>

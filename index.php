@@ -28,9 +28,9 @@ $unidade = $_SESSION['unidade'];
         <a href="/sadp/login/index.php?logout=logout">Fazer Logoff</a>
         <a href="/sadp/digitalizacao/">SADP Digitalização</a>
         <a href="/sadp/producao/">SADP Produção</a>
-        <a href="#">Consulta e-Carta</a>
-        <a href="#">SGD</a>
-        <a href="#">e-Carta</a>
+        <a href="http://msc01065329:9888/ecarta/form/getMovimento_frm.ect" target="_blank">Consulta e-Carta</a>
+        <a href="https://sgd.correios.com.br/sgd/app/" target="_blank">SGD</a>
+        <a href="https://cas.correios.com.br/login?service=https%3A%2F%2Fapp.correiosnet.int%2Fecarta%2Fpages%2F" target="_blank">e-Carta</a>
         <a href="/sadp/">Home</a>
         </nav>
     </header>

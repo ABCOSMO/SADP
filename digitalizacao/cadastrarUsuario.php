@@ -59,7 +59,7 @@ $unidade = $_SESSION['unidade'];
         </div>
         <div class="container__cadastro">
             <div class="menuCadastro" id="modal-1">
-                <form method="post" id="myForm" name="autenticar" onSubmit="return validaFormulario()">
+                <form method="post" id="myForm" name="autenticar" >
                     <div class="modal-header">
                         <h1 class="modal-title">
                             Cadastrar novo usuário

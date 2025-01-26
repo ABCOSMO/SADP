@@ -126,7 +126,7 @@ class cadastroUsuario extends conectarBD
         $stmt->bind_param("s", $matricula);
         $stmt->execute();
         $result = $stmt->get_result();
-    
+		
         if ($result->num_rows > 0) 
         {
             // Usuário já existe
@@ -140,19 +140,16 @@ class cadastroUsuario extends conectarBD
             $stmt = $this->conn->prepare("INSERT INTO usuario (usuario, matricula, email, telefone, unidadeUsuario, privilegioUsuario, senha) VALUES (?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssssss", $nomeUsuario, $matricula, $email, $telefone, $unidade, $perfil, $senha);
             $stmt->execute();
-    
+				
             if ($stmt->affected_rows > 0) 
             {
-                $response = array('success' => true);
-                //header("Location: /fapi/producao/index.php?cadastro=novo");
+                $response = array('success' => true, 'message' => 'Usuário cadastrado com sucesso.');
             } else {
                 $response = array('success' => false, 'error' => $conn->error);
-                //echo "Erro ao cadastrar o usuário.";
             }
             header('Content-Type: application/json');
             echo json_encode($response);
             $stmt->close(); // Fecha a última consulta
-            $conn->close();
         }
     }
 
