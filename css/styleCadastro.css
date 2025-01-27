@@ -250,7 +250,7 @@ footer {
     text-align: justify;
     width: 70rem;
     border-radius: 4vh;  
-    padding: 1vh;
+    padding: 1rem 1rem;
 }
 
 
@@ -263,9 +263,15 @@ footer {
     margin: 0;
 }
 
+.botao__alterar_excluir {
+    border: none;
+    cursor: pointer;
+}
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+    text-align: center;
   }
 
 .input-group input {

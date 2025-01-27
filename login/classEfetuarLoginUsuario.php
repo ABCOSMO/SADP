@@ -33,7 +33,13 @@ class efetuarLoginUsuario extends conectarBD
                     $_SESSION['nome'] = $row['usuario'];
                     $_SESSION['privilegio'] = $row['privilegioUsuario'];
                     $_SESSION['unidade'] = $row['unidadeUsuario'];
+                    date_default_timezone_set('America/Sao_Paulo');
+                    $data = new DateTime('now');
+                    $gravarData = $data->format('Y-m-d H:i:s');
                     if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+                        $stmt = $this->conn->prepare("INSERT INTO logacesso (usuarioLogAcesso, matriculaLogAcesso, dataHoraAcesso) VALUES (?, ?, ?)");
+                        $stmt->bind_param("sss", $_SESSION['nome'], $_SESSION['matricula'], $gravarData);
+                        $stmt->execute();
                         // Usuário logado, redireciona para a área restrita
                         header('Location: /sadp/');
                         exit;

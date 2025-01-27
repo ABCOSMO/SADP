@@ -77,8 +77,8 @@ class listarUsuario extends conectarBD
                                     <td id='usuario'>$email</td>
                                     <td id='usuario'>$telefone</td>
                                     <td id='usuario'>$perfil</td>
-                                    <td id='usuario'><button><i class='fa-solid fa-pencil'></i></button></td>
-                                    <td id='usuario'><button data-id='$matriculaFormatada' class='botao__excluir'>
+                                    <td id='usuario'><a href='../cadastro/controllerAlterarCadastro.php?matricula=$matricula'><button class='botao__alterar_excluir'><i class='fa-solid fa-pencil'></i></button></a></td>
+                                    <td id='usuario'><button data-id='$matriculaFormatada' class='botao__excluir botao__alterar_excluir'>
                                     <i class='fa-solid fa-trash'></i></button></td>
                                 </tr>";
                        
