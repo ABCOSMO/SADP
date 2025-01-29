@@ -64,7 +64,7 @@ class alterarUsuario extends conectarBD
                     $idUnidade = $row['idunidade'];
 
                     header('Location: ../digitalizacao/alterarUsuario.php?usuario=' . $usuario . '&matricula=' . $this->formatarMatricula($matricula) . 
-                    '&email=' . $email . '&telefone=' . $telefone . '&perfil=' . $idPerfil . '&unidade=' . $idUnidade);
+                    '&email=' . $email . '&telefone=' . $telefone . '&perfil=' . $perfil . '&unidade=' . $unidade);
                 }
             }
         }

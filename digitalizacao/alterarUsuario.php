@@ -27,7 +27,7 @@ $idPerfil = $_GET['perfil'];
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="scriptCadastro.js" defer></script>
+    <script src="scriptAlterarCadastro.js" defer></script>
     <title>SADP - DELOG</title>
 </head>
 <body>
@@ -39,10 +39,10 @@ $idPerfil = $_GET['perfil'];
             <a href="../login/index.php?logout=logout">Fazer Logoff</a>
             <a href="../digitalizacao/">SADP Digitalização</a>
             <a href="../producao/">SADP Produção</a>
-            <a href="#">Consulta e-Carta</a>
-            <a href="#">SGD</a>
-            <a href="#">e-Carta</a>
-            <a href="/sadp/">Home</a>
+            <a href="http://msc01065329:9888/ecarta/form/getMovimento_frm.ect" target="_blank">Consulta e-Carta</a>
+			<a href="https://sgd.correios.com.br/sgd/app/" target="_blank">SGD</a>
+			<a href="https://cas.correios.com.br/login?service=https%3A%2F%2Fapp.correiosnet.int%2Fecarta%2Fpages%2F" target="_blank">e-Carta</a>
+            <a href="../">Home</a>
         </nav>
     </header>
     <div class="container__caminho">
@@ -51,7 +51,9 @@ $idPerfil = $_GET['perfil'];
             <p class="seta"> > </p>
             <a href="../digitalizacao/">SADP Digitalização</a>
             <p class="seta">  > </p>
-            <a href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a>
+            <a href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
+            <p class="seta">  > </p>
+            <a href="../digitalizacao/alterarUsuario.php">Alterar Usuário</a>
         </div>
     </div>
     <section class="container__botao">
@@ -74,43 +76,43 @@ $idPerfil = $_GET['perfil'];
                     <div class="modal-body">
                         <div class="input-group">
                             <label for="nome">
-                                Cadastrar Nome
+                                Alterar Nome
                             </label>
                             <input type="text" id="inputNome" name="novoNome" value="<?php echo $usuario ?>" maxlength="60">
                         </div>
                         <div class="input-group">
                             <label for="matricula">
-                                Cadastrar Matrícula
+                                Alterar Matrícula
                             </label>
                             <input type="text" id="inputMatricula" name="novaMatricula" value="<?php echo $matricula ?>" maxlength="11">
                         </div>
                         <div class="input-group">
                             <label for="email">
-                                Cadastrar e-mail
+                                Alterar e-mail
                             </label>
                             <input type="email" id="inputEmail" name="novoEmail" value="<?php echo $email ?>" maxlength="60">
                         </div>
                         <div class="input-group">
                             <label for="telefone">
-                                Cadastrar Telefone
+                                Alterar Telefone
                             </label>
                             <input type="text" id="inputTelefone" name="novoTelefone" value="<?php echo $telefone ?>" maxlength="11">
                         </div>
                         <div class="input-group">
                         <label for="unidade">
-                                Cadastrar Unidade
+                                Alterar Unidade
                             </label>
                             <select class="selecionar" type="checkbox" name="novaUnidade" size="1" id="unidade">
-                                <option value="" selected="<?php echo $idUnidade ?>" id="selecionar__unidade"> - Unidade - </option>
+                                <option value="" selected disabled="disabled" id="selecionar__unidade"> - Unidade - </option>
                                 <?php $escolherUnidade->seletorUnidade(); ?>
                             </select>
                         </div>
                         <div class="input-group">
                             <label for="perfil">
-                                Cadastrar Perfil
+                                Alterar Perfil
                             </label>
                             <select class="selecionar" type="checkbox" name="novoPerfil" size="1" id="perfil">
-                                <option value="" selected="<?php echo $idPerfil ?>" id="selecionar__unidade"> - Perfil - </option>
+                                <option value="" selected disabled="disabled" id="selecionar__unidade"> - Perfil - </option>
                                 <?php $escolherUnidade->seletorPerfil(); ?>
                             </select>
                         </div>

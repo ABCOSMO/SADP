@@ -80,6 +80,32 @@ class cadastroUsuario extends conectarBD
         $this->senha=$senha;
     }
 
+    public function alterarPerfil() 
+    {
+        $perfil = $this->getPerfil();
+        
+        $stmt = $this->conn->prepare("SELECT * FROM privilegio WHERE idPrivilegio= ? ");
+        $stmt->bind_param("i", $perfil);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $row = $result->fetch_assoc();
+        return $this->perfil = $row['privilegio'];      
+    }
+
+    public function alterarUnidade() 
+    {
+        $unidade = $this->getUnidade();
+        
+        $stmt = $this->conn->prepare("SELECT * FROM unidade WHERE idunidade= ? ");
+        $stmt->bind_param("i", $unidade);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $row = $result->fetch_assoc();
+        return $this->unidade = $row['unidade'];
+    }
+
     public function createUsuario() 
     {
         $nomeUsuario = $this->getNomeUsuario();
@@ -87,37 +113,8 @@ class cadastroUsuario extends conectarBD
         $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
         $email = $this->getEmail();
         $telefone = $this->getTelefone();
-        $unidade = $this->getUnidade();
-        
-        $stmt = $this->conn->prepare("SELECT * FROM unidade WHERE idunidade= ? ");
-        $stmt->bind_param("s", $unidade);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) 
-        {
-            // Autenticação bem-sucedida
-            while($row = $result->fetch_assoc())
-            {
-                $unidade = $row['unidade'];
-            }
-        } 
-
-        $perfil = $this->getPerfil();
-        
-        $stmt = $this->conn->prepare("SELECT * FROM privilegio WHERE idPrivilegio= ? ");
-        $stmt->bind_param("s", $perfil);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) 
-        {
-            // Autenticação bem-sucedida
-            while($row = $result->fetch_assoc())
-            {
-                $perfil = $row['privilegio'];
-            }
-        } 
+        $unidade = $this->alterarUnidade();
+        $perfil = $this->alterarPerfil();
 
         $senha = $this->getSenha();
     
@@ -171,25 +168,36 @@ class cadastroUsuario extends conectarBD
         $stmt->close();
     }
 
-    public function editarUsuario()
+    public function editarUsuario() 
     {
-        $stmt = $this->conn->prepare("UPDATE usuario SET privilegioUsuario = ?, unidadeUsuario = ?, usuario = ?, matricula = ?,
-                                        email = ?, telefone = ? WHERE matricula = ?");
-        $stmt->bind_param("sssssss", $this->getPerfil(), $this->getUnidade, $this->getNomeUsuario(), $this->getMatricula(),
-                            $this->getEmail(), $this->getTelefone(), $this->getMatricula());
-        $stmt->execute();
-
-        // Verificando se a atualização ocorreu com sucesso
-        if ($stmt->affected_rows > 0) {
-            echo "Registro atualizado com sucesso!";
+        $tratarMatricula = $this->getMatricula();
+        $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
+        $perfil = $this->alterarPerfil();
+        $unidade = $this->alterarUnidade();
+        $usuario = $this->getNomeUsuario();
+        $email = $this->getEmail();
+        $telefone = $this->getTelefone();
+    
+        $stmt = $this->conn->prepare("UPDATE usuario SET privilegioUsuario = ?, unidadeUsuario = ?, usuario = ?, matricula = ?, 
+        email = ?, telefone = ? WHERE matricula = ?");
+    
+        if (!$stmt) {
+            $response = array('success' => false, 'error' => $this->conn->error);
         } else {
-            echo "Não foi possível atualizar o registro.";
+            $stmt->bind_param("sssissi", $perfil, $unidade, $usuario, $matricula, $email, $telefone, $matricula);
+    
+            if ($stmt->execute()) {
+                $response = array('success' => true, 'message' => 'Usuário alterado com sucesso.');
+            } else {
+                $response = array('success' => false, 'error' => $stmt->error); 
+            }
+    
+            $stmt->close();
         }
-
-        // Fechando o statement
-        $stmt->close();
-        $conn->close();
+        //var_dump($response);
+        //exit;
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }
-
 ?>
