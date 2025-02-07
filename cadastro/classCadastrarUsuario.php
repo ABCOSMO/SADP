@@ -128,24 +128,6 @@ class cadastroUsuario extends conectarBD
         }
     }
 
-    public function deletarUsuario() 
-    {
-        $tratarMatricula = $this->getMatricula();
-        $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
-
-        $stmt = $this->conn->prepare("DELETE FROM usuario WHERE matricula = ?");
-        $stmt->bind_param("i", $matricula);
-        $stmt->execute();
-
-        if ($stmt->execute()) {
-            echo json_encode(['success' => true]);
-        } else {
-            echo json_encode(['success' => false, 'error' => $stmt->error]);
-        }
-    
-        $stmt->close();
-    }
-
     public function editarUsuario() 
     {
         $tratarMatricula = $this->getMatricula();

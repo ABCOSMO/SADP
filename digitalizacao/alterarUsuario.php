@@ -53,7 +53,7 @@ $idPerfil = $_GET['perfil'];
             <p class="seta">  > </p>
             <a href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
             <p class="seta">  > </p>
-            <a href="../digitalizacao/alterarUsuario.php">Alterar Usuário</a>
+            <a href="#">Alterar Usuário</a>
         </div>
     </div>
     <section class="container__botao">

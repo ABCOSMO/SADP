@@ -2,9 +2,9 @@
 
 class conectarBD
 {
-    public $conn;
+   public $conn;
 
-   function __construct()
+   public function __construct()
    {
        $this->connectaBD();       
    }

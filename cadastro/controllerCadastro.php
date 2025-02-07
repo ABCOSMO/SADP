@@ -21,6 +21,7 @@
             $newUnidade,
             $newPerfil,
             $newSenha
+            //password_hash($newSenha, PASSWORD_DEFAULT) // Criptografa a senha
         );
         
         $novoUsuario->createUsuario();
