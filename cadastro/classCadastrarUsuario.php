@@ -3,83 +3,61 @@ include_once('../classes/classConectarBD.php');
 
 class cadastroUsuario extends conectarBD
 {
-    function __construct()
+    public function __construct(
+        private string $nomeUsuario,
+        private string $matricula,
+        private string $email,
+        private string $telefone,
+        private string $unidade,
+        private string $perfil,
+        private string $senha
+    )
     {
         parent::__construct();
     }
 
     //Cadastra nome do novo usuário
-    public function getNomeUsuario()
+    public function getNomeUsuario(): string
     {
         return $this->nomeUsuario;
     }
-    //Alterar nome do usuário
-    public function setNomeUsuario($nomeUsuario)
-    {
-        $this->nomeUsuario=$nomeUsuario;
-    }
+    
     //Cadastrar matricula de novo usuário
-    public function getMatricula()
+    public function getMatricula(): string
     {
         return $this->matricula;
     }
-    //Alterar matrícula de usuário
-    public function setMatricula($matricula)
-    {
-        $this->matricula=$matricula;
-    }
+    
     //Cadastrar e-mail de novo usuário
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
-    //Alterar e-mail de usuário
-    public function setEmail($email)
-    {
-        $this->email=$email;
-    }
+    
     //Cadastrar telefone de novo usuário
-    public function getTelefone()
+    public function getTelefone(): string
     {
         return $this->telefone;
     }
-    //Alterar Telefone de usuário
-    public function setTelefone($telefone)
-    {
-        $this->telefone=$telefone;
-    }
+   
     //Cadastrar unidade de novo usuário
-    public function getUnidade()
+    public function getUnidade(): string
     {
         return $this->unidade;
     }
-    //Alterar Telefone de usuário
-    public function setUnidade($unidade)
-    {
-        $this->unidade=$unidade;
-    }
+   
     //Cadastrar perfil de novo usuário
-    public function getPerfil()
+    public function getPerfil(): string
     {
         return $this->perfil;
     }
-    //Alterar Telefone de usuário
-    public function setPerfil($perfil)
-    {
-        $this->perfil=$perfil;
-    }
+   
     //Cadastar senha de novo usuário
-    public function getSenha()
+    public function getSenha(): string
     {
         return $this->senha;
     }
-    //Alterar senha de usuário
-    public function setSenha($senha)
-    {
-        //$senha = password_hash($senha, PASSWORD_DEFAULT); // Hash da senha para segurança
-        $this->senha=$senha;
-    }
-
+    
     public function alterarPerfil() 
     {
         $perfil = $this->getPerfil();

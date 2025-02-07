@@ -10,15 +10,19 @@
         $newTelefone = $_POST['novoTelefone'];
         $newUnidade = $_POST['novaUnidade'];
         $newPerfil = $_POST['novoPerfil'];
+        $newSenha = '';
 		
 		
-        $novoUsuario = new cadastroUsuario();
-        $novoUsuario->setNomeUsuario($newUsuario);
-        $novoUsuario->setMatricula($newMatricula);
-        $novoUsuario->setEmail($newEmail);
-        $novoUsuario->setTelefone($newTelefone);
-        $novoUsuario->setUnidade($newUnidade);
-        $novoUsuario->setPerfil($newPerfil);
+        $novoUsuario = new cadastroUsuario(
+            $newUsuario,
+            $newMatricula,
+            $newEmail,
+            $newTelefone,
+            $newUnidade,
+            $newPerfil,
+            $newSenha
+        );
+        
         $novoUsuario->editarUsuario();
     }
 ?>

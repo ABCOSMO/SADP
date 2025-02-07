@@ -13,14 +13,16 @@
         $newSenha = $_POST['newPassword'];
 		
 		
-        $novoUsuario = new cadastroUsuario();
-        $novoUsuario->setNomeUsuario($newUsuario);
-        $novoUsuario->setMatricula($newMatricula);
-        $novoUsuario->setEmail($newEmail);
-        $novoUsuario->setTelefone($newTelefone);
-        $novoUsuario->setUnidade($newUnidade);
-        $novoUsuario->setPerfil($newPerfil);
-        $novoUsuario->setSenha($newSenha);
+        $novoUsuario = new cadastroUsuario(
+            $newUsuario,
+            $newMatricula,
+            $newEmail,
+            $newTelefone,
+            $newUnidade,
+            $newPerfil,
+            $newSenha
+        );
+        
         $novoUsuario->createUsuario();
     }
 ?>

@@ -2,9 +2,6 @@
 
 class conectarBD
 {
-    private $nomeUsuario;
-    private $matricula;
-    private $senha;
     public $conn;
 
    function __construct()
