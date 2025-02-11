@@ -1,7 +1,10 @@
 <?php
-include_once('../classes/classConectarBD.php');
 
-class cadastroUsuario extends conectarBD
+namespace SADP\Cadastrar;
+
+use SADP\ConectarUsuario\ConectarBD;
+
+class CadastroUsuario extends ConectarBD
 {
     public function __construct(
         private string $nomeUsuario,

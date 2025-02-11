@@ -1,8 +1,10 @@
 <?php
 
-include_once('../classes/classConectarBD.php');
+namespace SADP\Cadastrar;
 
-class excluirUsuario extends conectarBD
+use SADP\ConectarUsuario\ConectarBD;
+
+class ExcluirUsuario extends ConectarBD
 {
     public function __construct(
         private string $matricula

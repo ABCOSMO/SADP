@@ -1,7 +1,10 @@
 <?php
  session_start();
- include_once('../classes/classSessaoUsuario.php');
- $autenticandoUsuario = new sessaoUsuario();
+ include_once('../src/ConectarUsuario/SessaoUsuario.php');
+
+ use SADP\ConectarUsuario\SessaoUsuario;
+
+ $autenticandoUsuario = new SessaoUsuario();
  $autenticandoUsuario->fazerLogof();
 ?>
 <!DOCTYPE html>

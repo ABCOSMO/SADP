@@ -1,5 +1,8 @@
 <?php
-class sessaoUsuario
+
+namespace SADP\ConectarUsuario;
+
+class SessaoUsuario
 {
     public function autenticarUsuario()
     {

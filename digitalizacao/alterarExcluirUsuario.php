@@ -1,13 +1,19 @@
 <?php
 session_start();
-include_once('../classes/classSessaoUsuario.php');
-include_once('../classes/classSeletorUnidade.php');
-include_once('../classes/classListarUsuario.php');
-$autenticandoUsuario = new sessaoUsuario();
+include_once('../src/ConectarUsuario/ConectarBD.php');
+include_once('../src/ConectarUsuario/SessaoUsuario.php');
+include_once('../src/Lista/SelecionarUnidade.php');
+include_once('../src/Lista/ListarUsuario.php');
+
+use SADP\ConectarUsuario\SessaoUsuario;
+use SADP\Lista\SelecionarUnidade;
+use SADP\Lista\ListarUsuario;
+
+$autenticandoUsuario = new SessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
-$escolherUnidade = new selecionarUnidade();
-$listarUsuarios = new listarUsuario();
+$escolherUnidade = new SelecionarUnidade();
+$listarUsuarios = new ListarUsuario();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];

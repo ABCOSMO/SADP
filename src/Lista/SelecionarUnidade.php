@@ -1,7 +1,10 @@
 <?php
-include_once('classConectarBD.php');
 
-class selecionarUnidade extends conectarBD
+namespace SADP\Lista;
+
+use SADP\ConectarUsuario\ConectarBD;
+
+class SelecionarUnidade extends ConectarBD
 {
     function __construct()
     {

@@ -1,6 +1,9 @@
 <?php
     session_start();
-    include('classCadastrarUsuario.php');        
+    include_once('../src/ConectarUsuario/ConectarBD.php');
+    include('../src/Cadastrar/CadastrarUsuario.php'); 
+    
+    use SADP\Cadastar\CadastrarUsuario;
  
     if(isset($_POST['novaMatricula']))
     {  
@@ -13,7 +16,7 @@
         $newSenha = $_POST['newPassword'];
 		
 		
-        $novoUsuario = new cadastroUsuario(
+        $novoUsuario = new CadastroUsuario(
             $newUsuario,
             $newMatricula,
             $newEmail,

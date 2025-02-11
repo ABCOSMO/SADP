@@ -1,6 +1,8 @@
 <?php
 
-class conectarBD
+namespace SADP\ConectarUsuario;
+
+class ConectarBD
 {
    public $conn;
 
@@ -15,7 +17,7 @@ class conectarBD
         $user = "root";
         $pass = "";
         $mydb = "test";
-        $this->conn = new mysqli($server, $user, $pass, $mydb);
+        $this->conn = new \mysqli($server, $user, $pass, $mydb);
         mysqli_set_charset($this->conn, "utf8");
         if($this->conn->connect_error){
             die("Conexão Falhou:".$this->conn->connect_error);

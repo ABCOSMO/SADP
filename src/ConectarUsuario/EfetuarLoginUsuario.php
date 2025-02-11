@@ -1,8 +1,10 @@
 <?php
 
-include_once('../classes/classConectarBD.php');
+namespace SADP\ConectarUsuario;
 
-class efetuarLoginUsuario extends conectarBD
+use SADP\ConectarUsuario\ConectarBD;
+
+class EfetuarLoginUsuario extends ConectarBD
 {
     function __construct()
     {
@@ -34,7 +36,7 @@ class efetuarLoginUsuario extends conectarBD
                     $_SESSION['privilegio'] = $row['privilegioUsuario'];
                     $_SESSION['unidade'] = $row['unidadeUsuario'];
                     date_default_timezone_set('America/Sao_Paulo');
-                    $data = new DateTime('now');
+                    $data = new \DateTime('now');
                     $gravarData = $data->format('Y-m-d H:i:s');
                     if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
                         $stmt = $this->conn->prepare("INSERT INTO logacesso (usuarioLogAcesso, matriculaLogAcesso, dataHoraAcesso) VALUES (?, ?, ?)");

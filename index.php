@@ -1,6 +1,11 @@
 <?php
 session_start();
-include_once('classes/classSessaoUsuario.php');
+//include_once('src/ConectarUsuario/SessaoUsuario.php');
+
+require 'autoload.php';
+
+use SADP\ConectarUsuario\SessaoUsuario;
+
 $autenticandoUsuario = new sessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();

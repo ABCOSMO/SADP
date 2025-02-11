@@ -1,6 +1,10 @@
 <?php
 
-class listarUsuario extends conectarBD
+namespace SADP\Lista;
+
+use SADP\ConectarUsuario\ConectarBD;
+
+class ListarUsuario extends ConectarBD
 {
     function __construct()
     {
