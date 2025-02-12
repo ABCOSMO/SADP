@@ -176,9 +176,9 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 24vh;
-    margin-left: 45vh;
-    height: 80%;
+    margin-top: 15vh;
+    margin-left: 15vh;
+    height: 50%;
 }
 .corpo {
     font-family: var(--fonte-principal);
@@ -226,7 +226,8 @@ footer {
 
 .modal-body {
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
+    justify-content: center;
     gap: 12px;
 }
 
@@ -277,7 +278,7 @@ table, th, td {
     border: 1px solid #d1d5db;
     background-color: #f9fafb;
     border-radius: 8px;
-    padding: 10px 16px;
+    padding: 5px 8px;
 }
 
 .input-group input:focus {
@@ -361,7 +362,7 @@ table, th, td {
     background-color: white;
     color: var(--cor-secundaria);
     text-align: justify;
-    width: 25rem;
+    width: 60rem;
     border-radius: 4vh;  
     padding: 3vh;
 }
@@ -373,4 +374,10 @@ table, th, td {
     height: 100%;
     width: 100%;
 
+}
+
+.container__cadastro__envio {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
 }

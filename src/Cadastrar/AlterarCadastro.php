@@ -4,7 +4,7 @@ namespace SADP\Cadastrar;
 
 use SADP\ConectarUsuario\ConectarBD;
 
-class AlterarUsuario extends ConectarBD
+class AlterarCadastro extends ConectarBD
 {
     function __construct()
     {

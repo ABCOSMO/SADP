@@ -1,10 +1,11 @@
 <?php
 session_start();
-include_once('../src/ConectarUsuario/ConectarBD.php');
-include_once('../src/ConectarUsuario/SessaoUsuario.php');
-include_once('../src/Lista/SelecionarUnidade.php');
 
-use SADP\ConectarUsuario\SessaoUsuario;
+require '../autoload.php';
+
+use SADP\ConectarUsuario\{
+    ConectarBC, SessaoUsuario
+};
 use SADP\Lista\SelecionarUnidade;
 
 $autenticandoUsuario = new SessaoUsuario();

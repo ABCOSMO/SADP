@@ -5,11 +5,11 @@ function excluirUsuario()
     botoesExcluir.forEach(botao => {
         botao.addEventListener('click', () => {
             const id = botao.dataset.id;
-
+            
             // Confirmação antes de excluir
             if (confirm('Tem certeza que deseja excluir este registro?')) {
                 // Envia uma requisição POST para o servidor
-                fetch('/sadp/cadastro/controllerExcluirCadastro.php', {
+                fetch('../cadastro/controllerExcluirCadastro.php', {
                     method: 'POST',
                     body: JSON.stringify({ id: id })
                 })
@@ -20,7 +20,7 @@ function excluirUsuario()
                     if (data.success) {
                         alert('Registro excluído com sucesso!');
                         // Remover a linha da tabela (implemente a lógica aqui)
-                        window.location.href = '/sadp/digitalizacao/alterarExcluirUsuario.php';
+                        window.location.href = '../digitalizacao/alterarExcluirUsuario.php';
                     } else {
                         alert('Erro ao excluir o registro: ' + data.error);
                     }

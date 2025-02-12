@@ -2,8 +2,6 @@
     session_start();
 
     require '../autoload.php';
-    /*include_once('../src/ConectarUsuario/ConectarBD.php');
-    include('../src/ConectarUsuario/EfetuarLoginUsuario.php');*/
 
     use SADP\ConectarUsuario\{
         ConectarBD, EfetuarLoginUsuario

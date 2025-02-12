@@ -1,9 +1,9 @@
 <?php
     session_start();
-    include_once('../src/ConectarUsuario/ConectarBD.php');
-    include('../src/Cadastrar/CadastrarUsuario.php'); 
+    require '../autoload.php';
     
-    use SADP\Cadastar\CadastrarUsuario;
+    use SADP\ConectarUsuario\ConectarBD;
+    use SADP\Cadastrar\CadastrarUsuario;
  
     if(isset($_POST['novaMatricula']))
     {  
@@ -16,7 +16,7 @@
         $newSenha = $_POST['newPassword'];
 		
 		
-        $novoUsuario = new CadastroUsuario(
+        $novoUsuario = new CadastrarUsuario(
             $newUsuario,
             $newMatricula,
             $newEmail,

@@ -4,7 +4,7 @@ namespace SADP\Cadastrar;
 
 use SADP\ConectarUsuario\ConectarBD;
 
-class CadastroUsuario extends ConectarBD
+class CadastrarUsuario extends ConectarBD
 {
     public function __construct(
         private string $nomeUsuario,

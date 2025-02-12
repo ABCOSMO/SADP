@@ -1,13 +1,13 @@
 <?php
 session_start();
-include_once('../src/ConectarUsuario/ConectarBD.php');
-include_once('../src/ConectarUsuario/SessaoUsuario.php');
-include_once('../src/Lista/SelecionarUnidade.php');
-include_once('../src/Lista/ListarUsuario.php');
+require '../autoload.php';
 
-use SADP\ConectarUsuario\SessaoUsuario;
-use SADP\Lista\SelecionarUnidade;
-use SADP\Lista\ListarUsuario;
+use SADP\ConectarUsuario\{
+    ConectarBD, SessaoUsuario
+};
+use SADP\Lista\{
+    ListarUsuario, SelecionarUnidade
+};
 
 $autenticandoUsuario = new SessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();

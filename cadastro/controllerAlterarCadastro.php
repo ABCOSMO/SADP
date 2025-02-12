@@ -1,10 +1,10 @@
 <?php
 session_start();
-include_once('../src/ConectarUsuario/ConectarBD.php');
-include('../src/Cadastrar/AlterarCadastro.php');
+require '../autoload.php';
 
-use SADP\Cadastrar\AlterarUsuario;
+use SADP\ConectarUsuario\ConectarBD;
+use SADP\Cadastrar\AlterarCadastro;
 
 $matricula = $_GET['matricula'];
-$alterarUsuario = new AlterarUsuario();
+$alterarUsuario = new AlterarCadastro();
 $alterarUsuario->alterarDadosUsuario($matricula);

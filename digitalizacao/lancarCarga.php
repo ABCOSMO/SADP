@@ -1,21 +1,29 @@
 <?php
 session_start();
-include_once('../classes/classSessaoUsuario.php');
-include_once('../classes/classSeletorUnidade.php');
-$autenticandoUsuario = new sessaoUsuario();
+require '../autoload.php';
+
+use SADP\ConectarUsuario\{
+    ConectarBD, SessaoUsuario
+};
+use SADP\Lista\SelecionarUnidade;
+
+$autenticandoUsuario = new SessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
-$escolherUnidade = new selecionarUnidade();
+$escolherUnidade = new SelecionarUnidade();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
+date_default_timezone_set('America/Sao_Paulo');
+$data = new DateTime('now');
+$LancarData = $data->format('d/m/Y');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styleCadastro.css">
+    <link rel="stylesheet" href="../css/styleLancamentoCarga.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -57,7 +65,7 @@ $unidade = $_SESSION['unidade'];
             <a href="#">Relatório de Acesso</a>
             <a href="#">Relatório Digitalização</a>
         </div>
-        <div class="container__cadastro">
+        <section class="container__cadastro">
             <div class="menuCadastro" id="modal-1">
                 <form method="post" id="myForm" name="autenticar" >
                     <div class="modal-header">
@@ -65,44 +73,45 @@ $unidade = $_SESSION['unidade'];
                             Lançar Carga do Dia
                         </h1>
                     </div>
-                    <div class="modal-body">
+                    <section class="modal-body">
                         <div class="input-group">
                             <label for="nome">
                                 Data
                             </label>
-                            <input type="text" id="inputNome" name="novoNome" placeholder="Digite o nome" maxlength="60">
+                            <input type="text" id="inputNome" name="data" value=<?php echo $LancarData; ?> maxlength="60">
                         </div>
                         <div class="input-group">
                             <label for="matricula">
                                 Carga dia anterior
                             </label>
-                            <input type="text" id="inputMatricula" name="novaMatricula" placeholder="Digite a matrícula" maxlength="11">
+                            <input type="text" id="inputMatricula" name="cargaAnterior" placeholder="" maxlength="11">
                         </div>
                         <div class="input-group">
                             <label for="email">
                                 Carga recebida
                             </label>
-                            <input type="email" id="inputEmail" name="novoEmail" placeholder="Digite o e-mail" maxlength="60">
+                            <input type="email" id="inputEmail" name="cargaRecebida" placeholder="" maxlength="60">
                         </div>
                         <div class="input-group">
                             <label for="telefone">
                                 Carga digitalizada
                             </label>
-                            <input type="text" id="inputTelefone" name="novoTelefone" placeholder="Digite o telefone com DDD" maxlength="11">
+                            <input type="text" id="inputTelefone" name="cargaDigitalizada" placeholder="" maxlength="11">
                         </div>
                         <div class="input-group">
                         <label for="unidade">
                                 Resto do dia
                             </label>
-                            <input type="text" id="inputTelefone" name="novoTelefone" placeholder="Digite o telefone com DDD" maxlength="11">
+                            <input type="text" id="inputTelefone" name="resto" placeholder="" maxlength="11">
                         </div>
-                        <input value="Cadastrar" type="submit" id="login-button">
-                        </input>
+                    </section>
+                    <div class="container__cadastro__envio">
+                        <input value="Enviar dados" type="submit" id="login-button"></input>
                     </div>
                 </form>
             </div>
             <dialog class="loading"></dialog>
-        </div>
+        </section>
     </section>
     <footer>
         <div>
