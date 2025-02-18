@@ -1,9 +1,3 @@
-function verMensagem(tag, texto) {
-    let mensagem = document.querySelector(tag);
-    mensagem.innerHTML = texto;
-}
-verMensagem('h3', 'Desenvolvido pelos CDIPs');
-
 let openButtons = document.querySelectorAll('.open-modal');
 
 openButtons.forEach(button => {

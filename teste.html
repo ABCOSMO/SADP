@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exemplo de clique automático com hover</title>
+<style>
+  #meuElemento {
+    padding: 10px;
+    background-color: lightgray;
+    cursor: pointer; /* Indica que o elemento é clicável */
+  }
+</style>
+</head>
+<body>
+
+<div id="meuElemento">Passe o mouse aqui</div>
+
+<script>
+  const meuElemento = document.getElementById('meuElemento');
+
+  meuElemento.addEventListener('mouseover', function() {
+    // Simula um clique ao passar o mouse
+    meuElemento.click();
+  });
+
+  meuElemento.addEventListener('click', function() {
+    // Ação a ser executada quando o elemento é clicado
+    alert('Elemento clicado!');
+  });
+</script>
+
+</body>
+</html>

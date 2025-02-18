@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("../css/header.css");
 
 *:not(dialog) {
     margin: 0;
@@ -7,10 +8,10 @@
 }
 
 :root {
-    --cor-principal: #FFFFFF;
-    --cor-secundaria: #000000;
-    --cor-terciaria: #1C1C1C;
-    --cor-quarta: #DCDCDC;
+    --cor-branca: #FFFFFF;
+    --cor-preta: #000000;
+    --cor-segundo-preto: #1C1C1C;
+    --cor-segundo-branco: #DCDCDC;
     --fonte-principal: 'Inter';
     --cor-azul: blue;
     --cor-amarelo: yellow;
@@ -19,15 +20,10 @@
 
 body {
     background-image: url("/sadp/assets/FAPI.png");
-    background-color: var(--cor-quarta);
+    background-color: var(--cor-segundo-branco);
     height: 100vh;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-}
-
-.container__links {
-    display: flex;
-    flex-direction: row-reverse;
 }
 
 .container__caminho {
@@ -35,53 +31,22 @@ body {
     flex-direction: row;
 }
 
-nav {
-    margin: 1.5%;
-    height: 20%;
-}
-
-.links a {
-    background-color: transparent;
-    font-family: var(--fonte-principal);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--cor-secundaria);
-    padding: 0.5em;
-    text-decoration: none;
-    padding: 0;
-    margin: 0 2em;
-}
-
-.links p {
-    font-family: var(--fonte-principal);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--cor-cinza);
-    padding-top: 0.35em;
-}
-
-.links a:hover {
-    border-bottom: 2px solid var(--cor-secundaria);
-    color: var(--cor-secundaria);
-    padding: 0;
-}
-
-.caminhos a {
+.caminhos {
     
     background-color: transparent;
     font-family: var(--fonte-principal);
     font-size: 13px;
     font-weight: 400;
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
     padding: 0.2em;
     text-decoration: none;
     padding: 0;
     margin: 0 0.2em;
 }
 
-.caminhos a:hover {
-    border-bottom: 2px solid var(--cor-secundaria);
-    color: var(--cor-secundaria);
+.caminhos:hover {
+    border-bottom: 2px solid var(--cor-preta);
+    color: var(--cor-preta);
     padding: 0;
 }
 
@@ -96,7 +61,7 @@ nav {
     font-family: var(--fonte-principal);
     font-size: 13px;
     font-weight: 400;
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
     padding: 0.2em;
     text-decoration: none;
     padding: 0;
@@ -106,12 +71,12 @@ nav {
 .container__margem a{
     display: block;
     border-radius: 8px;
-    border: 2px solid var(--cor-principal);
+    border: 2px solid var(--cor-branca);
     background-color: transparent;
     font-family: var(--fonte-principal);
     font-size: 14px;
     font-weight: 500;
-    color: var(--cor-principal);
+    color: var(--cor-branca);
     padding: 0.5em;
     margin: 0.5em;
     width: 100%;
@@ -121,9 +86,9 @@ nav {
 
 .container__margem a:hover {    
     border-radius: 8px;
-    background-color: var(--cor-quarta);
+    background-color: var(--cor-segundo-branco);
     font-family: var(--fonte-principal);
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
 }
 
 .container__margem a:active {
@@ -133,12 +98,12 @@ nav {
 .open-modal {
     display: block;
     border-radius: 8px;
-    border: 2px solid var(--cor-principal);
+    border: 2px solid var(--cor-branca);
     background-color: transparent;
     font-family: var(--fonte-principal);
     font-size: 14px;
     font-weight: 500;
-    color: var(--cor-principal);
+    color: var(--cor-branca);
     padding: 0.5em;
     margin: 0.5em;
     width: 108%;
@@ -148,9 +113,9 @@ nav {
 
 .open-modal:hover {
     border-radius: 8px;
-    background-color: var(--cor-quarta);
+    background-color: var(--cor-segundo-branco);
     font-family: var(--fonte-principal);
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
 }
 
 .container__botao {
@@ -164,13 +129,11 @@ nav {
     margin-left: 0%;
 }
 
-
-
 .corpo {
     font-family: var(--fonte-principal);
     font-size: 16px;
     font-weight: 400;
-    color: var(--cor-principal);
+    color: var(--cor-branca);
     text-align: justify;
     margin-top: 8vh;    
 }
@@ -179,27 +142,13 @@ nav {
     display: grid;
     grid-template-columns: 100%;
     background-color: white;
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
     text-align: justify;
     margin-top: 8vh;
     margin-left: 0;/*11vh;*/
     width: 25rem;
     border-radius: 4vh;  
     padding: 3vh;
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.rodape {
-    font-family: var(--fonte-principal);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--cor-secundaria);
-    padding: 10vh 0;
 }
 
 dialog::backdrop {
@@ -321,7 +270,7 @@ dialog {
     display: grid;
     grid-template-columns: 100%;
     background-color: white;
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
     text-align: center;
     margin-top: 8vh;
     margin-left: 55vh;/*11vh;*/

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('../css/header.css');
 
 *:not(dialog) {
     margin: 0;
@@ -7,8 +8,8 @@
 }
 
 :root {
-    --cor-principal: #FFFFFF;
-    --cor-secundaria: #000000;
+    --cor-branca: #FFFFFF;
+    --cor-preta: #000000;
     --cor-terciaria: #1C1C1C;
     --cor-quarta: #DCDCDC;
     --fonte-principal: 'Inter';
@@ -25,63 +26,26 @@ body {
     background-repeat: no-repeat;
 }
 
-.container__links {
-    display: flex;
-    flex-direction: row-reverse;
-}
-
 .container__caminho {
     display: flex;
     flex-direction: row;
 }
 
-nav {
-    margin: 1.5%;
-    height: 20%;
-}
-
-.links a {
+.caminhos {    
     background-color: transparent;
     font-family: var(--fonte-principal);
     font-size: 13px;
     font-weight: 400;
-    color: var(--cor-secundaria);
-    padding: 0.5em;
-    text-decoration: none;
-    padding: 0;
-    margin: 0 2em;
-}
-
-.links p {
-    font-family: var(--fonte-principal);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--cor-cinza);
-    padding-top: 0.35em;
-}
-
-.links a:hover {
-    border-bottom: 2px solid var(--cor-secundaria);
-    color: var(--cor-secundaria);
-    padding: 0;
-}
-
-.caminhos a {
-    
-    background-color: transparent;
-    font-family: var(--fonte-principal);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
     padding: 0.2em;
     text-decoration: none;
     padding: 0;
     margin: 0 0.2em;
 }
 
-.caminhos a:hover {
-    border-bottom: 2px solid var(--cor-secundaria);
-    color: var(--cor-secundaria);
+.caminhos:hover {
+    border-bottom: 2px solid var(--cor-preta);
+    color: var(--cor-preta);
     padding: 0;
 }
 
@@ -96,7 +60,7 @@ nav {
     font-family: var(--fonte-principal);
     font-size: 13px;
     font-weight: 400;
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
     padding: 0.2em;
     text-decoration: none;
     padding: 0;
@@ -106,12 +70,12 @@ nav {
 .container__margem a{
     display: block;
     border-radius: 8px;
-    border: 2px solid var(--cor-principal);
+    border: 2px solid var(--cor-branca);
     background-color: transparent;
     font-family: var(--fonte-principal);
     font-size: 14px;
     font-weight: 500;
-    color: var(--cor-principal);
+    color: var(--cor-branca);
     padding: 0.5em;
     margin: 0.5em;
     width: 100%;
@@ -123,7 +87,7 @@ nav {
     border-radius: 8px;
     background-color: var(--cor-quarta);
     font-family: var(--fonte-principal);
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
 }
 
 .container__margem a:active {
@@ -133,12 +97,12 @@ nav {
 .open-modal {
     display: block;
     border-radius: 8px;
-    border: 2px solid var(--cor-principal);
+    border: 2px solid var(--cor-branca);
     background-color: transparent;
     font-family: var(--fonte-principal);
     font-size: 14px;
     font-weight: 500;
-    color: var(--cor-principal);
+    color: var(--cor-branca);
     padding: 0.5em;
     margin: 0.5em;
     width: 108%;
@@ -150,26 +114,17 @@ nav {
     border-radius: 8px;
     background-color: var(--cor-quarta);
     font-family: var(--fonte-principal);
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
 }
 
 .container__botao {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
     height: 60%;
 }
 
 .container__margem{
     margin-left: 0%;
-}
-
-.container__cadastro_usuario {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100vh;
-    margin-left: 10vh;   
 }
 
 .container__cadastro {
@@ -184,7 +139,7 @@ nav {
     font-family: var(--fonte-principal);
     font-size: 16px;
     font-weight: 400;
-    color: var(--cor-principal);
+    color: var(--cor-branca);
     text-align: justify;
     margin-top: 8vh;    
 }
@@ -199,7 +154,7 @@ footer {
     font-family: var(--fonte-principal);
     font-size: 12px;
     font-weight: 700;
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
     padding: 10vh 0;
 }
 
@@ -227,31 +182,20 @@ footer {
 .modal-body {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.input-group label {
-    font-size: 14px;
-    font-weight: 500;
+    gap: 8px;
 }
 
 .menuAlterarUsuario {
     display: grid;
     grid-template-columns: 100%;
     background-color: white;
-    color: var(--cor-secundaria);
+    color: var(--cor-preta);
     text-align: justify;
     width: 70rem;
     border-radius: 4vh;  
     padding: 1rem 1rem;
+    margin-top: 2vw;
 }
-
 
 #usuario {
     font-size: 12px;
@@ -282,6 +226,17 @@ table, th, td {
 
 .input-group input:focus {
     outline: 1px solid #6366f1;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .passaword-options {
@@ -356,12 +311,19 @@ table, th, td {
 }
 
 .menuCadastro {
-    display: grid;
-    grid-template-columns: 100%;
     background-color: white;
-    color: var(--cor-secundaria);
     text-align: justify;
     width: 25rem;
+    height:36.6rem;
+    border-radius: 4vh;  
+    padding: 3vh;
+}
+
+.menuAlterarCadastro {
+    background-color: white;
+    text-align: justify;
+    width: 25rem;
+    height:33rem;
     border-radius: 4vh;  
     padding: 3vh;
 }
