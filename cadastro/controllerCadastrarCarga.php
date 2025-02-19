@@ -14,9 +14,6 @@
         $newCargaRecebida = $_POST['cargaRecebida'];
         $newCargaDigitalizada = $_POST['cargaDigitalizada'];
         $newCargaResto = $_POST['cargaResto'];
-        $testeCarga = $newData . ' ' . $newUnidade . ' ' . $newMatricula . ' ' . $newCargaAnterior . ' ' . $newCargaRecebida
-        . ' ' . $newCargaDigitalizada . ' ' . $newCargaResto;
-		
 		
         $novaCarga = new CadastrarCarga(
             $newData,
