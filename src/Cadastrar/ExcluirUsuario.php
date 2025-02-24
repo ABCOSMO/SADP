@@ -7,16 +7,17 @@ use PDO;
 use PDOException;
 
 class ExcluirUsuario extends ConectarBD
-{
-    public function __construct(
-        private string $matricula
-    )
-    {
-        parent::__construct();
-    }
+{    
+    private $matricula;
+    
+    public function __construct($matricula)
+	{
+		parent::__construct();
+		$this->matricula = $matricula;
+	}
 
     //Cadastrar matricula de novo usuário
-    public function getMatricula(): string
+    public function getMatricula()
     {
         return $this->matricula;
     }

@@ -8,57 +8,73 @@ use PDOException;
 
 class CadastrarUsuario extends ConectarBD
 {
+    private $nomeUsuario;
+    private $matricula;
+    private $email;
+    private $telefone;
+    private $unidade;
+    private $perfil;
+    private $newSenha;
+  
+	
     public function __construct(
-        private string $nomeUsuario,
-        private string $matricula,
-        private string $email,
-        private string $telefone,
-        private string $unidade,
-        private string $perfil,
-        private string $newSenha
-    )
+		$nomeUsuario, 
+		$matricula, 
+		$email, 
+		$telefone, 
+		$unidade, 
+		$perfil, 
+		$newSenha
+	)
     {
         parent::__construct();
+        $this->nomeUsuario = $nomeUsuario;
+        $this->matricula = $matricula;
+        $this->email = $email;
+        $this->telefone = $telefone;
+        $this->unidade = $unidade;
+        $this->perfil = $perfil;
+        $this->newSenha = $newSenha;
     }
-
+    
     //Cadastra nome do novo usuário
-    public function getNomeUsuario(): string
+    public function getNomeUsuario()
     {
         return $this->nomeUsuario;
     }
     
     //Cadastrar matricula de novo usuário
-    public function getMatricula(): string
+    public function getMatricula()
     {
         return $this->matricula;
     }
     
     //Cadastrar e-mail de novo usuário
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
     
     //Cadastrar telefone de novo usuário
-    public function getTelefone(): string
+    public function getTelefone()
     {
         return $this->telefone;
     }
    
     //Cadastrar unidade de novo usuário
-    public function getUnidade(): string
+    public function getUnidade()
     {
         return $this->unidade;
     }
    
     //Cadastrar perfil de novo usuário
-    public function getPerfil(): string
+    public function getPerfil()
     {
         return $this->perfil;
     }
    
     //Cadastar senha de novo usuário
-    public function getSenha(): string
+    public function getSenha()
     {
         return $this->newSenha;
     }

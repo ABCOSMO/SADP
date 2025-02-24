@@ -8,63 +8,78 @@ use PDOException;
 
 class CadastrarCarga extends ConectarBD
 {
-    function __construct(
-        private string $novaData,
-        private string $unidade,
-        private string $matricula,
-        private string $cargaAnterior,
-        private string $cargaRecebida,
-        private string $cargaDigitalizada,
-        private string $resto
-    )
+    private $novaData;
+    private $unidade;
+    private $matricula;
+    private $cargaAnterior;
+    private $cargaRecebida;
+    private $cargaDigitalizada;
+    private $resto;
+    
+	function __construct(
+		$novaData, 
+		$unidade, 
+		$matricula, 
+		$cargaAnterior, 
+		$cargaRecebida, 
+		$cargaDigitalizada, 
+		$resto
+	)
     {
         parent::__construct();
+		$this->novaData = $novaData;
+        $this->unidade = $unidade;
+        $this->matricula = $matricula;
+        $this->cargaAnterior = $cargaAnterior;
+        $this->cargaRecebida = $cargaRecebida;
+        $this->cargaDigitalizada = $cargaDigitalizada;
+        $this->resto = $resto;
     }
 
      //Cadastra nova data
-     public function getNovaData(): string
+     public function getNovaData()
      {
          return $this->novaData;
      }
 
      //Cadastrar laçamento de carga de nova unidade
-     public function getNovaUnidade(): string
+     public function getNovaUnidade()
      {
          return $this->unidade;
      }
      
      //Cadastrar laçamento de carga de nova matricula
-     public function getNovaMatricula(): string
+     public function getNovaMatricula()
      {
          return $this->matricula;
      }
      
      //Cadastrar laçamento de carga do dia anterior
-     public function getCargaAnterior(): string
+     public function getCargaAnterior()
      {
          return $this->cargaAnterior;
      }
     
     //Cadastrar laçamento de carga recebida no dia
-     public function getCargaRecebida(): string
+     public function getCargaRecebida()
      {
          return $this->cargaRecebida;
      }
     
      //Cadastrar laçamento de carga digitalizada no dia
-     public function getCargaDigitalizada(): string
+     public function getCargaDigitalizada()
      {
          return $this->cargaDigitalizada;
      }
 
      //Cadastrar laçamento de resto no dia
-     public function getCargaResto(): string
+     public function getCargaResto()
      {
          return $this->resto;
      }
 
      //Aterar a data no formato para o banco de daddos
-     public function alterarData(): string 
+     public function alterarData() 
     {
         $novaData = $this->getNovaData();        
         $data = explode("/", $novaData);
