@@ -3,6 +3,8 @@
 namespace SADP\Cadastrar;
 
 use SADP\ConectarUsuario\ConectarBD;
+use PDO;
+use PDOException;
 
 class AlterarCadastro extends ConectarBD
 {
@@ -35,39 +37,22 @@ class AlterarCadastro extends ConectarBD
         {
             $matricula = $_GET['matricula'];
             // Prepare e execute a consulta SQL usando consulta parametrizada
-            $stmt = $this->conn->prepare("SELECT * FROM usuario WHERE matricula = ?");
-            $stmt->bind_param("s", $matricula);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            $sql = "SELECT * FROM usuario WHERE matricula = :matricula";
+            $dados = array(":matricula" => $matricula);
+            $query = parent::executarSQL($sql,$dados);
+            $resultado = $query->fetch(PDO::FETCH_OBJ);
 
-            if ($result->num_rows > 0) 
-            {
+            if ($resultado) {
                 // Autenticação bem-sucedida
-                while($row = $result->fetch_assoc())
-                {
-                    $usuario = $row['usuario'];// Assumindo que 'id' é o identificador único do usuário
-                    $matricula = $row['matricula'];
-                    $email = $row['email'];
-                    $telefone = $row['telefone'];
-                    $perfil = $row['privilegioUsuario'];
-                    $stmt = $this->conn->prepare("SELECT * FROM privilegio WHERE privilegio = ?");
-                    $stmt->bind_param("s", $perfil);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $row = $result->fetch_assoc();
-                    $idPerfil = $row['idPrivilegio'];
+                $usuario = $resultado->usuario;// Assumindo que 'id' é o identificador único do usuário
+                $matricula = $resultado->matricula;
+                $email = $resultado->email;
+                $telefone = $resultado->telefone;
+                $perfil = $resultado->privilegioUsuario;
+                $unidade = $resultado->unidadeUsuario;
 
-                    $unidade = $row['unidadeUsuario'];
-                    $stmt = $this->conn->prepare("SELECT * FROM unidade WHERE unidade = ?");
-                    $stmt->bind_param("s", $unidade);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $row = $result->fetch_assoc();
-                    $idUnidade = $row['idunidade'];
-
-                    header('Location: ../digitalizacao/alterarUsuario.php?usuario=' . $usuario . '&matricula=' . $this->formatarMatricula($matricula) . 
-                    '&email=' . $email . '&telefone=' . $telefone . '&perfil=' . $perfil . '&unidade=' . $unidade);
-                }
+                header('Location: ../digitalizacao/alterarUsuario.php?usuario=' . $usuario . '&matricula=' . $this->formatarMatricula($matricula) . 
+                '&email=' . $email . '&telefone=' . $telefone . '&perfil=' . $perfil . '&unidade=' . $unidade);
             }
         }
     }

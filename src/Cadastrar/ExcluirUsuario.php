@@ -3,6 +3,8 @@
 namespace SADP\Cadastrar;
 
 use SADP\ConectarUsuario\ConectarBD;
+use PDO;
+use PDOException;
 
 class ExcluirUsuario extends ConectarBD
 {
@@ -24,16 +26,15 @@ class ExcluirUsuario extends ConectarBD
         $tratarMatricula = $this->getMatricula();
         $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
 
-        $stmt = $this->conn->prepare("DELETE FROM usuario WHERE matricula = ?");
-        $stmt->bind_param("i", $matricula);
-        $stmt->execute();
+        $sql = "DELETE FROM usuario WHERE matricula = :matricula";
+        $dados = array(":matricula" => $matricula);
+        $query = parent::executarSQL($sql,$dados);
+        $resultado = parent::lastidSQL();
 
-        if ($stmt->execute()) {
+        if ($query) {
             echo json_encode(['success' => true]);
         } else {
-            echo json_encode(['success' => false, 'error' => $stmt->error]);
+            echo json_encode(['success' => false, 'error' => $resultado->error]);
         }
-    
-        $stmt->close();
     }
 }

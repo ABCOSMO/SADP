@@ -3,6 +3,8 @@
 namespace SADP\Lista;
 
 use SADP\ConectarUsuario\ConectarBD;
+use PDO;
+use PDOException;
 
 class SelecionarUnidade extends ConectarBD
 {
@@ -11,40 +13,44 @@ class SelecionarUnidade extends ConectarBD
         parent::__construct();
     }
 
-    public function seletorUnidade()
+    public function obterUnidade()
     {
-        $stmt = $this->conn->prepare("SELECT * FROM unidade");
-        $stmt->execute();
-        $result = $stmt->get_result();
+        try {
+            $sql = "SELECT * FROM unidade";
+            $query = parent::executarSQL($sql,[]);
+            $resultado = $query->fetchAll(PDO::FETCH_OBJ);
 
-        if ($result->num_rows > 0) 
-        {
-            // Autenticação bem-sucedida
-            while($row = $result->fetch_assoc())
-            {
-                $idUnidade = $row['idunidade'];// valor unidade
-                $unidade = $row['unidade'];
+            foreach($resultado as $key => $value) {
+                $idUnidade = $value->idunidade;// valor unidade
+                $unidade = $value->unidade;
                 echo '<option id="selecionar__unidade" value="'. $idUnidade .'">'.$idUnidade." - ".$unidade.'</option>';
             }
-        } 
+        } catch(PDOException $e){
+            // Registre o erro em um arquivo de log ou exiba uma mensagem amigável
+            $erroLog = error_log("Erro ao obter unidades: " . $e->getMessage());
+            //$json = json_encode($erroLog);
+            //file_put_contents("../digitalizacao/dados.json", $erroLog);
+        }         
     }
 
-    public function seletorPerfil()
+    public function obterPerfil()
     {
-        $stmt = $this->conn->prepare("SELECT * FROM privilegio");
-        $stmt->execute();
-        $result = $stmt->get_result();
+        try {
+            $sql = "SELECT * FROM privilegio";
+            $query = parent::executarSQL($sql,[]);
+            $resultado = $query->fetchAll(PDO::FETCH_OBJ);
 
-        if ($result->num_rows > 0) 
-        {
-            // Autenticação bem-sucedida
-            while($row = $result->fetch_assoc())
-            {
-                $idPerfil = $row['idPrivilegio'];// valor unidade
-                $perfil = $row['privilegio'];
+            foreach($resultado as $key => $value) {
+                $idPerfil = $value->idPrivilegio;// valor unidade
+                $perfil = $value->privilegio;
                 echo '<option value="'. $idPerfil .'" id="selecionar__unidade">'.$idPerfil." - ".$perfil.'</option>';
             }
-        } 
+        } catch(PDOException $e) {
+            // Registre o erro em um arquivo de log ou exiba uma mensagem amigável
+            $erroLog = error_log("Erro ao obter perfil: " . $e->getMessage());
+            //$json = json_encode($erroLog);
+            //file_put_contents("../digitalizacao/dados.json", $erroLog);
+        }
     }
 }
 

@@ -3,6 +3,8 @@
 namespace SADP\Cadastrar;
 
 use SADP\ConectarUsuario\ConectarBD;
+use PDO;
+use PDOException;
 
 class CadastrarCarga extends ConectarBD
 {
@@ -82,31 +84,43 @@ class CadastrarCarga extends ConectarBD
             $resto = str_replace(['.'], '', $this->getCargaResto());
 
             // Verifica se a carga já foi lançada
-            $stmt = $this->conn->prepare("SELECT * FROM cargadigitalizacao WHERE dataCarga = ? AND unidadeCarga = ?");
-            $stmt->bind_param("ss", $novaData, $unidade);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            $sql = "SELECT * FROM cargadigitalizacao WHERE dataCarga = :dataCarga AND unidadeCarga = :unidadeCarga";
+            $dados = array(
+                ":dataCarga" => $novaData, 
+                ":unidadeCarga" => $unidade
+            );
+            $query = parent::executarSQL($sql,$dados);
+            $resultado = $query->fetch(PDO::FETCH_OBJ);
 
-            if ($result->num_rows > 0) {
+            if ($resultado) {
                 // Carga já existente
                 $response = array('success' => false, 'error' => 'Carga desse dia já foi lançada no sistema');
             } else {
                 // Insere nova carga
-                $stmt = $this->conn->prepare("INSERT INTO cargadigitalizacao (dataCarga, unidadeCarga, matriculaCarga, cargaDiaAnterior, 
-                cargaRecebida, cargaDigitalizada, resto) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssiiiii", $novaData, $unidade, $matricula, $cargaAnterior, $cargaRecebida, $cargaDigitalizada, $resto);
-                $stmt->execute();
+                $sql = "INSERT INTO cargadigitalizacao (dataCarga, unidadeCarga, matriculaCarga, cargaDiaAnterior, 
+                cargaRecebida, cargaDigitalizada, resto) VALUES (:dataCarga, :unidadeCarga, :matriculaCarga, :cargaDiaAnterior,
+                :cargaRecebida, :cargaDigitalizada, :resto)";
+                $dados = array(
+                    ":dataCarga" => $novaData, 
+                    ":unidadeCarga" => $unidade, 
+                    ":matriculaCarga" => $matricula, 
+                    ":cargaDiaAnterior" => $cargaAnterior, 
+                    ":cargaRecebida" => $cargaRecebida, 
+                    ":cargaDigitalizada" => $cargaDigitalizada, 
+                    ":resto" => $resto
+                );
+                $query = parent::executarSQL($sql,$dados);
+                $resultado = parent::lastidSQL();
 
-                if ($stmt->affected_rows > 0) {
+                if ($resultado) {
                     $response = array('success' => true, 'message' => 'Carga do dia ' . $this->getNovaData() . ' cadastrada com sucesso.');
                 } else {
-                    $response = array('success' => false, 'error' => $stmt->error);
+                    $response = array('success' => false, 'error' => $query->error);
                 }
             }
 
             header('Content-Type: application/json');
             echo json_encode($response);
-            $stmt->close();
 
         } catch (\Exception $e) {
             $response = array('success' => false, 'error' => $e->getMessage());

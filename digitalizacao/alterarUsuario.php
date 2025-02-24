@@ -131,7 +131,7 @@ $idPerfil = $_GET['perfil'];
                             </label>
                             <select class="selecionar" type="checkbox" name="novaUnidade" size="1" id="unidade">
                                 <option value="" selected disabled="disabled" id="selecionar__unidade"> - Unidade - </option>
-                                <?php $escolherUnidade->seletorUnidade(); ?>
+                                <?php $escolherUnidade->obterUnidade(); ?>
                             </select>
                         </div>
                         <div class="input-group">
@@ -140,7 +140,7 @@ $idPerfil = $_GET['perfil'];
                             </label>
                             <select class="selecionar" type="checkbox" name="novoPerfil" size="1" id="perfil">
                                 <option value="" selected disabled="disabled" id="selecionar__unidade"> - Perfil - </option>
-                                <?php $escolherUnidade->seletorPerfil(); ?>
+                                <?php $escolherUnidade->obterPerfil(); ?>
                             </select>
                         </div>
                         <input value="Alterar" type="submit" id="login-button">
