@@ -13,6 +13,7 @@ class CadastrarCarga extends ConectarBD
     private $matricula;
     private $cargaAnterior;
     private $cargaRecebida;
+    private $cargaImpossibilitada;
     private $cargaDigitalizada;
     private $resto;
     
@@ -21,7 +22,8 @@ class CadastrarCarga extends ConectarBD
 		$unidade, 
 		$matricula, 
 		$cargaAnterior, 
-		$cargaRecebida, 
+		$cargaRecebida,
+        $cargaImpossibilitada,
 		$cargaDigitalizada, 
 		$resto
 	)
@@ -32,6 +34,7 @@ class CadastrarCarga extends ConectarBD
         $this->matricula = $matricula;
         $this->cargaAnterior = $cargaAnterior;
         $this->cargaRecebida = $cargaRecebida;
+        $this->cargaImpossibilitada = $cargaImpossibilitada;
         $this->cargaDigitalizada = $cargaDigitalizada;
         $this->resto = $resto;
     }
@@ -65,6 +68,12 @@ class CadastrarCarga extends ConectarBD
      {
          return $this->cargaRecebida;
      }
+
+     //Cadastrar laçamento de carga impossibilitada no dia
+     public function getCargaImpossibilitada()
+     {
+         return $this->cargaImpossibilitada;
+     }
     
      //Cadastrar laçamento de carga digitalizada no dia
      public function getCargaDigitalizada()
@@ -95,14 +104,23 @@ class CadastrarCarga extends ConectarBD
             $matricula = $this->getNovaMatricula();
             $cargaAnterior = str_replace(['.'], '', $this->getCargaAnterior());
             $cargaRecebida = str_replace(['.'], '', $this->getCargaRecebida());
+            $cargaImpossibilitada = str_replace(['.'], '', $this->getCargaImpossibilitada());
             $cargaDigitalizada = str_replace(['.'], '', $this->getCargaDigitalizada());
             $resto = str_replace(['.'], '', $this->getCargaResto());
 
+            $sqlUnidade = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
+            $dadosUnidade = array(
+                ":nome_unidade" => $unidade
+            );
+            $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
+            $resultadoUnidade = $queryUnidade->fetch(PDO::FETCH_OBJ);
+            $mcuUnidade = $resultadoUnidade->mcu_unidade;
+
             // Verifica se a carga já foi lançada
-            $sql = "SELECT * FROM cargadigitalizacao WHERE dataCarga = :dataCarga AND unidadeCarga = :unidadeCarga";
+            $sql = "SELECT * FROM tb_digitalizacao WHERE data_digitalizacao = :data_digitalizacao AND mcu_unidade = :mcu_unidade";
             $dados = array(
-                ":dataCarga" => $novaData, 
-                ":unidadeCarga" => $unidade
+                ":data_digitalizacao" => $novaData, 
+                ":mcu_unidade" => $mcuUnidade
             );
             $query = parent::executarSQL($sql,$dados);
             $resultado = $query->fetch(PDO::FETCH_OBJ);
@@ -112,17 +130,24 @@ class CadastrarCarga extends ConectarBD
                 $response = array('success' => false, 'error' => 'Carga desse dia já foi lançada no sistema');
             } else {
                 // Insere nova carga
-                $sql = "INSERT INTO cargadigitalizacao (dataCarga, unidadeCarga, matriculaCarga, cargaDiaAnterior, 
-                cargaRecebida, cargaDigitalizada, resto) VALUES (:dataCarga, :unidadeCarga, :matriculaCarga, :cargaDiaAnterior,
-                :cargaRecebida, :cargaDigitalizada, :resto)";
-                $dados = array(
-                    ":dataCarga" => $novaData, 
-                    ":unidadeCarga" => $unidade, 
-                    ":matriculaCarga" => $matricula, 
-                    ":cargaDiaAnterior" => $cargaAnterior, 
-                    ":cargaRecebida" => $cargaRecebida, 
-                    ":cargaDigitalizada" => $cargaDigitalizada, 
-                    ":resto" => $resto
+                date_default_timezone_set('America/Sao_Paulo');
+                $data = new DateTime('now');
+                $dataDia = $data->format('d/m/Y');
+
+                $sql = "INSERT INTO tb_digitalizacao (mcu_unidade, matricula, data_digitalizacao, qtd_imagens_dia_anterior, 
+                qtd_imagens_recebidas_dia, qtd_imagens_incorporadas, qtd_imagens_impossibilitadas, qtd_imagens_resto, data_registo) 
+                VALUES (:mcu_unidade, :matricula, :data_digitalizacao, :qtd_imagens_dia_anterior,:qtd_imagens_recebidas_dia, 
+                :qtd_imagens_incorporadas, :qtd_imagens_impossibilitadas, :qtd_imagens_resto, :data_registo)";
+                $dados = array( 
+                    ":mcu_unidade" => $mcuUnidade, 
+                    ":matricula" => $matricula, 
+                    ":data_digitalizacao" => $novaData,
+                    ":qtd_imagens_dia_anterior" => $cargaAnterior, 
+                    ":qtd_imagens_recebidas_dia" => $cargaRecebida, 
+                    ":qtd_imagens_incorporadas" => $cargaDigitalizada, 
+                    ":qtd_imagens_impossibilitadas" => $cargaImpossibilitada,
+                    ":qtd_imagens_resto" => $resto,
+                    ":data_registo" => $dataDia
                 );
                 $query = parent::executarSQL($sql,$dados);
                 $resultado = parent::lastidSQL();

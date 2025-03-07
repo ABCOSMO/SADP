@@ -7,7 +7,7 @@ function excluirUsuario()
             const id = botao.dataset.id;
             
             // Confirmação antes de excluir
-            if (confirm('Tem certeza que deseja excluir este registro?')) {
+            if (confirm('Tem certeza que deseja alterar este registro?')) {
                 // Envia uma requisição POST para o servidor
                 fetch('../cadastro/controllerExcluirCadastro.php', {
                     method: 'POST',
@@ -18,11 +18,11 @@ function excluirUsuario()
                 })
                 .then(data => {
                     if (data.success) {
-                        alert('Registro excluído com sucesso!');
+                        alert('Registro alterado com sucesso!');
                         // Remover a linha da tabela (implemente a lógica aqui)
                         window.location.href = '../digitalizacao/alterarExcluirUsuario.php';
                     } else {
-                        alert('Erro ao excluir o registro: ' + data.error);
+                        alert('Erro ao alterar o registro: ' + data.error);
                     }
                 })
                 .catch(error => {

@@ -48,14 +48,14 @@ class ListarUsuario extends ConectarBD
                     </label>
                     <table class='container__usuario'>
                         <tr>
-                            <th id='usuario'>Usuário</th>
-                            <th id='usuario'>Matrícula</th>
-                            <th id='usuario'>e-mail</th>
-                            <th id='usuario'>Telefone</th>
-                             <th id='usuario'>Celular</th>
-                            <th id='usuario'>Perfil</th>
-                            <th id='usuario'>Alterar</th>
-                            <th id='usuario'>Excluir</th>
+                            <th class='usuario' id='usuario'>Usuário</th>
+                            <th class='usuario' id='usuario'>Matrícula</th>
+                            <th class='usuario' id='usuario'>e-mail</th>
+                            <th class='usuario' id='usuario'>Telefone</th>
+                            <th class='usuario' id='usuario'>Celular</th>
+                            <th class='usuario' id='usuario'>Perfil</th>
+                            <th class='usuario' id='usuario'>Alterar</th>
+                            <th class='usuario' id='usuario'>Alterar Status</th>
                         </tr>";
             $consulta = "SELECT tb_funcionarios.*, tb_perfil.perfil FROM tb_funcionarios INNER JOIN tb_perfil ON  
             tb_funcionarios.perfil = tb_perfil.id_perfil AND mcu_unidade = :mcu_unidade";
@@ -71,18 +71,35 @@ class ListarUsuario extends ConectarBD
                 $telefone = $value->telefone;
                 $celular = $value->celular;
                 $perfil = $value->perfil;
-                                    
-                echo "  <tr class='container__usuario'>
-                            <td id='usuario'>$usuario</td>
-                            <td id='usuario'>$matriculaFormatada</td>
-                            <td id='usuario'>$email</td>
-                            <td id='usuario'>$telefone</td>
-                            <td id='usuario'>$celular</td>
-                            <td id='usuario'>$perfil</td>
-                            <td id='usuario'><a href='../cadastro/controllerAlterarCadastro.php?matricula=$matricula'><button class='botao__alterar_excluir'><i class='fa-solid fa-pencil'></i></button></a></td>
-                            <td id='usuario'><button data-id='$matriculaFormatada' class='botao__excluir botao__alterar_excluir'>
-                            <i class='fa-solid fa-trash'></i></button></td>
-                        </tr>";
+                $status = $value->status;
+                
+                if($status == 1){                                    
+                    echo "  <tr class='container__usuario'>
+                                <td class='usuario' id='usuario'>$usuario</td>
+                                <td class='usuario' id='usuario'>$matriculaFormatada</td>
+                                <td class='usuario' id='usuario'>$email</td>
+                                <td class='usuario' id='usuario'>$telefone</td>
+                                <td class='usuario' id='usuario'>$celular</td>
+                                <td class='usuario' id='usuario'>$perfil</td>
+                                <td class='usuario' id='usuario'><a href='../cadastro/controllerAlterarCadastro.php?matricula=$matricula'>
+                                <button class='botao__alterar_excluir'><i class='fa-solid fa-pencil'></i></button></a></td>
+                                <td class='usuario' id='usuario'><button data-id='$matriculaFormatada' class='botao__excluir botao__alterar_excluir'>
+                                <i class='fa-solid fa-trash'></i></button></td>
+                            </tr>";
+                }else{
+                    echo "  <tr class='container__usuario'>
+                                <td class='usuarioDesabilitado' id='usuario'>$usuario</td>
+                                <td class='usuarioDesabilitado' id='usuario'>$matriculaFormatada</td>
+                                <td class='usuarioDesabilitado' id='usuario'>$email</td>
+                                <td class='usuarioDesabilitado' id='usuario'>$telefone</td>
+                                <td class='usuarioDesabilitado' id='usuario'>$celular</td>
+                                <td class='usuarioDesabilitado' id='usuario'>$perfil</td>
+                                <td class='usuarioDesabilitado' id='usuario'><a href='../cadastro/controllerAlterarCadastro.php?matricula=$matricula'>
+                                <button class='botao__alterar_excluir'><i class='fa-solid fa-pencil'></i></button></a></td>
+                                <td class='usuarioDesabilitado' id='usuario'><button data-id='$matriculaFormatada' class='botao__excluir botao__alterar_excluir'>
+                                <i class='fa-solid fa-trash'></i></button></td>
+                            </tr>";
+                }        
             }          
             echo "</table>
                 </div>

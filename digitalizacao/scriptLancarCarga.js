@@ -85,6 +85,7 @@ function mascaraDigitarCarga(carga) {
 // Conferindo no input os dados lançados
 let inputAnterior = document.getElementById('inputAnterior');
 let inputRecebida = document.getElementById('inputRecebida');
+let inputImpossibilitada = document.getElementById('inputImpossibilitada');
 let inputDigitalizada = document.getElementById('inputDigitalizada');
 let inputResto = document.getElementById('inputResto');
 
@@ -96,6 +97,10 @@ inputRecebida.addEventListener('input', () => {
     inputRecebida.value = mascaraDigitarCarga(inputRecebida.value);
 });
 
+inputImpossibilitada.addEventListener('input', () => {
+    inputImpossibilitada.value = mascaraDigitarCarga(inputImpossibilitada.value);
+});
+
 inputDigitalizada.addEventListener('input', () => {
     inputDigitalizada.value = mascaraDigitarCarga(inputDigitalizada.value);
 });
@@ -105,14 +110,12 @@ inputResto.addEventListener('input', () => {
 });
 
 function validaFormulario(){
-    if (document.autenticar.inputData.value === "")
-    {
+    if (document.autenticar.inputData.value === ""){
         alert("Por favor, preencha o campo Data.");
         return false; // Formulário inválido
 
     }
-    if (document.autenticar.inputAnterior.value === "")
-    {
+    if (document.autenticar.inputAnterior.value === ""){
         alert("Por favor, preencha o campo Carga do dia anterior.");
         return false; // Formulário inválido
 
@@ -121,18 +124,19 @@ function validaFormulario(){
         alert("Por favor, preencha o campo Carga Recebida.");
         return false;
       }
-    if (document.autenticar.inputDigitalizada.value === "")
-    {
+    if (document.autenticar.inputImpossibilitada.value === "") {
+        alert("Por favor, preencha o campo Carga Impossibilitada.");
+        return false;
+    }
+    if (document.autenticar.inputDigitalizada.value === ""){
         alert("Por favor, preencha o campo Carga Digitalizada.");
         return false; // Formulário inválido
 
     }
-    if (document.autenticar.inputResto.value === "")
-    {
+    if (document.autenticar.inputResto.value === ""){
         alert("Por favor, preencha o campo Resto.");
         return false; // Formulário inválido
-    }else
-    {
+    }else{
 		 return true; // Formulário inválido
     }
 }

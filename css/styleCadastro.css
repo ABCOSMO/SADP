@@ -197,10 +197,19 @@ footer {
     margin-top: 2vw;
 }
 
-#usuario {
+.usuario {
     font-size: 12px;
     font-weight: 500;
     color: #9ca3af;
+    border: 1px solid #9ca3af;
+    padding: 0 0.3rem;
+    margin: 0;
+}
+
+.usuarioDesabilitado {
+    font-size: 12px;
+    font-weight: 500;
+    color: red;
     border: 1px solid #9ca3af;
     padding: 0 0.3rem;
     margin: 0;

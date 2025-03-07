@@ -14,7 +14,7 @@ if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados))
     $id = $dados['id'];
     $newMatricula = $id;
     $excluirUsuario = new ExcluirUsuario($newMatricula);
-    $excluirUsuario->deletarUsuario();
+    $excluirUsuario->alterarStatus();
     
 } else {
     // Tratar erros de decodificação ou dados inválidos

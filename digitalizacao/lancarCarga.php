@@ -116,6 +116,12 @@ $LancarData = $data->format('d/m/Y');
                             <input type="text" id="inputRecebida" name="cargaRecebida" placeholder="" maxlength="7">
                         </div>
                         <div class="input-group">
+                            <label for="cargaImpossibilitada">
+                                Carga impossibilitada
+                            </label>
+                            <input type="text" id="inputImpossibilitada" name="cargaImpossibilitada" placeholder="" maxlength="7">
+                        </div>
+                        <div class="input-group">
                             <label for="CargaDigitalizada">
                                 Carga digitalizada
                             </label>
