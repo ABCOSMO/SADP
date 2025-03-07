@@ -12,6 +12,7 @@ class CadastrarUsuario extends ConectarBD
     private $matricula;
     private $email;
     private $telefone;
+    private $celular;
     private $unidade;
     private $perfil;
     private $newSenha;
@@ -22,6 +23,7 @@ class CadastrarUsuario extends ConectarBD
 		$matricula, 
 		$email, 
 		$telefone, 
+        $celular,
 		$unidade, 
 		$perfil, 
 		$newSenha
@@ -32,6 +34,7 @@ class CadastrarUsuario extends ConectarBD
         $this->matricula = $matricula;
         $this->email = $email;
         $this->telefone = $telefone;
+        $this->celular = $celular;
         $this->unidade = $unidade;
         $this->perfil = $perfil;
         $this->newSenha = $newSenha;
@@ -60,6 +63,12 @@ class CadastrarUsuario extends ConectarBD
     {
         return $this->telefone;
     }
+
+    //Cadastrar telefone de novo usuário
+    public function getCelular()
+    {
+        return $this->celular;
+    }
    
     //Cadastrar unidade de novo usuário
     public function getUnidade()
@@ -83,28 +92,28 @@ class CadastrarUsuario extends ConectarBD
     {
         $perfil = $this->getPerfil();
         
-        $sql = "SELECT * FROM privilegio WHERE idPrivilegio = :idPrivilegio";
+        $sql = "SELECT * FROM tb_perfil WHERE perfil = :perfil";
         $dados = array(
-            ":idPrivilegio" => $perfil
+            ":perfil" => $perfil
         );
         $query = parent::executarSQL($sql,$dados);
         $resultado = $query->fetch(PDO::FETCH_OBJ);
 
-        return $perfil = $resultado->privilegio;      
+        return $perfil = $resultado->perfil;      
     }
 
     public function alterarUnidade() 
     {
         $unidade = $this->getUnidade();
         
-        $sql = "SELECT * FROM unidade WHERE idunidade = :idunidade";
+        $sql = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
         $dados = array(
-            ":idunidade" => $unidade
+            ":nome_unidade" => $unidade
         );
         $query = parent::executarSQL($sql,$dados);
         $resultado = $query->fetch(PDO::FETCH_OBJ);
         
-        return $unidade = $resultado->unidade;
+        return $unidade = $resultado->nome_unidade;
     }
 
     public function createUsuario() 
@@ -113,13 +122,16 @@ class CadastrarUsuario extends ConectarBD
         $tratarMatricula = $this->getMatricula();
         $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
         $email = $this->getEmail();
-        $telefone = $this->getTelefone();
+        $tratarTelefone = $this->getTelefone();
+        $telefone = str_replace(['(', ')', ' ', '-'], '', $tratarTelefone);
+        $tratarCelular = $this->getCelular();
+        $celular = str_replace(['(', ')', ' ', '-'], '', $tratarCelular);
         $unidade = $this->alterarUnidade();
         $perfil = $this->alterarPerfil();
         $newSenha = $this->getSenha();
     
         // Prepare e execute a consulta SQL para verificar a existência do usuário
-        $sqlVerifica = "SELECT * FROM usuario WHERE matricula = :matricula";
+        $sqlVerifica = "SELECT * FROM tb_funcionarios WHERE matricula = :matricula";
         $dadosVerifica = array(
             ":matricula" => $matricula
         );
@@ -127,21 +139,39 @@ class CadastrarUsuario extends ConectarBD
         $resultadoVerifica = $queryVerifica->fetch(PDO::FETCH_OBJ);
 
         if ($resultadoVerifica) {
-            $this->responderJSON(false, 'Usuário já cadastrado.');
+            $this->responderJSON(true, 'Erro ao cadastrar: Usuário já cadastrado.');
             return;
         }
 
         // Insere o novo usuário
-        $sqlInsere = "INSERT INTO usuario (usuario, matricula, email, telefone, unidadeUsuario, privilegioUsuario, senha) 
-        VALUES (:usuario, :matricula, :email, :telefone, :unidadeUsuario, :privilegioUsuario, :senha)";
+        $sqlConsultarUnidades = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
+        $dadosUnidades = array(":nome_unidade" => $unidade);
+        $queryUnidades = parent::executarSQL($sqlConsultarUnidades, $dadosUnidades);
+        $resultadoUnidades = $queryUnidades->fetch(PDO::FETCH_OBJ);
+        $mcu_unidade = $resultadoUnidades->mcu_unidade;
+        $se = $resultadoUnidades->se;
+
+        $sqlConsultarPerfil = "SELECT * FROM tb_perfil WHERE perfil = :perfil";
+        $dadosPerfil = array(":perfil" => $perfil);
+        $queryPerfil = parent::executarSQL($sqlConsultarPerfil, $dadosPerfil);
+        $resultadoPerfil = $queryPerfil->fetch(PDO::FETCH_OBJ);
+        $idPerfil = $resultadoPerfil->id_perfil;
+
+        $status = 1;
+
+        $sqlInsere = "INSERT INTO tb_funcionarios (matricula, nome, email, telefone, celular, se, mcu_unidade, perfil, senha, status) 
+        VALUES (:matricula, :nome, :email, :telefone, :celular, :se, :mcu_unidade, :perfil, :senha, :status)";
         $dadosInsere = array(
-            ":usuario" => $nomeUsuario,
             ":matricula" => $matricula,
+            ":nome" => $nomeUsuario,
             ":email" => $email,
             ":telefone" => $telefone,
-            ":unidadeUsuario" => $unidade,
-            ":privilegioUsuario" => $perfil,
-            ":senha" => $newSenha
+            ":celular" => $celular,
+            ":se" => $se,
+            ":mcu_unidade" => $mcu_unidade,
+            ":perfil" => $idPerfil,
+            ":senha" => $newSenha,
+            ":status" => $status
         );
 
         $queryInsere = parent::executarSQL($sqlInsere, $dadosInsere);
@@ -149,7 +179,7 @@ class CadastrarUsuario extends ConectarBD
         if ($queryInsere) {
             $this->responderJSON(true, 'Usuário cadastrado com sucesso.');
         } else {
-            $this->responderJSON(false, 'Erro ao cadastrar usuário: ' . $this->conn->error);
+            $this->responderJSON(false, 'Erro ao cadastrar usuário: ' . $queryInsere->error);
         }
     }
 

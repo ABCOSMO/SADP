@@ -16,14 +16,17 @@ class SelecionarUnidade extends ConectarBD
     public function obterUnidade()
     {
         try {
-            $sql = "SELECT * FROM unidade";
-            $query = parent::executarSQL($sql,[]);
+            $status = 1;
+            $sql = "SELECT * FROM tb_unidades WHERE status = :status ORDER BY nome_unidade";
+            $dados = array(":status" => $status);
+            $query = parent::executarSQL($sql,$dados);
             $resultado = $query->fetchAll(PDO::FETCH_OBJ);
+            $idUnidade = 1;// valor unidade
 
             foreach($resultado as $key => $value) {
-                $idUnidade = $value->idunidade;// valor unidade
-                $unidade = $value->unidade;
-                echo '<option id="selecionar__unidade" value="'. $idUnidade .'">'.$idUnidade." - ".$unidade.'</option>';
+                $unidade = $value->nome_unidade;
+                echo '<option id="selecionar__unidade" value="'. $unidade .'">'.$idUnidade." - ".$unidade.'</option>';
+                $idUnidade++;
             }
         } catch(PDOException $e){
             // Registre o erro em um arquivo de log ou exiba uma mensagem amigável
@@ -36,14 +39,17 @@ class SelecionarUnidade extends ConectarBD
     public function obterPerfil()
     {
         try {
-            $sql = "SELECT * FROM privilegio";
-            $query = parent::executarSQL($sql,[]);
+            $status = 1;
+            $sql = "SELECT * FROM tb_perfil WHERE status = :status ORDER BY id_perfil";
+            $dados = array(":status" => $status);
+            $query = parent::executarSQL($sql,$dados);
             $resultado = $query->fetchAll(PDO::FETCH_OBJ);
+            $idPerfil = 1;// valor unidade
 
             foreach($resultado as $key => $value) {
-                $idPerfil = $value->idPrivilegio;// valor unidade
-                $perfil = $value->privilegio;
-                echo '<option value="'. $idPerfil .'" id="selecionar__unidade">'.$idPerfil." - ".$perfil.'</option>';
+                $perfil = $value->perfil;
+                echo '<option value="'. $perfil .'" id="selecionar__unidade">'.$idPerfil." - ".$perfil.'</option>';
+                $idPerfil++;
             }
         } catch(PDOException $e) {
             // Registre o erro em um arquivo de log ou exiba uma mensagem amigável

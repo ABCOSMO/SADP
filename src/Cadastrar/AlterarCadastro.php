@@ -37,22 +37,24 @@ class AlterarCadastro extends ConectarBD
         {
             $matricula = $_GET['matricula'];
             // Prepare e execute a consulta SQL usando consulta parametrizada
-            $sql = "SELECT * FROM usuario WHERE matricula = :matricula";
+            $sql = "SELECT tb_funcionarios.*, tb_perfil.perfil FROM tb_funcionarios INNER JOIN tb_perfil ON  
+            tb_funcionarios.perfil = tb_perfil.id_perfil AND matricula = :matricula";
             $dados = array(":matricula" => $matricula);
             $query = parent::executarSQL($sql,$dados);
             $resultado = $query->fetch(PDO::FETCH_OBJ);
 
             if ($resultado) {
                 // Autenticação bem-sucedida
-                $usuario = $resultado->usuario;// Assumindo que 'id' é o identificador único do usuário
+                $usuario = $resultado->nome;// Assumindo que 'id' é o identificador único do usuário
                 $matricula = $resultado->matricula;
                 $email = $resultado->email;
                 $telefone = $resultado->telefone;
-                $perfil = $resultado->privilegioUsuario;
-                $unidade = $resultado->unidadeUsuario;
+                $celular = $resultado->celular;
+                $perfil = $resultado->perfil;
+                $unidade = $resultado->nome_unidade;
 
                 header('Location: ../digitalizacao/alterarUsuario.php?usuario=' . $usuario . '&matricula=' . $this->formatarMatricula($matricula) . 
-                '&email=' . $email . '&telefone=' . $telefone . '&perfil=' . $perfil . '&unidade=' . $unidade);
+                '&email=' . $email . '&telefone=' . $telefone . '&celular=' . $celular . '&perfil=' . $perfil . '&unidade=' . $unidade);
             }
         }
     }

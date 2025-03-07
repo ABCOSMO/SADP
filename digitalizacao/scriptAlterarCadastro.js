@@ -88,6 +88,30 @@ inputTelefone.addEventListener('input', () => {
     inputTelefone.value = mascaraTelefone(inputTelefone.value);
 });
 
+function mascaraCelular(celular) {
+    // Remove todos os caracteres não numéricos
+    celular = celular.replace(/\D/g, "");
+  
+    // Verifica se o celular tem 11 dígitos
+    if (celular.length !== 11) {
+      return celular; // Retorna o celular sem formatação se não tiver 11 dígitos
+    }
+  
+    // Aplica a máscara: (XX) XXXXX-XXXX
+    celular = celular.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+  
+    return celular;
+  }
+  
+  // Exemplo de uso com um campo de input HTML:
+  let inputCelular = document.getElementById('inputCelular');
+  
+  if (inputCelular) {
+    inputCelular.addEventListener('input', () => {
+      inputCelular.value = mascaraCelular(inputCelular.value);
+    });
+  }
+
 function isValidEmail(email) {
     // Expressão regular para validar email
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -123,6 +147,12 @@ function validaFormulario(){
         return false; // Formulário inválido
 
     }
+    if (document.autenticar.inputCelular.value === "")
+        {
+            alert("Por favor, preencha o campo Celular.");
+            return false; // Formulário inválido
+    
+        }
     if (autenticar.unidade.options[autenticar.unidade.selectedIndex].value === "")
     {
         alert("Por favor, preencha o campo Unidade.");

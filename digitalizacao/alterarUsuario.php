@@ -18,6 +18,7 @@ $usuario = $_GET['usuario'];
 $matricula = $_GET['matricula'];
 $email = $_GET['email'];
 $telefone = $_GET['telefone'];
+$celular = $_GET['celular'];
 $idUnidade = $_GET['unidade'];
 $idPerfil = $_GET['perfil'];
 ?>
@@ -124,6 +125,12 @@ $idPerfil = $_GET['perfil'];
                                 Alterar Telefone
                             </label>
                             <input type="text" id="inputTelefone" name="novoTelefone" value="<?php echo $telefone ?>" maxlength="11">
+                        </div>
+                        <div class="input-group">
+                            <label for="celular">
+                                Alterar Celular
+                            </label>
+                            <input type="text" id="inputCelular" name="novoCelular" value="<?php echo $celular ?>" maxlength="11">
                         </div>
                         <div class="input-group">
                         <label for="unidade">

@@ -120,6 +120,12 @@ $unidade = $_SESSION['unidade'];
                             <input type="text" id="inputTelefone" name="novoTelefone" placeholder="Digite o telefone com DDD" maxlength="11">
                         </div>
                         <div class="input-group">
+                            <label for="celular">
+                                Cadastrar Celular
+                            </label>
+                            <input type="text" id="inputCelular" name="novoCelular" placeholder="Digite o celular com DDD" maxlength="11">
+                        </div>
+                        <div class="input-group">
                         <label for="unidade">
                                 Cadastrar Unidade
                             </label>

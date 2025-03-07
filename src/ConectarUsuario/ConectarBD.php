@@ -17,7 +17,7 @@ use PDOException;
                 $this->host = '127.0.0.1';
                 $this->senha = "";
                 $this->usuario = "root";
-                $this->bancoDados = "test";
+                $this->bancoDados = "mydb";
                 
                 
                 self::conecta();

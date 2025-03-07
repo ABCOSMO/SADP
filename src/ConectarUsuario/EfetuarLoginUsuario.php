@@ -15,32 +15,32 @@ class EfetuarLoginUsuario extends ConectarBD
 
     public function logarUsuario()
     {
-        if($_SERVER['REQUEST_METHOD']==='POST')
-        {
+        if($_SERVER['REQUEST_METHOD']==='POST') {
             $tratarMatricula = $_POST['matricula'];
             $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
             $senha = $_POST['password'];
+            $status = 1;
             // Prepare e execute a consulta SQL usando consulta parametrizada
-            $sql = "SELECT * FROM usuario WHERE matricula = :matricula AND senha = :senha";
-            $dados = array(":matricula" => $matricula, ":senha" => $senha);
+            $sql = "SELECT tb_funcionarios.*, tb_unidades.nome_unidade FROM tb_funcionarios INNER JOIN tb_unidades ON 
+            tb_funcionarios.mcu_unidade = tb_unidades.mcu_unidade AND tb_funcionarios.status = :status AND matricula = :matricula AND senha = :senha";
+            $dados = array(":status" => $status, ":matricula" => $matricula, ":senha" => $senha);
             $query = parent::executarSQL($sql, $dados);
             $resultado = $query->fetch(PDO::FETCH_OBJ);
 
             if($resultado){
                 $_SESSION['logado'] = true;
-                $_SESSION['id_usuario'] = $resultado->id;// Assumindo que 'id' é o identificador único do usuário
-                $_SESSION['matricula'] = $resultado->matricula;
-                $_SESSION['nome'] = $resultado->usuario;
-                $_SESSION['privilegio'] = $resultado->privilegioUsuario;
-                $_SESSION['unidade'] = $resultado->unidadeUsuario;
+                $_SESSION['matricula'] = $resultado->matricula;// Assumindo que 'id' é o identificador único do usuário
+                $_SESSION['nome'] = $resultado->nome;
+                $_SESSION['privilegio'] = $resultado->perfil;
+                $_SESSION['unidade'] = $resultado->nome_unidade;
                 date_default_timezone_set('America/Sao_Paulo');
                 $data = new \DateTime('now');
                 $gravarData = $data->format('Y-m-d H:i:s');
 
-                $sql = "INSERT INTO logacesso (usuarioLogAcesso, matriculaLogAcesso, dataHoraAcesso) VALUES (:usuario, :matricula, :dataHora)";
+                /*$sql = "INSERT INTO logacesso (usuarioLogAcesso, matriculaLogAcesso, dataHoraAcesso) VALUES (:usuario, :matricula, :dataHora)";
                 $dados = array(":usuario" => $_SESSION['nome'], ":matricula" => $_SESSION['matricula'], ":dataHora" => $gravarData);
                 $query = parent::executarSQL($sql, $dados);
-			    $resultado = parent::lastidSQL();
+			    $resultado = parent::lastidSQL();*/
                 header('Location: ../');
                 exit;
             }else {
