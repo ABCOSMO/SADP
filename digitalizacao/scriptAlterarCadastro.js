@@ -135,12 +135,6 @@ function validaFormulario(){
         alert("Por favor, insira um endereço de e-mail válido.");
         return false;
       }
-    /*if (document.autenticar.inputEmail.value === "")
-    {
-        alert("Por favor, preencha o campo e-mail.");
-        return false; // Formulário inválido
-
-    }*/
     if (document.autenticar.inputTelefone.value === "")
     {
         alert("Por favor, preencha o campo Telefone.");

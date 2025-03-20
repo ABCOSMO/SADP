@@ -5,7 +5,7 @@ use SADP\ConectarUsuario\ConectarBD;
 
 
 
-    $newData = '06/03/2025';
+    $newData = '07/03/2025';
     $newUnidade = 'CDIP BRASÍLIA';
     $newMatricula = '81342497';
     $newCargaAnterior = '0';
@@ -14,7 +14,7 @@ use SADP\ConectarUsuario\ConectarBD;
     $newCargaDigitalizada = '190.000';
     $newCargaResto = '0';
     
-    
+ 
 class CadastrarCarga extends ConectarBD
 {
     private $novaData;
@@ -123,7 +123,7 @@ class CadastrarCarga extends ConectarBD
             );
             $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
             $resultadoUnidade = $queryUnidade->fetch(PDO::FETCH_OBJ);
-            $mcuUnidade = $resultadoUnidade->mcu_unidade;
+            $mcuUnidade = $resultadoUnidade->mcu_unidade; 
 
             // Verifica se a carga já foi lançada
             $sql = "SELECT * FROM tb_digitalizacao WHERE data_digitalizacao = :data_digitalizacao AND mcu_unidade = :mcu_unidade";
@@ -141,30 +141,12 @@ class CadastrarCarga extends ConectarBD
                 // Insere nova carga
                 date_default_timezone_set('America/Sao_Paulo');
                 $data = new DateTime('now');
-                $dataDia = $data->format('d/m/Y');
-                
-                $sql = "INSERT INTO tb_digitalizacao (
-                mcu_unidade, 
-                matricula, 
-                data_digitalizacao, 
-                qtd_imagens_dia_anterior, 
-                qtd_imagens_recebidas_dia, 
-                qtd_imagens_incorporadas, 
-                qtd_imagens_impossibilitadas, 
-                qtd_imagens_resto, 
-                data_registo
-                ) 
-                VALUES (
-                :mcu_unidade, 
-                :matricula, 
-                :data_digitalizacao, 
-                :qtd_imagens_dia_anterior,
-                :qtd_imagens_recebidas_dia, 
-                :qtd_imagens_incorporadas, 
-                :qtd_imagens_impossibilitadas, 
-                :qtd_imagens_resto, 
-                :data_registo
-                )";
+                $dataDia = $data->format('Y-m-d');
+
+                $sql = "INSERT INTO tb_digitalizacao (mcu_unidade, matricula, data_digitalizacao, qtd_imagens_dia_anterior, 
+                qtd_imagens_recebidas_dia, qtd_imagens_incorporadas, qtd_imagens_impossibilitadas, qtd_imagens_resto) 
+                VALUES (:mcu_unidade, :matricula, :data_digitalizacao, :qtd_imagens_dia_anterior,:qtd_imagens_recebidas_dia, 
+                :qtd_imagens_incorporadas, :qtd_imagens_impossibilitadas, :qtd_imagens_resto)";
                 $dados = array( 
                     ":mcu_unidade" => $mcuUnidade, 
                     ":matricula" => $matricula, 
@@ -173,8 +155,7 @@ class CadastrarCarga extends ConectarBD
                     ":qtd_imagens_recebidas_dia" => $cargaRecebida, 
                     ":qtd_imagens_incorporadas" => $cargaDigitalizada, 
                     ":qtd_imagens_impossibilitadas" => $cargaImpossibilitada,
-                    ":qtd_imagens_resto" => $resto,
-                    ":data_registo" => $dataDia
+                    ":qtd_imagens_resto" => $resto
                 );
                 $query = parent::executarSQL($sql,$dados);
                 $resultado = parent::lastidSQL();
@@ -182,7 +163,8 @@ class CadastrarCarga extends ConectarBD
                 if ($resultado) {
                     $response = array('success' => true, 'message' => 'Carga do dia ' . $this->getNovaData() . ' cadastrada com sucesso.');
                 } else {
-                    $response = array('success' => false, 'error' => $query->error);
+					$erroInfo = $query->errorInfo();
+                    $response = array('success' => false, 'error' => $erroInfo);
                 }
             }
 
@@ -199,14 +181,14 @@ class CadastrarCarga extends ConectarBD
     
 
 $novaCarga = new CadastrarCarga(
-    $newData,
-    $newUnidade,
-    $newMatricula,
-    $newCargaAnterior,
-    $newCargaRecebida,
-    $newCargaImpossibilitada,
-    $newCargaDigitalizada,
-    $newCargaResto
-);
-
-$novaCarga->lancamentoDaCarga();
+            $newData,
+            $newUnidade,
+            $newMatricula,
+            $newCargaAnterior,
+            $newCargaRecebida,
+            $newCargaImpossibilitada,
+            $newCargaDigitalizada,
+            $newCargaResto
+        );
+        
+        $novaCarga->lancamentoDaCarga();

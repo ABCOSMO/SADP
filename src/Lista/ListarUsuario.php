@@ -29,11 +29,37 @@ class ListarUsuario extends ConectarBD
     
         return $matriculaFormatada;
     }
+	
+	public function formatarTelefone($telefone) 
+    {    
+        // Divide a matrícula em partes para facilitar a formatação
+        $parte1 = substr($telefone, 0, 2);
+        $parte2 = substr($telefone, 2, 4);
+        $parte3 = substr($telefone, 6, 4);
+    
+        // Junta as partes com os pontos e hífen
+        $telefoneFormatado = '(' . $parte1 . ') ' . $parte2 . '-' . $parte3;
+    
+        return $telefoneFormatado;
+    }
+	
+	public function formatarCelular($celular) 
+    {    
+        // Divide a matrícula em partes para facilitar a formatação
+        $parte1 = substr($celular, 0, 2);
+        $parte2 = substr($celular, 2, 5);
+        $parte3 = substr($celular, 7, 4);
+    
+        // Junta as partes com os pontos e hífen
+        $celularFormatado = '(' . $parte1 . ') ' . $parte2 . '-' . $parte3;
+    
+        return $celularFormatado;
+    }
     
     public function mostrarUsuario()
     {
         $sql = "SELECT tb_funcionarios.*, tb_unidades.nome_unidade FROM tb_funcionarios INNER JOIN tb_unidades ON 
-            tb_funcionarios.mcu_unidade = tb_unidades.mcu_unidade";
+            tb_funcionarios.mcu_unidade = tb_unidades.mcu_unidade GROUP BY tb_funcionarios.mcu_unidade";
         $query = parent::executarSQL($sql,[]);
         $resultado = $query->fetchAll(PDO::FETCH_OBJ);
 
@@ -69,17 +95,19 @@ class ListarUsuario extends ConectarBD
                 $matriculaFormatada = $this -> formatarMatricula($matricula);
                 $email = $value->email;
                 $telefone = $value->telefone;
+				$telefoneFormatado = $this -> formatarTelefone($telefone);
                 $celular = $value->celular;
+				$celularFormatado = $this -> formatarCelular($celular);
                 $perfil = $value->perfil;
                 $status = $value->status;
                 
-                if($status == 1){                                    
+                if($status == 1){
                     echo "  <tr class='container__usuario'>
                                 <td class='usuario' id='usuario'>$usuario</td>
                                 <td class='usuario' id='usuario'>$matriculaFormatada</td>
                                 <td class='usuario' id='usuario'>$email</td>
-                                <td class='usuario' id='usuario'>$telefone</td>
-                                <td class='usuario' id='usuario'>$celular</td>
+                                <td class='usuario' id='usuario'>$telefoneFormatado</td>
+                                <td class='usuario' id='usuario'>$celularFormatado</td>
                                 <td class='usuario' id='usuario'>$perfil</td>
                                 <td class='usuario' id='usuario'><a href='../cadastro/controllerAlterarCadastro.php?matricula=$matricula'>
                                 <button class='botao__alterar_excluir'><i class='fa-solid fa-pencil'></i></button></a></td>

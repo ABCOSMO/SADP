@@ -191,12 +191,44 @@ class CadastrarUsuario extends ConectarBD
         $unidade = $this->alterarUnidade();
         $usuario = $this->getNomeUsuario();
         $email = $this->getEmail();
-        $telefone = $this->getTelefone();
+        $tratarTelefone = $this->getTelefone();
+        $telefone = str_replace(['(', ')', ' ', '-'], '', $tratarTelefone);
+        $tratarCelular = $this->getCelular();
+        $celular = str_replace(['(', ')', ' ', '-'], '', $tratarCelular);
         
-        $sql = "UPDATE usuario SET privilegioUsuario = :privilegioUsuario, unidadeUsuario = :unidadeUsuario, usuario = usuario, 
-        matricula = :matricula, email = :email, telefone = :telefone WHERE matricula = :matricula";
-        $dados = array(":privilegioUsuario" => $perfil, ":unidadeUsuario" => $unidade, ":usuario" => $usuario, 
-        ":matricula" => $matricula, ":email" => $email, ":telefone" => $telefone);
+		$sqlConsultarUnidades = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
+        $dadosUnidades = array(":nome_unidade" => $unidade);
+        $queryUnidades = parent::executarSQL($sqlConsultarUnidades, $dadosUnidades);
+        $resultadoUnidades = $queryUnidades->fetch(PDO::FETCH_OBJ);
+        $mcu_unidade = $resultadoUnidades->mcu_unidade;
+        $se = $resultadoUnidades->se;
+		
+        $sqlConsultarPerfil = "SELECT * FROM tb_perfil WHERE perfil = :perfil";
+        $dadosPerfil = array(":perfil" => $perfil);
+        $queryPerfil = parent::executarSQL($sqlConsultarPerfil, $dadosPerfil);
+        $resultadoPerfil = $queryPerfil->fetch(PDO::FETCH_OBJ);
+        $idPerfil = $resultadoPerfil->id_perfil;
+		
+        $sql = "UPDATE tb_funcionarios SET 
+		matricula = :matricula, 
+		nome = :nome, 
+		email = :email, 
+        telefone = :telefone, 
+		celular = :celular, 
+		se = :se, 
+		mcu_unidade = :mcu_unidade,
+		perfil = :perfil
+		WHERE matricula = :matricula";
+        $dados = array(
+		":matricula" => $matricula, 
+		":nome" => $usuario, 
+		":email" => $email, 
+        ":telefone" => $telefone, 
+		":celular" => $celular, 
+		":se" => $se,
+		":mcu_unidade" => $mcu_unidade,
+		":perfil" => $idPerfil
+		);
         $query = parent::executarSQL($sql,$dados);
         $resultado = parent::lastidSQL();
 

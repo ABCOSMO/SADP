@@ -30,8 +30,6 @@ $LancarData = $data->format('d/m/Y');
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="scriptLancarCarga.js" defer></script>
-    <script src="../header.js" defer></script>
     <title>SADP - DELOG</title>
 </head>
 <body>
@@ -138,6 +136,7 @@ $LancarData = $data->format('d/m/Y');
                         <input value="Enviar dados" type="submit" id="login-button"></input>
                     </div>
                 </form>
+                <div id="dadosContainer"></div>
             </div>
             <dialog class="loading"></dialog>
         
@@ -147,5 +146,7 @@ $LancarData = $data->format('d/m/Y');
             <h3 class="rodape">Desenvolvido pelos CDIPs</h3>
         </div>
     </footer>
+    <script src="scriptLancarCarga.js" defer></script>
+    <script src="../header.js" defer></script>
 </body>
 </html>

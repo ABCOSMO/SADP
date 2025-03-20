@@ -114,7 +114,7 @@ class CadastrarCarga extends ConectarBD
             );
             $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
             $resultadoUnidade = $queryUnidade->fetch(PDO::FETCH_OBJ);
-            $mcuUnidade = $resultadoUnidade->mcu_unidade;
+            $mcuUnidade = $resultadoUnidade->mcu_unidade; 
 
             // Verifica se a carga já foi lançada
             $sql = "SELECT * FROM tb_digitalizacao WHERE data_digitalizacao = :data_digitalizacao AND mcu_unidade = :mcu_unidade";
@@ -130,14 +130,10 @@ class CadastrarCarga extends ConectarBD
                 $response = array('success' => false, 'error' => 'Carga desse dia já foi lançada no sistema');
             } else {
                 // Insere nova carga
-                date_default_timezone_set('America/Sao_Paulo');
-                $data = new DateTime('now');
-                $dataDia = $data->format('d/m/Y');
-
                 $sql = "INSERT INTO tb_digitalizacao (mcu_unidade, matricula, data_digitalizacao, qtd_imagens_dia_anterior, 
-                qtd_imagens_recebidas_dia, qtd_imagens_incorporadas, qtd_imagens_impossibilitadas, qtd_imagens_resto, data_registo) 
+                qtd_imagens_recebidas_dia, qtd_imagens_incorporadas, qtd_imagens_impossibilitadas, qtd_imagens_resto) 
                 VALUES (:mcu_unidade, :matricula, :data_digitalizacao, :qtd_imagens_dia_anterior,:qtd_imagens_recebidas_dia, 
-                :qtd_imagens_incorporadas, :qtd_imagens_impossibilitadas, :qtd_imagens_resto, :data_registo)";
+                :qtd_imagens_incorporadas, :qtd_imagens_impossibilitadas, :qtd_imagens_resto)";
                 $dados = array( 
                     ":mcu_unidade" => $mcuUnidade, 
                     ":matricula" => $matricula, 
@@ -146,8 +142,7 @@ class CadastrarCarga extends ConectarBD
                     ":qtd_imagens_recebidas_dia" => $cargaRecebida, 
                     ":qtd_imagens_incorporadas" => $cargaDigitalizada, 
                     ":qtd_imagens_impossibilitadas" => $cargaImpossibilitada,
-                    ":qtd_imagens_resto" => $resto,
-                    ":data_registo" => $dataDia
+                    ":qtd_imagens_resto" => $resto
                 );
                 $query = parent::executarSQL($sql,$dados);
                 $resultado = parent::lastidSQL();
@@ -155,7 +150,8 @@ class CadastrarCarga extends ConectarBD
                 if ($resultado) {
                     $response = array('success' => true, 'message' => 'Carga do dia ' . $this->getNovaData() . ' cadastrada com sucesso.');
                 } else {
-                    $response = array('success' => false, 'error' => $query->error);
+					$erroInfo = $query->errorInfo();
+                    $response = array('success' => false, 'error' => $erroInfo);
                 }
             }
 

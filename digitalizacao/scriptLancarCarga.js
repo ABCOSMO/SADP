@@ -3,8 +3,6 @@ function enviarDadosFormulario()
 			const form = document.getElementById('myForm');
 			const loading = document.querySelector('.loading');
 			
-			
-				event.preventDefault();
 				// Mostrar a animação
 				loading.style.display = 'block';
 				const formData = new FormData(form);
@@ -109,6 +107,54 @@ inputResto.addEventListener('input', () => {
     inputResto.value = mascaraDigitarCarga(inputResto.value);
 });
 
+function relatorioDigitalizacao() {
+    let id = 0;
+    let resultado = document.getElementById('dadosContainer'); // Obtém a referência uma vez
+    resultado.innerHTML = ''; // Limpa o conteúdo existente
+    fetch('../cadastro/controllerCargaDigitalizacao.php') 
+    .then(response => response.json())
+      .then(data => {
+          // Aqui você pode trabalhar com os dados JSON recebidos
+          //console.log(data);
+          // Exibir os dados na tela, etc.
+          
+          data.forEach(item => {
+              console.log(item.data_digitalizacao);
+              console.log(item.imagens_anterior);
+              resultado.innerHTML += 
+                    `<form method="post" id="myForm${id}" name="autenticar${id}" >
+                        <section class="modal-body">
+                            <div class="input-group">
+                                <input type="text" id="inputData${id}" name="novaData" value=${item.data_digitalizacao} maxlength="10">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="inputAnterior${id}" name="cargaAnterior" 
+                                value=${item.imagens_anterior} maxlength="7">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="inputRecebida${id}" name="cargaRecebida" value=${item.imagens_recebidas} maxlength="7">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="inputImpossibilitada${id}" name="cargaImpossibilitada" value=${item.imagens_impossibilitadas} maxlength="7">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="inputDigitalizada${id}" name="cargaDigitalizada" value=${item.imagens_incorporadas} maxlength="7">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="inputResto${id}" name="cargaResto" value=${item.resto} maxlength="7">
+                            </div>
+                        </section>
+                    </form>`;
+                    id++;
+          });
+      })
+      .catch(error => {
+          console.error('Erro:', error);
+      });
+}
+
+relatorioDigitalizacao();
+
 function validaFormulario(){
     if (document.autenticar.inputData.value === ""){
         alert("Por favor, preencha o campo Data.");
@@ -148,5 +194,6 @@ form.addEventListener('submit', (event) => {
     if (validaFormulario()) {
         // Se o formulário for válido, envie os dados
        enviarDadosFormulario();
+       window.location.href = '../digitalizacao/lancarCarga.php';
     }
 });
