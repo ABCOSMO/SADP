@@ -108,7 +108,7 @@ inputResto.addEventListener('input', () => {
 });
 
 function relatorioDigitalizacao() {
-    let id = 0;
+    let id = 1;
     let resultado = document.getElementById('dadosContainer'); // Obtém a referência uma vez
     resultado.innerHTML = ''; // Limpa o conteúdo existente
     fetch('../cadastro/controllerCargaDigitalizacao.php') 
@@ -119,30 +119,43 @@ function relatorioDigitalizacao() {
           // Exibir os dados na tela, etc.
           
           data.forEach(item => {
-              console.log(item.data_digitalizacao);
-              console.log(item.imagens_anterior);
+              //console.log(item.data_digitalizacao);
+              //console.log(item.imagens_anterior);
               resultado.innerHTML += 
                     `<form method="post" id="myForm${id}" name="autenticar${id}" >
                         <section class="modal-body">
                             <div class="input-group">
-                                <input type="text" id="inputData${id}" name="novaData" value=${item.data_digitalizacao} maxlength="10">
+                                <input type="text" id="inputData${id}" name="novaData" 
+                                value=${item.data_digitalizacao} maxlength="10" disabled>
                             </div>
                             <div class="input-group">
                                 <input type="text" id="inputAnterior${id}" name="cargaAnterior" 
-                                value=${item.imagens_anterior} maxlength="7">
+                                value=${mascaraDigitarCarga(item.imagens_anterior.toString())} maxlength="7" disabled>
                             </div>
                             <div class="input-group">
-                                <input type="text" id="inputRecebida${id}" name="cargaRecebida" value=${item.imagens_recebidas} maxlength="7">
+                                <input type="text" id="inputRecebida${id}" name="cargaRecebida" 
+                                value=${mascaraDigitarCarga(item.imagens_recebidas.toString())} maxlength="7" disabled>
                             </div>
                             <div class="input-group">
-                                <input type="text" id="inputImpossibilitada${id}" name="cargaImpossibilitada" value=${item.imagens_impossibilitadas} maxlength="7">
+                                <input type="text" id="inputImpossibilitada${id}" name="cargaImpossibilitada" 
+                                value=${mascaraDigitarCarga(item.imagens_impossibilitadas.toString())} maxlength="7" disabled>
                             </div>
                             <div class="input-group">
-                                <input type="text" id="inputDigitalizada${id}" name="cargaDigitalizada" value=${item.imagens_incorporadas} maxlength="7">
+                                <input type="text" id="inputDigitalizada${id}" name="cargaDigitalizada" 
+                                value=${mascaraDigitarCarga(item.imagens_incorporadas.toString())} maxlength="7" disabled>
                             </div>
                             <div class="input-group">
-                                <input type="text" id="inputResto${id}" name="cargaResto" value=${item.resto} maxlength="7">
+                                <input type="text" id="inputResto${id}" name="cargaResto" 
+                                value=${mascaraDigitarCarga(item.resto.toString())} maxlength="7" disabled>
                             </div>
+                            <div class="input-group">
+                                <button class='open-modal botao__alterar_excluir' data-modal="modal-${id}">
+                                <i class='fa-solid fa-pencil'></i></button>
+                            </div>
+                             <dialog id="modal-${id}">
+                                Tipo Modal
+                                <button class="close-modal" data-modal="modal-${id}">Fechar</button>
+                            </dialog>
                         </section>
                     </form>`;
                     id++;
@@ -154,6 +167,28 @@ function relatorioDigitalizacao() {
 }
 
 relatorioDigitalizacao();
+
+document.addEventListener('click', (event) => {
+    // Abrir modal
+    if (event.target.classList.contains('open-modal')) {
+        const modalId = event.target.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        console.log(modal);
+        if (modal) {
+            modal.showModal();
+        }
+    }
+
+    // Fechar modal
+    if (event.target.classList.contains('close-modal')) {
+        const modalId = event.target.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.close();
+        }
+    }
+});
+
 
 function validaFormulario(){
     if (document.autenticar.inputData.value === ""){

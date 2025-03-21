@@ -51,7 +51,7 @@ function enviarDadosFormulario()
 					// Processa a resposta JSON, por exemplo, exibindo uma mensagem
 					if (data.success) {
 						alert(data.message);
-						window.location.href = '../digitalizacao/cadastrarUsuario.php';
+						window.location.href = '../digitalizacao/alterarExcluirUsuario.php';
 					} else {
 						alert('Erro ao enviar os dados: ' + data.error);
 					}

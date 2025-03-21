@@ -29,8 +29,6 @@ $unidade = $_SESSION['unidade'];
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="scriptExcluirCadastro.js" defer></script>
-    <script src="../header.js" defer></script>
     <title>SADP - DELOG</title>
 </head>
 <body>
@@ -89,11 +87,88 @@ $unidade = $_SESSION['unidade'];
     </div>
     <section class="container__botao">
         <div class="container__cadastro_usuario">
-            <div class="menuAlterarUsuario" id="modal-1">
+            <div class="menuAlterarUsuario">
+                <div class="menuAlterarUsuario__botao_cadastro">
+                    <button class="open-modal" data-modal="modal-1" id="login-button-cadastro">
+                        Cadastrar Novo Usuário
+                    </button> 
+                </div>
                <div class="modal-header">
                     <h1 class="modal-title">
                         Alterar ou excluir usuário
                     </h1>
+                    <dialog id="modal-1">
+                        <div class="menuCadastro" id="modal-1">
+                            <form method="post" id="myForm" name="autenticar" >
+                                <div class="modal-header">
+                                    <h1 class="modal-title">
+                                        Cadastrar novo usuário
+                                    </h1>
+                                    <button class="close-modal" data-modal="modal-1" type="button">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                        <label for="nome">
+                                            Cadastrar Nome
+                                        </label>
+                                        <input type="text" id="inputNome" name="novoNome" placeholder="Digite o nome" maxlength="60">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="matricula">
+                                            Cadastrar Matrícula
+                                        </label>
+                                        <input type="text" id="inputMatricula" name="novaMatricula" placeholder="Digite a matrícula" maxlength="11">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="email">
+                                            Cadastrar e-mail
+                                        </label>
+                                        <input type="email" id="inputEmail" name="novoEmail" placeholder="Digite o e-mail" maxlength="60">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="telefone">
+                                            Cadastrar Telefone
+                                        </label>
+                                        <input type="text" id="inputTelefone" name="novoTelefone" placeholder="Digite o telefone com DDD" maxlength="11">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="celular">
+                                            Cadastrar Celular
+                                        </label>
+                                        <input type="text" id="inputCelular" name="novoCelular" placeholder="Digite o celular com DDD" maxlength="11">
+                                    </div>
+                                    <div class="input-group">
+                                    <label for="unidade">
+                                            Cadastrar Unidade
+                                        </label>
+                                        <select class="selecionar" type="checkbox" name="novaUnidade" size="1" id="unidade">
+                                            <option value="" selected disabled="disabled" id="selecionar__unidade"> - Unidade - </option>
+                                            <?php $escolherUnidade->obterUnidade(); ?>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="perfil">
+                                            Cadastrar Perfil
+                                        </label>
+                                        <select class="selecionar" type="checkbox" name="novoPerfil" size="1" id="perfil">
+                                            <option value="" selected disabled="disabled" id="selecionar__unidade"> - Perfil - </option>
+                                            <?php $escolherUnidade->obterPerfil(); ?>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="password">
+                                            Criar Senha
+                                        </label>
+                                        <input type="text" id="password" name="newPassword" placeholder="••••••••" maxlength="9">
+                                    </div>
+                                    <input value="Cadastrar" type="submit" id="login-button">
+                                    </input>
+                                </div>
+                            </form>
+                         </div>
+                    </dialog>
                 </div>
                     <?php $listarUsuarios -> mostrarUsuario(); ?>
             </div>
@@ -105,5 +180,8 @@ $unidade = $_SESSION['unidade'];
             <h3 class="rodape">Desenvolvido pelos CDIPs</h3>
         </div>
     </footer>
+    <script src="scriptExcluirCadastro.js" defer></script>
+    <script src="scriptCadastro.js" defer></script>
+    <script src="../header.js" defer></script>
 </body>
 </html>
