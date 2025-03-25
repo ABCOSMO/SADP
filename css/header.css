@@ -77,6 +77,7 @@
     position: absolute;
     top: 8%;
     width: 13vw;
+    z-index: 100;
 }
  
 
@@ -84,6 +85,7 @@
     background: var(--cor-branca);
     display: flex;
     justify-content: center;
+    z-index: 100;
 }
 
 .lista-digitalizacao__link {
@@ -93,10 +95,12 @@
     font-size: 14px;
     color: var(--cor-preta);
     margin: 0.6em 0;
+    z-index: 100;
 }
 
 .lista-digitalizacao__link:hover {
     border-bottom: 2px solid var(--cor-cinza);
+    z-index: 100;
 }
 
 .cabecalho__digitalizacao:checked ~ .lista-digitalizacao {

@@ -24,6 +24,7 @@ $LancarData = $data->format('d/m/Y');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/styleLancamentoCarga.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,19 +53,10 @@ $LancarData = $data->format('d/m/Y');
             </label>
             <ul class="lista-digitalizacao" id="lista">
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
+                    <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Excluir Dados Digitalização</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Relatório de Acesso</a>
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="#">Relatório Digitalização</a>
@@ -91,7 +83,7 @@ $LancarData = $data->format('d/m/Y');
                 <form method="post" id="myForm" name="autenticar" >
                     <div class="modal-header">
                         <h1 class="modal-title">
-                            Lançar Carga do Dia
+                            Lançar Dados Digitalização
                         </h1>
                     </div>
                     <section class="modal-body">
@@ -132,20 +124,143 @@ $LancarData = $data->format('d/m/Y');
                             <input type="text" id="inputResto" name="cargaResto" placeholder="" maxlength="7">
                         </div>
                     </section>
-                    <div class="container__cadastro__envio">
-                        <input value="Enviar dados" type="submit" id="login-button"></input>
-                    </div>
+                    <section>
+                        <div class="modal-header">
+                            <p class="modal-title titulo">
+                                Carga recebida por Superintendência
+                            </p>
+                        </div>
+                    </section>
+                    <section>
+                        <input class="estados" type="checkbox" id="acr" name="acr">
+                        <label class="caixa" for="ACR">
+                            SE/ACR
+                        </label>
+                        <input class="estados" type="checkbox" id="al" name="al">
+                        <label class="caixa" for="AL">
+                            SE/AL
+                        </label>
+                        <input class="estados" type="checkbox" id="am" name="am">
+                        <label class="caixa" for="AM">
+                            SE/AM
+                        </label>
+                        <input class="estados" type="checkbox" id="ap" name="ap">
+                        <label class="caixa" for="AP">
+                            SE/AP
+                        </label>
+                        <input class="estados" type="checkbox" id="ba" name="ba">
+                        <label class="caixa" for="BA">
+                            SE/BA
+                        </label>
+                        <input class="estados" type="checkbox" id="bsb" name="bsb">
+                        <label class="caixa" for="BSB">
+                            SE/BSB
+                        </label>
+                        <input class="estados" type="checkbox" id="ce" name="ce">
+                        <label class="caixa" for="CE">
+                            SE/CE
+                        </label>
+                        <input class="estados" type="checkbox" id="es" name="es">
+                        <label class="caixa" for="ES">
+                            SE/ES
+                        </label>
+                        <input class="estados" type="checkbox" id="go" name="go">
+                        <label class="caixa" for="GO">
+                            SE/GO
+                        </label>
+                        <input class="estados" type="checkbox" id="ma" name="ma">
+                        <label class="caixa" for="MA">
+                            SE/MA
+                        </label>
+                        <input class="estados" type="checkbox" id="mg" name="mg">
+                        <label class="caixa" for="MG">
+                            SE/MG
+                        </label>
+                        <input class="estados" type="checkbox" id="ms" name="ms">
+                        <label class="caixa" for="MS">
+                            SE/MS
+                        </label>
+                        <input class="estados" type="checkbox" id="mt" name="mt">
+                        <label class="caixa" for="MT">
+                            SE/MT
+                        </label>
+                        <input class="estados" type="checkbox" id="pa" name="pa">
+                        <label class="caixa" for="PA">
+                            SE/PA
+                        </label>
+                        <input class="estados" type="checkbox" id="pb" name="pb">
+                        <label class="caixa" for="PB">
+                            SE/PB
+                        </label>
+                        <input class="estados" type="checkbox" id="pe" name="pe">
+                        <label class="caixa" for="PE">
+                            SE/PE
+                        </label>
+                        <input class="estados" type="checkbox" id="pi" name="pi">
+                        <label class="caixa" for="PI">
+                            SE/PI
+                        </label>
+                        <input class="estados" type="checkbox" id="pr" name="pr">
+                        <label class="caixa" for="PR">
+                            SE/PR
+                        </label>
+                        <input class="estados" type="checkbox" id="rj" name="rj">
+                        <label class="caixa" for="RJ">
+                            SE/RJ
+                        </label>
+                        <input class="estados" type="checkbox" id="rn" name="rn">
+                        <label class="caixa" for="RN">
+                            SE/RN
+                        </label>
+                        <input class="estados" type="checkbox" id="ro" name="ro">
+                        <label class="caixa" for="RO">
+                            SE/RO
+                        </label>
+                        <input class="estados" type="checkbox" id="rr" name="rr">
+                        <label class="caixa" for="RR">
+                            SE/RR
+                        </label>
+                        <input class="estados" type="checkbox" id="rs" name="rs">
+                        <label class="caixa" for="RS">
+                            SE/RS
+                        </label>
+                        <input class="estados" type="checkbox" id="sc" name="sc">
+                        <label class="caixa" for="SC">
+                            SE/SC
+                        </label>
+                        <input class="estados" type="checkbox" id="se" name="se">
+                        <label class="caixa" for="SE">
+                            SE/SE
+                        </label>
+                        <input class="estados" type="checkbox" id="spi" name="spi">
+                        <label class="caixa" for="SPI">
+                            SE/SPI
+                        </label>
+                        <input class="estados" type="checkbox" id="spm" name="spm">
+                        <label class="caixa" for="SPM">
+                            SE/SPM
+                        </label>
+                        <input class="estados" type="checkbox" id="to" name="to">
+                        <label class="caixa" for="TO">
+                            SE/TO
+                        </label>
+                    </section>
+                    <section class="modal-body">
+                        <div class="container__cadastro__envio">
+                            <input value="Enviar dados" type="submit" id="login-button"></input>
+                        </div>
+                    </section>
                 </form>
                 <div id="dadosContainer"></div>
             </div>
-            <dialog class="loading"></dialog>
-        
+            <dialog class="loading"></dialog>        
     </section>
     <footer>
         <div>
             <h3 class="rodape">Desenvolvido pelos CDIPs</h3>
         </div>
     </footer>
+    <script src="funcoes.js" defer></script>
     <script src="scriptLancarCarga.js" defer></script>
     <script src="../header.js" defer></script>
 </body>

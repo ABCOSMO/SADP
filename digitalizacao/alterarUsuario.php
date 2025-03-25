@@ -57,19 +57,10 @@ $idPerfil = $_GET['perfil'];
             </label>
             <ul class="lista-digitalizacao" id="lista">
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
+                    <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Excluir Dados Digitalização</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Relatório de Acesso</a>
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="#">Relatório Digitalização</a>
@@ -88,7 +79,7 @@ $idPerfil = $_GET['perfil'];
             <p class="seta"> > </p>
             <a class="caminhos" href="../digitalizacao/">SADP Digitalização</a>
             <p class="seta">  > </p>
-            <a class="caminhos" href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
+            <a class="caminhos" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
             <p class="seta">  > </p>
             <a class="caminhos" href="#">Alterar Usuário</a>
         </div>

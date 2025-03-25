@@ -52,6 +52,7 @@ body {
 .linha {
     display: flex;
     flex-direction: row;
+    margin-bottom: 2em;
 }
 
 .seta {
@@ -158,14 +159,39 @@ footer {
 
 .menuCadastro {
     display: grid;
+    position: fixed;
+    top: 7em;
     grid-template-columns: 100%;
     background-color: white;
     color: var(--cor-preta);
-    text-align: justify;
+    text-align: center;
     justify-content: center;
     width: 75rem;
     border-radius: 4vh;  
     padding: 3vh;
+    max-height: 35em;
+    overflow-y: auto;
+    z-index: 0;
+}
+
+.menuAlterar {
+    display: grid;
+    grid-template-columns: 100%;
+    background-color: white;
+    color: var(--cor-preta);
+    text-align: center;
+    justify-content: center;
+    width: 75rem;
+    border-radius: 4vh;  
+    padding: 3vh;
+    max-height: 35em;
+    overflow-y: auto;
+    z-index: 0;
+}
+
+.manter__aberto {
+
+    border-radius: 4vh; 
 }
 
 .fundoTransparente {
@@ -190,4 +216,12 @@ footer {
 
 .botao__alterar_excluir:hover {
     cursor: pointer;
+}
+
+.estados {
+    margin: 1em 0em 0em 0.6em;
+}
+
+.titulo{
+    margin-top: 2em;
 }

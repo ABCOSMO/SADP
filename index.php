@@ -44,19 +44,10 @@ $unidade = $_SESSION['unidade'];
             </label>
             <ul class="lista-digitalizacao" id="lista">
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../sadp/digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../sadp/digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
+                    <a class="lista-digitalizacao__link" href="../sadp/digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../sadp/digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Excluir Dados Digitalização</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Relatório de Acesso</a>
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="#">Relatório Digitalização</a>

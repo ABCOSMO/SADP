@@ -4,13 +4,11 @@ openButtons.forEach(button => {
     button.addEventListener('click', () => {
         let modalId = button.getAttribute('data-modal');
         let modal = document.getElementById(modalId);
-
         modal.showModal();
     });
 });
 
 let closeButtons = document.querySelectorAll('.close-modal');
-
 closeButtons.forEach(button => {
     button.addEventListener('click', () => {
         let modalId = button.getAttribute('data-modal');
