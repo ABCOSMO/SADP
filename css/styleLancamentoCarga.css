@@ -225,3 +225,18 @@ footer {
 .titulo{
     margin-top: 2em;
 }
+
+table, th, td {
+    border: 1px solid #d1d5db;
+    border-collapse: collapse;
+    border-left: transparent;
+    border-right: transparent;
+    text-align: center;
+    color: var(--cor-cinza);
+    padding: 0.5em 1em;
+    font-size: 14px;
+  }
+
+  tr:hover {
+    background-color: #d1d5db;
+  }

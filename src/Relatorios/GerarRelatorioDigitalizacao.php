@@ -67,14 +67,17 @@ class GerarRelatorioDigitalizacao extends ConectarBD
             $dataAnterior = $this->getDataAnterior();
             $dataPosterior = $this->getDataPosterior();
 
-            $sqlUnidade = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
+            $sqlUnidade = "SELECT tb_unidades.mcu_unidade, tb_funcionarios.nome FROM tb_unidades INNER JOIN tb_funcionarios
+            ON tb_unidades.mcu_unidade = tb_funcionarios.mcu_unidade AND tb_unidades.nome_unidade = :nome_unidade";
             $dadosUnidade = array(
                 ":nome_unidade" => $unidade
             );
             $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
-            $resultadoUnidade = $queryUnidade->fetch(PDO::FETCH_OBJ);
-            
-            $mcuUnidade = $resultadoUnidade->mcu_unidade; 
+            $resultadoUnidade = $queryUnidade->fetchAll(PDO::FETCH_OBJ);
+            foreach($resultadoUnidade as $linha){
+                $mcuUnidade = $linha->mcu_unidade; 
+                $nomeUsuario = $linha->nome;
+            }
 
             // Verifica se a carga já foi lançada
             $sql = "SELECT * FROM tb_digitalizacao WHERE data_digitalizacao >= :data_anterior AND data_digitalizacao <= :data_posterior
@@ -90,6 +93,7 @@ class GerarRelatorioDigitalizacao extends ConectarBD
             $response = [];
             foreach($resultado as $key => $value) {
                 $response[] = [
+                    'nome_usuario' => $nomeUsuario,
                     'data_digitalizacao' => $this->alterarFormatoData($value->data_digitalizacao),
                     'imagens_anterior' => $value->qtd_imagens_dia_anterior,
                     'imagens_recebidas' => $value->qtd_imagens_recebidas_dia,

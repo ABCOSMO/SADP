@@ -20,7 +20,7 @@
         $matricula,
         $unidade,
         $dataAnterior,
-        $dataPosterior,
+        $dataPosterior
     );
 
     $gerarRelatorioDigitalizacao->relatorioDiarioDigitalizacao();

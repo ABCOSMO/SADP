@@ -7,6 +7,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
+
 :root {
     --cor-branca: #FFFFFF;
     --cor-preta: #000000;
@@ -102,7 +103,7 @@ body {
     font-family: var(--fonte-principal);
     font-size: 14px;
     font-weight: 500;
-    color: var(--cor-branca);
+    /*color: var(--cor-branca);*/
     padding: 0.5em;
     margin: 0.5em;
     width: 108%;
@@ -120,7 +121,13 @@ body {
 .container__botao {
     display: flex;
     justify-content: center;
-    height: 60%;
+    /*height: 60%;*/
+    /*sugestão da AI*/
+    border: none;
+    padding: 0;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .container__margem{
@@ -183,6 +190,12 @@ footer {
 }
 
 .close-modal {
+    background: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /*sugestão da AI*/
+    font-size: 1.2em;
     cursor: pointer;
     border: none;
     background-color: transparent;
@@ -230,12 +243,6 @@ footer {
     border: none;
     cursor: pointer;
 }
-
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
-  }
 
 .input-group input {
     border: 1px solid #d1d5db;
@@ -373,3 +380,55 @@ table, th, td {
     display: flex;
     justify-content: end;
 }
+
+dialog {
+    z-index: 1000;
+    padding: 0;
+    border: none;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Garante que diálogos não sejam mostrados antes do comando */
+dialog:not([open]) {
+    display: none;
+}
+
+/* Estilo quando aberto */
+dialog[open] {
+    display: block;
+    position: fixed;
+    top: 100%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    /* Seus estilos adicionais aqui */
+}
+
+.modal-open {
+    overflow: hidden; /* Impede scroll da página principal */
+}
+
+/* Garante que o modal não fique muito pequeno em telas grandes */
+@media (min-width: 768px) {
+    .container__botao {
+        min-width: 500px;
+    }
+}
+
+table, th, td {
+    border: 1px solid #d1d5db;
+    border-collapse: collapse;
+    border-left: transparent;
+    border-right: transparent;
+    text-align: center;
+    color: var(--cor-cinza);
+    padding: 0.5em 1em;
+    font-size: 14px;
+  }
+
+  tr:hover {
+    background-color: #d1d5db;
+  }
