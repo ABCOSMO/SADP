@@ -103,7 +103,6 @@ body {
     font-family: var(--fonte-principal);
     font-size: 14px;
     font-weight: 500;
-    /*color: var(--cor-branca);*/
     padding: 0.5em;
     margin: 0.5em;
     width: 108%;
@@ -121,11 +120,9 @@ body {
 .container__botao {
     display: flex;
     justify-content: center;
-    /*height: 60%;*/
-    /*sugestão da AI*/
     border: none;
     padding: 0;
-    max-width: 90%;
+    max-width: 100%;
     max-height: 90vh;
     overflow-y: auto;
 }
@@ -215,7 +212,7 @@ footer {
     background-color: white;
     color: var(--cor-preta);
     text-align: justify;
-    width: 70rem;
+    width: 90rem;
     border-radius: 4vh;  
     padding: 1rem 1rem;
     margin-top: 2vw;
@@ -225,8 +222,6 @@ footer {
     font-size: 12px;
     font-weight: 500;
     color: #9ca3af;
-    border: 1px solid #9ca3af;
-    padding: 0 0.3rem;
     margin: 0;
 }
 
@@ -234,7 +229,6 @@ footer {
     font-size: 12px;
     font-weight: 500;
     color: red;
-    border: 1px solid #9ca3af;
     padding: 0 0.3rem;
     margin: 0;
 }
@@ -243,6 +237,13 @@ footer {
     border: none;
     cursor: pointer;
 }
+
+.botao__alterar_excluir:hover {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
 
 .input-group input {
     border: 1px solid #d1d5db;
@@ -425,10 +426,10 @@ table, th, td {
     border-right: transparent;
     text-align: center;
     color: var(--cor-cinza);
-    padding: 0.5em 1em;
-    font-size: 14px;
+    padding: 0.2em 1em;
   }
 
   tr:hover {
     background-color: #d1d5db;
   }
+    

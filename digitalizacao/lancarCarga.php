@@ -265,5 +265,4 @@ $LancarData = $data->format('d/m/Y');
     <script src="../script/scriptLancarCarga.js" defer></script>
     <script src="../script/funcoes.js" defer></script>
     <script src="../header.js" defer></script>
-</body>
 </html>

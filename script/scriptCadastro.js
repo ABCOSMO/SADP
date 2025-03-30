@@ -41,14 +41,14 @@ function adicionarListenersModal() {
     });
 
     // Fechar modal ao clicar no backdrop
-    document.querySelectorAll('dialog').forEach(modal => {
+    /*document.querySelectorAll('dialog').forEach(modal => {
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 modal.close();
                 document.body.classList.remove('modal-open');
             }
         });
-    });
+    });*/
 }
 
 
@@ -173,53 +173,48 @@ function isValidEmail(email) {
   }
 
 function validaFormulario(){
-    if (document.autenticar.inputNome.value === "")
+    
+    if (document.getElementById('inputNome').value === "")
     {
         alert("Por favor, preencha o campo Nome.");
         return false; // Formulário inválido
 
     }
-    if (document.autenticar.inputMatricula.value === "")
+    if (document.getElementById('inputMatricula').value === "")
     {
         alert("Por favor, preencha o campo Matrícula.");
         return false; // Formulário inválido
 
     }
-    if (!isValidEmail(document.autenticar.inputEmail.value)) {
+    if (!isValidEmail(document.getElementById('inputEmail').value)) {
         alert("Por favor, insira um endereço de e-mail válido.");
         return false;
-      }
-    /*if (document.autenticar.inputEmail.value === "")
-    {
-        alert("Por favor, preencha o campo e-mail.");
-        return false; // Formulário inválido
-
-    }*/
-    if (document.autenticar.inputTelefone.value === "")
+    }
+    if (document.getElementById('inputTelefone').value === "")
     {
         alert("Por favor, preencha o campo Telefone.");
         return false; // Formulário inválido
 
     }
-    if (document.autenticar.inputCelular.value === "")
+    if (document.getElementById('inputCelular').value === "")
     {
             alert("Por favor, preencha o campo Celular.");
             return false; // Formulário inválido
     
     }
-    if (autenticar.unidade.options[autenticar.unidade.selectedIndex].value === "")
+    if (document.getElementById('unidade').options[document.getElementById('unidade').selectedIndex].value === "")
     {
         alert("Por favor, preencha o campo Unidade.");
         return false; // Formulário inválido
 
     }
-    if (autenticar.perfil.options[autenticar.perfil.selectedIndex].value === "")
+    if (document.getElementById('perfil').options[document.getElementById('perfil').selectedIndex].value === "")
     {
         alert("Por favor, preencha o campo Perfil.");
         return false; // Formulário inválido
 
     }
-    if (document.autenticar.password.value === "")
+    if (document.getElementById('password').value === "")
     {
         alert("Por favor, preencha o campo Senha.");
         return false; // Formulário inválido

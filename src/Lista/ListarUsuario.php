@@ -108,7 +108,40 @@ class ListarUsuario extends ConectarBD
                     
                     }        
                 }            
-            }  
+            }
+            
+    
+            $status = 1;
+            $sql = "SELECT * FROM tb_unidades WHERE status = :status ORDER BY nome_unidade";
+            $dados = array(":status" => $status);
+            $query = parent::executarSQL($sql,$dados);
+            $resultado = $query->fetchAll(PDO::FETCH_OBJ);
+            $idUnidade = 1;// valor unidade
+
+            $sql2 = "SELECT * FROM tb_perfil WHERE status = :status ORDER BY id_perfil";
+            $dados2 = array(":status" => $status);
+            $query2 = parent::executarSQL($sql2,$dados2);
+            $resultado2 = $query2->fetchAll(PDO::FETCH_OBJ);
+            $idPerfil = 1;// valor perfil
+
+            foreach($resultado2 as $key => $value) {
+                $perfil = $value->perfil;
+                $response[] = [
+                    'lista_perfil' => $perfil,
+                    'id_perfil' => $idPerfil
+                ];
+                $idPerfil++;
+            }
+
+            foreach($resultado as $key => $value) {
+                $unidade = $value->nome_unidade;
+                $response[] = [
+                    'lista_unidade' => $unidade,
+                    'id_unidade' => $idUnidade
+                ];
+                $idUnidade++;
+            }           
+
             header('Content-Type: application/json');
             echo json_encode($response);
         }catch(\Exception $e) {

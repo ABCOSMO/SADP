@@ -80,7 +80,7 @@ $unidade = $_SESSION['unidade'];
         <div class="container__cadastro_usuario">
             <div class="menuAlterarUsuario">
                 <div class="menuAlterarUsuario__botao_cadastro">
-                    <button class="open-modal" data-modal="modal-150" id="login-button-cadastro">
+                    <button class="open-modal" data-modal="modal-1" id="login-button-cadastro">
                         Cadastrar Novo Usuário
                     </button> 
                 </div>
@@ -94,14 +94,14 @@ $unidade = $_SESSION['unidade'];
             <div class="loading"></div>
         </div>
     </section>
-    <dialog id="modal-150">
-        <div class="menuCadastro" id="modal-150">
+    <dialog id="modal-1">
+        <div class="menuCadastro" id="modal-1">
             <form method="post" id="myForm" name="autenticar" >
                 <div class="modal-header">
                     <h1 class="modal-title">
                         Cadastrar novo usuário
                     </h1>
-                    <button class="close-modal" data-modal="modal-150" type="button">
+                    <button class="close-modal" data-modal="modal-1" type="button">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
@@ -174,6 +174,7 @@ $unidade = $_SESSION['unidade'];
     <script src="../script/relatorioUsuarios.js" defer></script>
     <script src="../script/scriptExcluirCadastro.js" defer></script>
     <script src="../script/scriptCadastro.js" defer></script>
+    <script src="../script/scriptAlterarCadastro.js" defer></script>
     <script src="../header.js" defer></script>
 </body>
 </html>
