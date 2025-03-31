@@ -1,5 +1,5 @@
 function relatorioDigitalizacao() {
-    let id = 0;
+    let id = 2;
     let resultado = document.getElementById('dadosContainer');
     resultado.innerHTML = ''; // Limpa o conteúdo existente
 
@@ -10,6 +10,7 @@ function relatorioDigitalizacao() {
                                     <div class="input-group">
                                         <table>
                                             <tr>
+                                                <th class='usuario'>Matrícula</th>
                                                 <th class='usuario'>Usuário</th>
                                                 <th class='usuario'>Data</th>
                                                 <th class='usuario'>Carga dia anterior</th>
@@ -18,20 +19,27 @@ function relatorioDigitalizacao() {
                                                 <th class='usuario'>Carga Digitalizada</th>
                                                 <th class='usuario'>Resto do dia</th>
                                                 <th class='usuario'>Alterar</th>
+                                                <th class='usuario'>Excluir</th>
                                             </tr>`;
 
             data.forEach(item => {
                 tabelaHTML += `<tr class=''>
+                                    <td class='' id='matricula${id}'>${item.matricula_usuario}</td>
                                     <td class='' id='usuario${id}'>${item.nome_usuario}</td>
-                                    <td class='' id='inputData${id}'>${item.data_digitalizacao}</td>
-                                    <td class='' id='inputAnterior${id}'>${mascaraDigitarCarga(item.imagens_anterior.toString())}</td>
-                                    <td class='' id='inputRecebida${id}'>${mascaraDigitarCarga(item.imagens_recebidas.toString())}</td>
-                                    <td class='' id='inputImpossibilitada${id}'>${mascaraDigitarCarga(item.imagens_impossibilitadas.toString())}</td>
-                                    <td class='' id='inputDigitalizada${id}'>${mascaraDigitarCarga(item.imagens_incorporadas.toString())}</td>
-                                    <td class='' id='inputResto${id}'>${mascaraDigitarCarga(item.resto.toString())}</td>
+                                    <td class='' id='Data${id}'>${item.data_digitalizacao}</td>
+                                    <td class='' id='Anterior${id}'>${mascaraDigitarCarga(item.imagens_anterior.toString())}</td>
+                                    <td class='' id='Recebida${id}'>${mascaraDigitarCarga(item.imagens_recebidas.toString())}</td>
+                                    <td class='' id='Impossibilitada${id}'>${mascaraDigitarCarga(item.imagens_impossibilitadas.toString())}</td>
+                                    <td class='' id='Digitalizada${id}'>${mascaraDigitarCarga(item.imagens_incorporadas.toString())}</td>
+                                    <td class='' id='Resto${id}'>${mascaraDigitarCarga(item.resto.toString())}</td>
                                     <td>
-                                        <button type="button" class='open-modal botao__alterar_excluir' data-modal="modal-${id}" id="login-button-cadastro">
-                                            <i class='fa-solid fa-pencil'></i>
+                                        <button type="button" class='open-modal botao__alterar_excluir' data-modal="modal-${id}" 
+                                            id="login-button-cadastro"><i class='fa-solid fa-pencil'></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class='botao botao__excluir${id} botao__alterar_excluir'>
+                                            <i class='fa-solid fa-trash'></i>
                                         </button>
                                     </td>
                                 </tr>`;
@@ -42,11 +50,11 @@ function relatorioDigitalizacao() {
             resultado.innerHTML = tabelaHTML;
 
             let modalHTML = ''; // Declaração correta da variável
-            id = 0; // Reset do ID para manter consistência
+            id = 2; // Reset do ID para manter consistência
             
             data.forEach(item => {
                 modalHTML += `<dialog class="manter__aberto" id="modal-${id}">
-                                    <div class="menuAlterar" id="modal-1">
+                                    <div class="menuAlterar" id="modal-${id}">
                                         <form method="post" id="myForm${id}" name="autenticar">
                                             <div class="modal-header">
                                                 <h1 class="modal-title">Alterar dados da digitalização</h1>

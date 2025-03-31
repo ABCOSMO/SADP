@@ -39,13 +39,13 @@ function enviarDadosFormulario() {
 
 function mascaraDigitarData(digitaData) {
     // Remove todos os caracteres não numéricos
-    digitaData = this.value.digitaData.replace(/\D/g, "");
+    digitaData = digitaData.replace(/\D/g, "");
 
     // Verifica se o data contém até 8 dígitos
     if (digitaData.length !== 8) {
         return digitaData;
     }
-    digitaData = this.value.digitaData.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3"); // Retorna a data com formatação de 10 digitos
+    digitaData = digitaData.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3"); // Retorna a data com formatação de 10 digitos
     return digitaData;
 }
 
@@ -72,8 +72,61 @@ function mascaraDigitarCarga(carga) {
     }    
 }
 
+function adicionarListenersModal() {
+    // Impedir que eventos se propaguem para elementos pais
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.open-modal') || e.target.closest('.close-modal')) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    });
+
+    // Abrir modal
+    document.querySelectorAll('.open-modal').forEach(button => {
+        button.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            
+            if (modal) {
+                modal.showModal();
+                // Adiciona classe ao body para evitar scroll
+                document.body.classList.add('modal-open');
+                
+                // Focar no primeiro elemento input do modal
+                const firstInput = modal.querySelector('input, select, textarea');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }
+        });
+    });
+
+    // Fechar modal
+    document.querySelectorAll('.close-modal').forEach(button => {
+        button.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            
+            if (modal) {
+                modal.close();
+                document.body.classList.remove('modal-open');
+            }
+        });
+    });
+
+    // Fechar modal ao clicar no backdrop
+    /*document.querySelectorAll('dialog').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.close();
+                document.body.classList.remove('modal-open');
+            }
+        });
+    });*/
+}
 
 
+/*
 function adicionarListenersModal() {
     let openButtons = document.querySelectorAll('.open-modal');
     openButtons.forEach(button => {
@@ -99,7 +152,7 @@ function adicionarListenersModal() {
         });
     });    
 }
-
+*/
 
 
 function validaFormularioModal(valor) {

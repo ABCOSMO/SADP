@@ -33,57 +33,64 @@ function digitarFormulario() {
 
 }
 
+
 function digitarFormularioModal() {
     setTimeout(() => {
-
         const inputModal = document.querySelectorAll('form');
-    
-        for (let id = 0; id < inputModal.length; id++) {
-            let inputAnteriorModal = document.getElementById(`inputModalAnterior${id}`);
-            let inputRecebidaModal = document.getElementById(`inputModalRecebida${id}`);
-            let inputImpossibilitadaModal = document.getElementById(`inputModalImpossibilitada${id}`);
-            let inputDigitalizadaModal = document.getElementById(`inputModalDigitalizada${id}`);
-            let inputRestoModal = document.getElementById(`inputModalResto${id}`);
-        
-            inputAnteriorModal.addEventListener('focus', () => {
-                inputAnteriorModal.value = '';
-            });
 
-            inputRecebidaModal.addEventListener('focus', () => {
-                inputRecebidaModal.value = '';
-            });
+        if (inputModal.length > 0) { // Verifica se o modal existe
+            for (let id = 0; id < inputModal.length; id++) {
+                let inputAnteriorModal = document.getElementById(`inputModalAnterior${id}`);
+                let inputRecebidaModal = document.getElementById(`inputModalRecebida${id}`);
+                let inputImpossibilitadaModal = document.getElementById(`inputModalImpossibilitada${id}`);
+                let inputDigitalizadaModal = document.getElementById(`inputModalDigitalizada${id}`);
+                let inputRestoModal = document.getElementById(`inputModalResto${id}`);
 
-            inputImpossibilitadaModal.addEventListener('focus', () => {
-                inputImpossibilitadaModal.value = '';
-            });
+                if (inputAnteriorModal) { // Verifica se o elemento existe
+                    inputAnteriorModal.addEventListener('focus', () => {
+                        inputAnteriorModal.value = '';
+                    });
+                    inputAnteriorModal.addEventListener('input', () => {
+                        inputAnteriorModal.value = mascaraDigitarCarga(inputAnteriorModal.value);
+                    });
+                }
 
-            inputDigitalizadaModal.addEventListener('focus', () => {
-                inputDigitalizadaModal.value = '';
-            });
+                if (inputRecebidaModal) {
+                    inputRecebidaModal.addEventListener('focus', () => {
+                        inputRecebidaModal.value = '';
+                    });
+                    inputRecebidaModal.addEventListener('input', () => {
+                        inputRecebidaModal.value = mascaraDigitarCarga(inputRecebidaModal.value);
+                    });
+                }
 
-            inputRestoModal.addEventListener('focus', () => {
-                inputRestoModal.value = '';
-            });
+                if (inputImpossibilitadaModal) {
+                    inputImpossibilitadaModal.addEventListener('focus', () => {
+                        inputImpossibilitadaModal.value = '';
+                    });
+                    inputImpossibilitadaModal.addEventListener('input', () => {
+                        inputImpossibilitadaModal.value = mascaraDigitarCarga(inputImpossibilitadaModal.value);
+                    });
+                }
 
-            inputAnteriorModal.addEventListener('input', () => {
-                inputAnteriorModal.value = mascaraDigitarCarga(inputAnteriorModal.value);
-            });
-        
-            inputRecebidaModal.addEventListener('input', () => {
-                inputRecebidaModal.value = mascaraDigitarCarga(inputRecebidaModal.value);
-            });
-        
-            inputImpossibilitadaModal.addEventListener('input', () => {
-                inputImpossibilitadaModal.value = mascaraDigitarCarga(inputImpossibilitadaModal.value);
-            });
-        
-            inputDigitalizadaModal.addEventListener('input', () => {
-                inputDigitalizadaModal.value = mascaraDigitarCarga(inputDigitalizadaModal.value);
-            });
-        
-            inputRestoModal.addEventListener('input', () => {
-                inputRestoModal.value = mascaraDigitarCarga(inputRestoModal.value);
-            });
+                if (inputDigitalizadaModal) {
+                    inputDigitalizadaModal.addEventListener('focus', () => {
+                        inputDigitalizadaModal.value = '';
+                    });
+                    inputDigitalizadaModal.addEventListener('input', () => {
+                        inputDigitalizadaModal.value = mascaraDigitarCarga(inputDigitalizadaModal.value);
+                    });
+                }
+
+                if (inputRestoModal) {
+                    inputRestoModal.addEventListener('focus', () => {
+                        inputRestoModal.value = '';
+                    });
+                    inputRestoModal.addEventListener('input', () => {
+                        inputRestoModal.value = mascaraDigitarCarga(inputRestoModal.value);
+                    });
+                }
+            }
         }
     }, 300);
 }

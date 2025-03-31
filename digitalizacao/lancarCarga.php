@@ -124,7 +124,7 @@ $LancarData = $data->format('d/m/Y');
                             <input type="text" id="inputResto" name="cargaResto" placeholder="" maxlength="7">
                         </div>
                     </section>
-                    <section>
+                    <!--<section>
                         <div class="modal-header">
                             <p class="modal-title titulo">
                                 Carga recebida por Superintendência
@@ -244,7 +244,7 @@ $LancarData = $data->format('d/m/Y');
                         <label class="caixa" for="TO">
                             SE/TO
                         </label>
-                    </section>
+                    </section>-->
                     <section class="modal-body">
                         <div class="container__cadastro__envio">
                             <input value="Enviar dados" type="submit" id="login-button"></input>
@@ -264,5 +264,6 @@ $LancarData = $data->format('d/m/Y');
     <script src="../script/digitarFormulario.js" defer></script>
     <script src="../script/scriptLancarCarga.js" defer></script>
     <script src="../script/funcoes.js" defer></script>
+    <script src="../script/excluirCargaDigitalizacao.js" defer></script>
     <script src="../header.js" defer></script>
 </html>
