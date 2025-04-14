@@ -21,7 +21,6 @@ function enviarDadosAlteradosDigitalizacao(id) {
     const form = document.getElementById(`myForm${id}`);
     const loading = document.querySelector('.loading');
 
-    event.preventDefault();
     loading.style.display = 'block';
 
     // Coleta os dados dos inputs que começam com "inputModal"
@@ -53,12 +52,14 @@ function enviarDadosAlteradosDigitalizacao(id) {
             window.location.href = '../digitalizacao/lancarCarga.php';
         } else {
             alert('Erro ao enviar os dados: ' + data.error);
+            window.location.href = '../digitalizacao/lancarCarga.php';
         }
     })
     .catch(error => {
         loading.style.display = 'none';
         console.error('Erro ao enviar os dados:', error);
         alert('Erro ao enviar os dados');
+        window.location.href = '../digitalizacao/lancarCarga.php';
     });
 }
     
@@ -77,9 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (validaFormularioModal(i)) {
                              //Se o formulário for válido, envie os dados
                         enviarDadosAlteradosDigitalizacao(i);
-                        window.location.href = '../digitalizacao/lancarCarga.php';
-            
-                        alert('validado com sucesso');
                         }else{
                             console.log('erro');
                         }

@@ -3,7 +3,7 @@
     require '../autoload.php';
     
     use SADP\ConectarUsuario\ConectarBD;
-    //use SADP\Cadastrar\CadastrarUsuario;
+    use SADP\Cadastrar\CadastrarCarga;
     
     // Recebe os dados JSON
     $jsonData = file_get_contents('php://input');
@@ -16,40 +16,37 @@
         exit;
     }
 
-    // Agora você pode acessar os dados usando $data
-    $cargaAnterior = $data['cargaAnterior'];
-    $cargaRecebida = $data['cargaRecebida'];
-    file_put_contents(__DIR__ . "/meu_arquivo.txt", $cargaRecebida);
+        $dataCadastrada = $data['novaData'];
+        $cargaAnterior = $data['cargaAnterior'];
+        $cargaRecebida = $data['cargaRecebida'];
+        $cargaImpossibilitada = $data['cargaImpossibilitada'];
+        $cargaDigitalizada = $data['cargaDigitalizada'];
+        $cargaResto = $data['cargaResto'];
 
-    /*
-    if(isset($_POST['novaMatricula']))
-    {  
-		$newUsuario = $_POST['novoNome'];
-        $newMatricula = $_POST['novaMatricula'];
-        $newEmail = $_POST['novoEmail'];
-        $newTelefone = $_POST['novoTelefone'];
-		$newCelular = $_POST['novoCelular'];
-        $newUnidade = $_POST['novaUnidade'];
-        $newPerfil = $_POST['novoPerfil'];
-        $newSenha = '';
-		
-		$conteudo = $newUsuario . " " . $newMatricula . " " . $newEmail . " " . $newTelefone . " " . $newCelular . " " . 
-        $newUnidade . " " . $newPerfil . " " . $newSenha;
+    if(isset($_SESSION['matricula'])) {  
+		$unidade = $_SESSION['unidade'];
+        $matricula = $_SESSION['matricula'];
+         // Agora você pode acessar os dados usando $data
+        
+    
+        /*
+        $conteudo = $dataCadastrada . " " . $unidade . " " . $matricula . " " . $cargaAnterior . " " . $cargaRecebida . " " . 
+        $cargaImpossibilitada . " " . $cargaDigitalizada . " " . $cargaResto;
 		
 		file_put_contents(__DIR__ . "/meu_arquivo.txt", $conteudo);
+        */
 
-        $novoUsuario = new CadastrarUsuario(
-            $newUsuario,
-            $newMatricula,
-            $newEmail,
-            $newTelefone,
-			$newCelular,
-            $newUnidade,
-            $newPerfil,
-            $newSenha
+        $alterarDadosDigitalizacao = new CadastrarCarga(
+            $dataCadastrada,
+            $unidade,
+            $matricula,
+            $cargaAnterior,
+			$cargaRecebida,
+            $cargaImpossibilitada,
+            $cargaDigitalizada,
+            $cargaResto
         );
         
-        $novoUsuario->editarUsuario();
+        $alterarDadosDigitalizacao->alterarDadosCarga();
     }
-        */
 ?>

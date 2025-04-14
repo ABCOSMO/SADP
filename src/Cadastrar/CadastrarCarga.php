@@ -164,4 +164,75 @@ class CadastrarCarga extends ConectarBD
             echo json_encode($response);
         }
     }
+
+
+    public function alterarDadosCarga() {
+        try {
+            $novaData = $this->alterarData();
+            $unidade = $this->getNovaUnidade();
+            $matricula = $this->getNovaMatricula();
+            $cargaAnterior = str_replace(['.'], '', $this->getCargaAnterior());
+            $cargaRecebida = str_replace(['.'], '', $this->getCargaRecebida());
+            $cargaImpossibilitada = str_replace(['.'], '', $this->getCargaImpossibilitada());
+            $cargaDigitalizada = str_replace(['.'], '', $this->getCargaDigitalizada());
+            $resto = str_replace(['.'], '', $this->getCargaResto());
+
+            $sqlUnidade = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
+            $dadosUnidade = array(
+                ":nome_unidade" => $unidade
+            );
+            $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
+            $resultadoUnidade = $queryUnidade->fetch(PDO::FETCH_OBJ);
+            $mcuUnidade = $resultadoUnidade->mcu_unidade; 
+
+            // Verifica se a carga já foi lançada
+            $sql = "SELECT * FROM tb_digitalizacao WHERE data_digitalizacao = :data_digitalizacao AND mcu_unidade = :mcu_unidade";
+            $dados = array(
+                ":data_digitalizacao" => $novaData, 
+                ":mcu_unidade" => $mcuUnidade
+            );
+            $query = parent::executarSQL($sql,$dados);
+            $resultado = $query->fetch(PDO::FETCH_OBJ);
+
+            
+                // Insere nova carga
+                $sql = "UPDATE tb_digitalizacao
+                            SET mcu_unidade = :mcu_unidade, 
+                                matricula = :matricula, 
+                                data_digitalizacao = :data_digitalizacao, 
+                                qtd_imagens_dia_anterior = :qtd_imagens_dia_anterior, 
+                                qtd_imagens_recebidas_dia = :qtd_imagens_recebidas_dia, 
+                                qtd_imagens_incorporadas = :qtd_imagens_incorporadas, 
+                                qtd_imagens_impossibilitadas = :qtd_imagens_impossibilitadas, 
+                                qtd_imagens_resto = :qtd_imagens_resto
+                            WHERE mcu_unidade = :mcu_unidade AND data_digitalizacao = :data_digitalizacao";
+                $dados = array( 
+                    ":mcu_unidade" => $mcuUnidade, 
+                    ":matricula" => $matricula, 
+                    ":data_digitalizacao" => $novaData,
+                    ":qtd_imagens_dia_anterior" => $cargaAnterior, 
+                    ":qtd_imagens_recebidas_dia" => $cargaRecebida, 
+                    ":qtd_imagens_incorporadas" => $cargaDigitalizada, 
+                    ":qtd_imagens_impossibilitadas" => $cargaImpossibilitada,
+                    ":qtd_imagens_resto" => $resto
+                );
+                $query = parent::executarSQL($sql,$dados);
+
+                if ($query) {
+                    $response = array('success' => true, 'message' => 'Carga do dia ' . $this->getNovaData() . ' alterada com sucesso.');
+                } else {
+					$erroInfo = $query->errorInfo();
+                    $response = array('success' => false, 'error' => $erroInfo);
+                }
+            
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+
+        } catch (\Exception $e) {
+            $response = array('success' => false, 'error' => $e->getMessage());
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }
 }
