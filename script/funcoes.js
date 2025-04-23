@@ -209,12 +209,15 @@ function validaFormularioModal(valor) {
 
 function validaFormulario(){
 
-    let anterior = document.getElementById('inputAnterior').value.replace(/\D/g, "");
-    let recebida = document.getElementById('inputRecebida').value.replace(/\D/g, "");
+    let anterior = document.getElementById('inputAnterior');
+    anterior.disabled = false;
+    let cargaAnterior = parseInt(anterior.value.replace(/\D/g, ""));
+    anterior.disabled = true;    
+    let recebida = parseInt(document.getElementById('inputRecebida').value.replace(/\D/g, ""));
     let impossibilitada = document.getElementById('inputImpossibilitada').value.replace(/\D/g, "");
-    let digitalizada = document.getElementById('inputDigitalizada').value.replace(/\D/g, "");
-    let resto = document.getElementById('inputResto').value.replace(/\D/g, "");
-    let totalCarga = anterior + recebida - impossibilitada - digitalizada - resto;
+    let digitalizada = parseInt(document.getElementById('inputDigitalizada').value.replace(/\D/g, ""));
+    let resto = parseInt(document.getElementById('inputResto').value.replace(/\D/g, ""));
+    let totalCarga = cargaAnterior + recebida - impossibilitada - digitalizada - resto;
     
 
     if (document.getElementById('inputData').value === ""){

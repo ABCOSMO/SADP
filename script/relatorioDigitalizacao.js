@@ -19,9 +19,10 @@ function relatorioDigitalizacao() {
                                                 <th class='usuario'>Carga Digitalizada</th>
                                                 <th class='usuario'>Resto do dia</th>
                                                 <th class='usuario'>Alterar</th>
-                                                <th class='usuario'>Excluir</th>
+                                                <!--<th class='usuario'>Excluir</th>-->
                                             </tr>`;
 
+        
             data.forEach(item => {
                 tabelaHTML += `<tr class=''>
                                     <td class='' id='matricula${id}'>${item.matricula_usuario}</td>
@@ -37,15 +38,17 @@ function relatorioDigitalizacao() {
                                             id="login-button-cadastro"><i class='fa-solid fa-pencil'></i>
                                         </button>
                                     </td>
+                                <!--
                                     <td>
                                         <button class='botao botao__excluir${id} botao__alterar_excluir'>
                                             <i class='fa-solid fa-trash'></i>
                                         </button>
                                     </td>
+                                -->
                                 </tr>`;
                 id++;
             });
-            
+         
             tabelaHTML += `</table></div></section>`;
             resultado.innerHTML = tabelaHTML;
 

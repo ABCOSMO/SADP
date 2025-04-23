@@ -5,16 +5,15 @@ digitarFormulario();
 digitarFormularioModal();
     
 //adicionarListenersFormularios();
-
-const form = document.getElementById('myForm');
-form.addEventListener('submit', (event) => {
-    event.preventDefault(); // Impede o envio padrão do formulário
-    if (validaFormulario()) {
-        // Se o formulário for válido, envie os dados
-       enviarDadosFormulario();
-       window.location.href = '../digitalizacao/lancarCarga.php';
-    }
-});
+        const form = document.getElementById('myForm');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            if (validaFormulario()) {
+                // Se o formulário for válido, envie os dados
+            enviarDadosFormulario();
+            window.location.href = '../digitalizacao/lancarCarga.php';
+            }
+        });
 
 
 function enviarDadosAlteradosDigitalizacao(id) {

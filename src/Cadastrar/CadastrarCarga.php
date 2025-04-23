@@ -145,18 +145,15 @@ class CadastrarCarga extends ConectarBD
                     ":qtd_imagens_resto" => $resto
                 );
                 $query = parent::executarSQL($sql,$dados);
-                $resultado = parent::lastidSQL();
+                
 
-                if ($resultado) {
-                    $response = array('success' => true, 'message' => 'Carga do dia ' . $this->getNovaData() . ' cadastrada com sucesso.');
+                if ($query) {
+                    $this->responderJSON(true,'Carga do dia ' . $this->getNovaData() . ' cadastrada com sucesso.');
                 } else {
 					$erroInfo = $query->errorInfo();
-                    $response = array('success' => false, 'error' => $erroInfo);
+                    $this->responderJSON(false, 'error' . $erroInfo);
                 }
             }
-
-            header('Content-Type: application/json');
-            echo json_encode($response);
 
         } catch (\Exception $e) {
             $response = array('success' => false, 'error' => $e->getMessage());
@@ -219,20 +216,22 @@ class CadastrarCarga extends ConectarBD
                 $query = parent::executarSQL($sql,$dados);
 
                 if ($query) {
-                    $response = array('success' => true, 'message' => 'Carga do dia ' . $this->getNovaData() . ' alterada com sucesso.');
+                    $this->responderJSON(true, 'Carga do dia ' . $this->getNovaData() . ' alterada com sucesso.');
                 } else {
 					$erroInfo = $query->errorInfo();
-                    $response = array('success' => false, 'error' => $erroInfo);
+                    $this->responderJSON(false, 'error' . $erroInfo);
                 }
-            
-
-            header('Content-Type: application/json');
-            echo json_encode($response);
 
         } catch (\Exception $e) {
             $response = array('success' => false, 'error' => $e->getMessage());
             header('Content-Type: application/json');
             echo json_encode($response);
         }
+    }
+
+    public function responderJSON($success, $message)
+    {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => $success, 'message' => $message]);
     }
 }

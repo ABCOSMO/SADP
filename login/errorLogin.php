@@ -51,9 +51,9 @@
                         </div>
                         <div class="passaword-options">
                             <div class="remember-passaword">
-                                <a href="#" class="remember-passaword">Não sou cadastrado</a>
+                                <a href="#" class="remember-passaword"><!--Não sou cadastrado--></a>
                             </div>
-                            <a href="#" class="remember-passaword">Esqueceu a senha?</a>
+                            <a href="#" class="remember-passaword"><!--Esqueceu a senha?--></a>
                         </div>
                         <button type="submit" id="login-button">
                             Entrar<!--Login to your account-->

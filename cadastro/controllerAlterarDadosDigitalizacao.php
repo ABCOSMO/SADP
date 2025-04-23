@@ -28,14 +28,11 @@
         $matricula = $_SESSION['matricula'];
          // Agora você pode acessar os dados usando $data
         
-    
-        /*
         $conteudo = $dataCadastrada . " " . $unidade . " " . $matricula . " " . $cargaAnterior . " " . $cargaRecebida . " " . 
         $cargaImpossibilitada . " " . $cargaDigitalizada . " " . $cargaResto;
 		
 		file_put_contents(__DIR__ . "/meu_arquivo.txt", $conteudo);
-        */
-
+        
         $alterarDadosDigitalizacao = new CadastrarCarga(
             $dataCadastrada,
             $unidade,

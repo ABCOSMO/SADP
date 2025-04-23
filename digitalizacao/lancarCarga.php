@@ -5,16 +5,19 @@ require '../autoload.php';
 use SADP\ConectarUsuario\{
     ConectarBD, SessaoUsuario
 };
-use SADP\Lista\SelecionarUnidade;
+use SADP\Lista\{
+    SelecionarUnidade, CargaAnterior
+};
 
+$unidade = $_SESSION['unidade'];
+$matricula = $_SESSION['matricula'];
 $autenticandoUsuario = new SessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
 $escolherUnidade = new SelecionarUnidade();
+$cargaAnterior = new CargaAnterior($matricula, $unidade);
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
-$unidade = $_SESSION['unidade'];
-$matricula = $_SESSION['matricula'];
 date_default_timezone_set('America/Sao_Paulo');
 $data = new DateTime('now');
 $LancarData = $data->format('d/m/Y');
@@ -97,7 +100,10 @@ $LancarData = $data->format('d/m/Y');
                             <label for="cargaAnterior">
                                 Carga dia anterior
                             </label>
-                            <input type="text" id="inputAnterior" name="cargaAnterior" placeholder="" maxlength="7">
+                            <input type="text" id="inputAnterior" name="cargaAnterior" 
+                            value=<?php echo $cargaAnterior->mostrarCargaAnterior(); ?> maxlength="7" disabled>
+                            <input type="hidden" id="inputAnterior" name="cargaAnterior" 
+                            value="<?php echo $cargaAnterior->mostrarCargaAnterior(); ?>">
                         </div>
                         <div class="input-group">
                             <label for="cargaRecebida">

@@ -1,194 +1,52 @@
 <?php
-require 'autoload.php';
-
-use SADP\ConectarUsuario\ConectarBD;
-
-
-
-    $newData = '07/03/2025';
-    $newUnidade = 'CDIP BRASÍLIA';
-    $newMatricula = '81342497';
-    $newCargaAnterior = '0';
-    $newCargaRecebida = '200.000';
-    $newCargaImpossibilitada = '10.000';
-    $newCargaDigitalizada = '190.000';
-    $newCargaResto = '0';
+    session_start();
+    require 'autoload.php';
     
- 
-class CadastrarCarga extends ConectarBD
-{
-    private $novaData;
-    private $unidade;
-    private $matricula;
-    private $cargaAnterior;
-    private $cargaRecebida;
-    private $cargaImpossibilitada;
-    private $cargaDigitalizada;
-    private $resto;
+    use SADP\ConectarUsuario\ConectarBD;
+    use SADP\Cadastrar\CadastrarCarga;
     
-	function __construct(
-		$novaData, 
-		$unidade, 
-		$matricula, 
-		$cargaAnterior, 
-		$cargaRecebida,
-        $cargaImpossibilitada,
-		$cargaDigitalizada, 
-		$resto
-	)
-    {
-        parent::__construct();
-		$this->novaData = $novaData;
-        $this->unidade = $unidade;
-        $this->matricula = $matricula;
-        $this->cargaAnterior = $cargaAnterior;
-        $this->cargaRecebida = $cargaRecebida;
-        $this->cargaImpossibilitada = $cargaImpossibilitada;
-        $this->cargaDigitalizada = $cargaDigitalizada;
-        $this->resto = $resto;
+    // Recebe os dados JSON
+  /*  
+    $jsonData = file_get_contents('php://input');
+    $data = json_decode($jsonData, true);
+
+    if ($data === null) {
+        // Erro ao decodificar o JSON
+        http_response_code(400); // Bad Request
+        echo json_encode(['success' => false, 'error' => 'Dados JSON inválidos']);
+        exit;
     }
+*/
+       $dataCadastrada = '22/04/2025';
+        $cargaAnterior = '1.000';
+        $cargaRecebida = '65.000';
+        $cargaImpossibilitada = '0';
+        $cargaDigitalizada = '63.000';
+        $cargaResto = '3.000';
 
-     //Cadastra nova data
-     public function getNovaData()
-     {
-         return $this->novaData;
-     }
-
-     //Cadastrar laçamento de carga de nova unidade
-     public function getNovaUnidade()
-     {
-         return $this->unidade;
-     }
-     
-     //Cadastrar laçamento de carga de nova matricula
-     public function getNovaMatricula()
-     {
-         return $this->matricula;
-     }
-     
-     //Cadastrar laçamento de carga do dia anterior
-     public function getCargaAnterior()
-     {
-         return $this->cargaAnterior;
-     }
+    //if(isset($_SESSION['matricula'])) {  
+		$unidade = 'CDIP BRASÍLIA ';
+        $matricula = '81342497';
+         // Agora você pode acessar os dados usando $data
+        
     
-    //Cadastrar laçamento de carga recebida no dia
-     public function getCargaRecebida()
-     {
-         return $this->cargaRecebida;
-     }
-
-     //Cadastrar laçamento de carga impossibilitada no dia
-     public function getCargaImpossibilitada()
-     {
-         return $this->cargaImpossibilitada;
-     }
-    
-     //Cadastrar laçamento de carga digitalizada no dia
-     public function getCargaDigitalizada()
-     {
-         return $this->cargaDigitalizada;
-     }
-
-     //Cadastrar laçamento de resto no dia
-     public function getCargaResto()
-     {
-         return $this->resto;
-     }
-
-     //Aterar a data no formato para o banco de daddos
-     public function alterarData() 
-    {
-        $novaData = $this->getNovaData();        
-        $data = explode("/", $novaData);
-        return $data[2] . "-" . $data[1] . "-" . $data[0];
-              
-    }
-    
-    public function lancamentoDaCarga() 
-    {
-        try {
-            $novaData = $this->alterarData();
-            $unidade = $this->getNovaUnidade();
-            $matricula = $this->getNovaMatricula();
-            $cargaAnterior = str_replace(['.'], '', $this->getCargaAnterior());
-            $cargaRecebida = str_replace(['.'], '', $this->getCargaRecebida());
-            $cargaImpossibilitada = str_replace(['.'], '', $this->getCargaImpossibilitada());
-            $cargaDigitalizada = str_replace(['.'], '', $this->getCargaDigitalizada());
-            $resto = str_replace(['.'], '', $this->getCargaResto());
-
-            $sqlUnidade = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
-            $dadosUnidade = array(
-                ":nome_unidade" => $unidade
-            );
-            $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
-            $resultadoUnidade = $queryUnidade->fetch(PDO::FETCH_OBJ);
-            $mcuUnidade = $resultadoUnidade->mcu_unidade; 
-
-            // Verifica se a carga já foi lançada
-            $sql = "SELECT * FROM tb_digitalizacao WHERE data_digitalizacao = :data_digitalizacao AND mcu_unidade = :mcu_unidade";
-            $dados = array(
-                ":data_digitalizacao" => $novaData, 
-                ":mcu_unidade" => $mcuUnidade
-            );
-            $query = parent::executarSQL($sql,$dados);
-            $resultado = $query->fetch(PDO::FETCH_OBJ);
-
-            if ($resultado) {
-                // Carga já existente
-                $response = array('success' => false, 'error' => 'Carga desse dia já foi lançada no sistema');
-            } else {
-                // Insere nova carga
-                date_default_timezone_set('America/Sao_Paulo');
-                $data = new DateTime('now');
-                $dataDia = $data->format('Y-m-d');
-
-                $sql = "INSERT INTO tb_digitalizacao (mcu_unidade, matricula, data_digitalizacao, qtd_imagens_dia_anterior, 
-                qtd_imagens_recebidas_dia, qtd_imagens_incorporadas, qtd_imagens_impossibilitadas, qtd_imagens_resto) 
-                VALUES (:mcu_unidade, :matricula, :data_digitalizacao, :qtd_imagens_dia_anterior,:qtd_imagens_recebidas_dia, 
-                :qtd_imagens_incorporadas, :qtd_imagens_impossibilitadas, :qtd_imagens_resto)";
-                $dados = array( 
-                    ":mcu_unidade" => $mcuUnidade, 
-                    ":matricula" => $matricula, 
-                    ":data_digitalizacao" => $novaData,
-                    ":qtd_imagens_dia_anterior" => $cargaAnterior, 
-                    ":qtd_imagens_recebidas_dia" => $cargaRecebida, 
-                    ":qtd_imagens_incorporadas" => $cargaDigitalizada, 
-                    ":qtd_imagens_impossibilitadas" => $cargaImpossibilitada,
-                    ":qtd_imagens_resto" => $resto
-                );
-                $query = parent::executarSQL($sql,$dados);
-                $resultado = parent::lastidSQL();
-
-                if ($resultado) {
-                    $response = array('success' => true, 'message' => 'Carga do dia ' . $this->getNovaData() . ' cadastrada com sucesso.');
-                } else {
-					$erroInfo = $query->errorInfo();
-                    $response = array('success' => false, 'error' => $erroInfo);
-                }
-            }
-
-            header('Content-Type: application/json');
-            echo json_encode($response);
-
-        } catch (\Exception $e) {
-            $response = array('success' => false, 'error' => $e->getMessage());
-            header('Content-Type: application/json');
-            echo json_encode($response);
-        }
-    }
-}
-    
-
-$novaCarga = new CadastrarCarga(
-            $newData,
-            $newUnidade,
-            $newMatricula,
-            $newCargaAnterior,
-            $newCargaRecebida,
-            $newCargaImpossibilitada,
-            $newCargaDigitalizada,
-            $newCargaResto
+        /*
+        $conteudo = $dataCadastrada . " " . $unidade . " " . $matricula . " " . $cargaAnterior . " " . $cargaRecebida . " " . 
+        $cargaImpossibilitada . " " . $cargaDigitalizada . " " . $cargaResto;
+		
+		file_put_contents(__DIR__ . "/meu_arquivo.txt", $conteudo);
+        */
+        $alterarDadosDigitalizacao = new CadastrarCarga(
+            $dataCadastrada,
+            $unidade,
+            $matricula,
+            $cargaAnterior,
+			$cargaRecebida,
+            $cargaImpossibilitada,
+            $cargaDigitalizada,
+            $cargaResto
         );
         
-        $novaCarga->lancamentoDaCarga();
+        $alterarDadosDigitalizacao->alterarDadosCarga();
+   // }
+?>
