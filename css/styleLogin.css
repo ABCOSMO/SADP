@@ -16,7 +16,7 @@
 }
 
 body {
-    background-image: url("/sadp/assets/FAPI_LIMPO.png");
+    background-image: url("../assets/FAPI_LIMPO.png");
     background-color: var(--cor-quarta);
     height: 100vh;
     background-size: 100% 100%;

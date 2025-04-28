@@ -76,7 +76,7 @@ $LancarData = $data->format('d/m/Y');
         <div class="linha">
             <a class="caminhos" href="../">Home</a>  
             <p class="seta"> > </p>
-            <a class="caminhos" href="../digitalizacao/">Digitalização</a>
+            <a class="caminhos" href="../digitalizacao/lancarCarga.php">Digitalização</a>
             <p class="seta">  > </p>
             <a class="caminhos" href="../digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
         </div>

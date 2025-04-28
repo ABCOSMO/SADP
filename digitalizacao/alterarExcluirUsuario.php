@@ -71,7 +71,7 @@ $unidade = $_SESSION['unidade'];
         <div class="linha">
             <a class="caminhos" href="../">Home</a>  
             <p class="seta"> > </p>
-            <a class="caminhos" href="../digitalizacao/">Digitalização</a>
+            <a class="caminhos" href="../digitalizacao/alterarExcluirUsuario.php">Digitalização</a>
             <p class="seta">  > </p>
             <a class="caminhos" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
         </div>
