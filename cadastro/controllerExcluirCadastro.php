@@ -2,8 +2,8 @@
 session_start();
 require '../autoload.php';
 
-use SADP\ConectarUsuario\ConectarBD;
-use SADP\Cadastrar\ExcluirUsuario;
+use FADPD\ConectarUsuario\ConectarBD;
+use FADPD\Cadastrar\ExcluirUsuario;
 
 $dadosJson = file_get_contents('php://input');
 $dados = json_decode($dadosJson, true);
@@ -19,7 +19,7 @@ if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados))
 } else {
     // Tratar erros de decodificação ou dados inválidos
     $errou =  'Erro ao processar os dados: ' . json_last_error_msg();
-    file_put_contents(__DIR__ . '/matricula.txt', $errou);
+    /*file_put_contents(__DIR__ . '/matricula.txt', $errou);*/
 }
 
 ?>

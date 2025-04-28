@@ -2,9 +2,9 @@
     session_start();
     require '../autoload.php';
     
-    use SADP\ConectarUsuario\ConectarBD;
-    use SADP\Relatorios\CalcularData;
-    use SADP\Relatorios\GerarRelatorioDigitalizacao;
+    use FADPD\ConectarUsuario\ConectarBD;
+    use FADPD\Relatorios\CalcularData;
+    use FADPD\Relatorios\GerarRelatorioDigitalizacao;
 
     $unidade = $_SESSION['unidade'];
     $matricula = $_SESSION['matricula'];

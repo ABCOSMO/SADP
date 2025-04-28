@@ -2,8 +2,8 @@
 session_start();
 require '../autoload.php';
 
-use SADP\ConectarUsuario\ConectarBD;
-use SADP\Cadastrar\AlterarCadastro;
+use FADPD\ConectarUsuario\ConectarBD;
+use FADPD\Cadastrar\AlterarCadastro;
 
 $matricula = $_GET['matricula'];
 $alterarUsuario = new AlterarCadastro();

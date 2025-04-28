@@ -1,8 +1,8 @@
 <?php
 
-namespace SADP\Relatorios;
+namespace FADPD\Relatorios;
 
-use SADP\ConectarUsuario\ConectarBD;
+use FADPD\ConectarUsuario\ConectarBD;
 use PDO;
 use PDOException;
 

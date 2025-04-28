@@ -1,6 +1,6 @@
 <?php
 
-namespace SADP\ConectarUsuario;
+namespace FADPD\ConectarUsuario;
 use PDO;
 use PDOException;
 

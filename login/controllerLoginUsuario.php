@@ -3,7 +3,7 @@
 
     require '../autoload.php';
 
-    use SADP\ConectarUsuario\{
+    use FADPD\ConectarUsuario\{
         ConectarBD, EfetuarLoginUsuario
     };
         

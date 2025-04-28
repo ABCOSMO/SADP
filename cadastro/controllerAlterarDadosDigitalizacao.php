@@ -2,8 +2,8 @@
     session_start();
     require '../autoload.php';
     
-    use SADP\ConectarUsuario\ConectarBD;
-    use SADP\Cadastrar\CadastrarCarga;
+    use FADPD\ConectarUsuario\ConectarBD;
+    use FADPD\Cadastrar\CadastrarCarga;
     
     // Recebe os dados JSON
     $jsonData = file_get_contents('php://input');
@@ -31,7 +31,7 @@
         $conteudo = $dataCadastrada . " " . $unidade . " " . $matricula . " " . $cargaAnterior . " " . $cargaRecebida . " " . 
         $cargaImpossibilitada . " " . $cargaDigitalizada . " " . $cargaResto;
 		
-		file_put_contents(__DIR__ . "/meu_arquivo.txt", $conteudo);
+		/*file_put_contents(__DIR__ . "/meu_arquivo.txt", $conteudo);*/
         
         $alterarDadosDigitalizacao = new CadastrarCarga(
             $dataCadastrada,

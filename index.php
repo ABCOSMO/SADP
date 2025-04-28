@@ -3,7 +3,7 @@ session_start();
 
 require 'autoload.php';
 
-use SADP\ConectarUsuario\SessaoUsuario;
+use FADPD\ConectarUsuario\SessaoUsuario;
 
 $autenticandoUsuario = new sessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
@@ -22,7 +22,7 @@ $unidade = $_SESSION['unidade'];
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <title>SADP - DELOG</title>
+    <title>FADPD - DELOG</title>
 </head>
 <body>
     <header class="cabecalho">
@@ -33,31 +33,31 @@ $unidade = $_SESSION['unidade'];
             </label>
             <ul class="lista-logoff">
                 <li class="lista-logoff__item">
-                    <a class="lista-logoff__link" href="/sadp/login/index.php?logout=logout">Fazer Logoff</a>
+                    <a class="lista-logoff__link" href="/fadpd/login/index.php?logout=logout">Fazer Logoff</a>
                 </li>
             </ul>
         </nav>
         <nav class="cabecalho__links">
             <input type="checkbox" id="menu-digitalizacao" class="cabecalho__digitalizacao">
             <label for="menu-digitalizacao">
-                <span class="cabecalho__menu__texto" id="digitalizacao">SADP Digitalização</span>
+                <span class="cabecalho__menu__texto" id="digitalizacao">Digitalização</span>
             </label>
             <ul class="lista-digitalizacao" id="lista">
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../sadp/digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
+                    <a class="lista-digitalizacao__link" href="/fadpd/digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../sadp/digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
+                    <a class="lista-digitalizacao__link" href="/fadpd/digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="#">Relatório Digitalização</a>
                 </li>
             </ul>
-            <a class="cabecalho__menu__texto" href="#">SADP Produção</a>
+            <a class="cabecalho__menu__texto" href="#">Produção</a>
             <a class="cabecalho__menu__texto" href="http://msc01065329:9888/ecarta/form/getMovimento_frm.ect" target="_blank">Consulta e-Carta</a>
             <a class="cabecalho__menu__texto" href="https://sgd.correios.com.br/sgd/app/" target="_blank">SGD</a>
             <a class="cabecalho__menu__texto" href="https://cas.correios.com.br/login?service=https%3A%2F%2Fapp.correiosnet.int%2Fecarta%2Fpages%2F" target="_blank">e-Carta</a>
-            <a class="cabecalho__menu__texto" href="/sadp/">Home</a>
+            <a class="cabecalho__menu__texto" href="/fadpd/">Home</a>
         </nav>
     </header>
     <main class="container__corpo"></main>

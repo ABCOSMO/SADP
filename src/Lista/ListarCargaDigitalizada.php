@@ -1,8 +1,8 @@
 <?php
 
-namespace SADP\Lista;
+namespace FADPD\Lista;
 
-use SADP\ConectarUsuario\ConectarBD;
+use FADPD\ConectarUsuario\ConectarBD;
 
 class ListarUsuario extends ConectarBD
 {

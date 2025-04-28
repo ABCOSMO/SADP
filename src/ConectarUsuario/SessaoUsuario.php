@@ -1,6 +1,6 @@
 <?php
 
-namespace SADP\ConectarUsuario;
+namespace FADPD\ConectarUsuario;
 
 class SessaoUsuario
 {
@@ -9,7 +9,7 @@ class SessaoUsuario
         if (!isset($_SESSION['logado']) || empty($_SESSION['logado'])) 
         {
             // Usuário não está logado, redirecionar para a página de login
-            header('Location: /sadp/login/');
+            header('Location: /FADPD/login/');
             exit();
         }    
     }   
@@ -22,7 +22,7 @@ class SessaoUsuario
         {
             session_unset();
             session_destroy();
-            header("Location: /sadp/login/"); 
+            header("Location: /FADPD/login/"); 
             exit;
         } else 
         {
@@ -35,7 +35,7 @@ class SessaoUsuario
         if(isset($_GET['logout'])) {
             session_unset();
             session_destroy();
-            header("Location: /sadp/login/");
+            header("Location: /FADPD/login/");
             exit;
         }
     }

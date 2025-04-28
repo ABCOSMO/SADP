@@ -2,8 +2,8 @@
     session_start();
     require '../autoload.php';
     
-    use SADP\ConectarUsuario\ConectarBD;
-    use SADP\Cadastrar\CadastrarUsuario;
+    use FADPD\ConectarUsuario\ConectarBD;
+    use FADPD\Cadastrar\CadastrarUsuario;
  
     if(isset($_POST['novaMatricula']))
     {  

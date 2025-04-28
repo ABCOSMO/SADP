@@ -2,8 +2,8 @@
     session_start();
     require '../autoload.php';
     
-    use SADP\ConectarUsuario\ConectarBD;
-    use SADP\Cadastrar\CadastrarCarga;
+    use FADPD\ConectarUsuario\ConectarBD;
+    use FADPD\Cadastrar\CadastrarCarga;
  
     if(isset($_POST['novaData']))
     {  

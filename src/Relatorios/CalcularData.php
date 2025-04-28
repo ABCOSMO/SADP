@@ -1,5 +1,5 @@
 <?php
-namespace SADP\Relatorios;
+namespace FADPD\Relatorios;
 
 class CalcularData
 {
