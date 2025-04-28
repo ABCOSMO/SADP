@@ -62,7 +62,7 @@ $LancarData = $data->format('d/m/Y');
                     <a class="lista-digitalizacao__link" href="../digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
                 </li>
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Relatório Digitalização</a>
+                    <a class="lista-digitalizacao__link" href="../digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
                 </li>
             </ul>
             <a class="cabecalho__menu__texto" href="#">Produção</a>

@@ -6,14 +6,14 @@ use FADPD\ConectarUsuario\{
     ConectarBD, SessaoUsuario
 };
 use FADPD\Lista\{
-    ListarUsuario, SelecionarUnidade
+    SelecionarData, SelecionarUnidade
 };
 
 $autenticandoUsuario = new SessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
 $escolherUnidade = new SelecionarUnidade();
-$listarUsuarios = new ListarUsuario();
+$escolherData = new SelecionarData();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
@@ -49,26 +49,17 @@ $unidade = $_SESSION['unidade'];
         <nav class="cabecalho__links">
             <input type="checkbox" id="menu-digitalizacao" class="cabecalho__digitalizacao">
             <label for="menu-digitalizacao">
-                <span class="cabecalho__menu__texto" id="digitalizacao">SADP Digitalização</span>
+                <span class="cabecalho__menu__texto" id="digitalizacao">Digitalização</span>
             </label>
             <ul class="lista-digitalizacao" id="lista">
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
+                    <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
                 </li>
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Excluir Dados Digitalização</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Relatório de Acesso</a>
-                </li>
-                <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="#">Relatório Digitalização</a>
+                    <a class="lista-digitalizacao__link" href="../digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
                 </li>
             </ul>
             <a class="cabecalho__menu__texto" href="#">Produção</a>
@@ -82,9 +73,9 @@ $unidade = $_SESSION['unidade'];
         <div class="linha">
             <a class="caminhos" href="../">Home</a>  
             <p class="seta"> > </p>
-            <a class="caminhos" href="../digitalizacao/">Digitalização</a>
+            <a class="caminhos" href="../digitalizacao/relatorioDigitalizacao.php">Digitalização</a>
             <p class="seta">  > </p>
-            <a class="caminhos" href="../digitalizacao/alterarExcluirUsuario.php">Alterar/Excluir Usuário</a>
+            <a class="caminhos" href="../digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
         </div>
     </div>
     <section class="container__botao">
@@ -92,11 +83,27 @@ $unidade = $_SESSION['unidade'];
             <div class="menuAlterarUsuario" id="modal-1">
                <div class="modal-header">
                     <h1 class="modal-title">
-                        Alterar ou excluir usuário
+                        Relatório Digitalização
                     </h1>
                 </div>
-                    <?php $listarUsuarios -> mostrarUsuario(); ?>
-            </div>
+                <div>
+                    <select class="selecionar" type="checkbox" name="novaUnidade" size="1" id="unidade">
+                        <option value="" selected disabled="disabled" id="selecionar__unidade"> - Escolher Unidade - </option>
+                        <?php $escolherUnidade->obterUnidade(); ?>
+                    </select>
+                    <select class="selecionar" type="checkbox" name="novoMes" size="1" id="mes">
+                        <option value="" selected disabled="disabled" id="selecionar__mes"> - Escolher Mês - </option>
+                        <?php $escolherData->obterMes(); ?>
+                    </select>
+                    <select class="selecionar" type="checkbox" name="novoAno" size="1" id="ano">
+                        <option value="" selected disabled="disabled" id="selecionar__Ano"> - Escolher Ano - </option>
+                        <?php $escolherData->obterAno(); ?>
+                    </select>
+                </div>
+                <div>
+                    <input value="Gerar" type="submit" id="login-button">
+                </div>
+            </div>            
             <dialog class="loading"></dialog>
         </div>
     </section>
