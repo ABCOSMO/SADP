@@ -42,7 +42,7 @@ $unidade = $_SESSION['unidade'];
             </label>
             <ul class="lista-logoff">
                 <li class="lista-logoff__item">
-                    <a class="lista-logoff__link" href="/fadpd/login/index.php?logout=logout">Fazer Logoff</a>
+                    <a class="lista-logoff__link" href="../login/index.php?logout=logout">Fazer Logoff</a>
                 </li>
             </ul>
         </nav>
@@ -66,7 +66,7 @@ $unidade = $_SESSION['unidade'];
             <a class="cabecalho__menu__texto" href="http://msc01065329:9888/ecarta/form/getMovimento_frm.ect" target="_blank">Consulta e-Carta</a>
             <a class="cabecalho__menu__texto" href="https://sgd.correios.com.br/sgd/app/" target="_blank">SGD</a>
             <a class="cabecalho__menu__texto" href="https://cas.correios.com.br/login?service=https%3A%2F%2Fapp.correiosnet.int%2Fecarta%2Fpages%2F" target="_blank">e-Carta</a>
-            <a class="cabecalho__menu__texto" href="/fadpd/">Home</a>
+            <a class="cabecalho__menu__texto" href="../">Home</a>
         </nav>
     </header>
     <div class="container__caminho">
@@ -99,9 +99,11 @@ $unidade = $_SESSION['unidade'];
                         <option value="" selected disabled="disabled" id="selecionar__Ano"> - Escolher Ano - </option>
                         <?php $escolherData->obterAno(); ?>
                     </select>
+                    <label for="aniversario">Data Inicial:</label>
+                    <input type="date" id="aniversario" name="aniversario" min="2000-01-01" max="2025-12-31" value="2025-04-28">
                 </div>
                 <div>
-                    <input value="Gerar" type="submit" id="login-button">
+                    <input value="Gerar Relatório" type="submit" id="login-button">
                 </div>
             </div>            
             <dialog class="loading"></dialog>

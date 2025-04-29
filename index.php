@@ -33,7 +33,7 @@ $unidade = $_SESSION['unidade'];
             </label>
             <ul class="lista-logoff">
                 <li class="lista-logoff__item">
-                    <a class="lista-logoff__link" href="/fadpd/login/index.php?logout=logout">Fazer Logoff</a>
+                    <a class="lista-logoff__link" href="./login/index.php?logout=logout">Fazer Logoff</a>
                 </li>
             </ul>
         </nav>
@@ -44,20 +44,20 @@ $unidade = $_SESSION['unidade'];
             </label>
             <ul class="lista-digitalizacao" id="lista">
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="/fadpd/digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
+                    <a class="lista-digitalizacao__link" href="./digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="/fadpd/digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
+                    <a class="lista-digitalizacao__link" href="./digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
                 </li>
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="/fadpd/digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
+                    <a class="lista-digitalizacao__link" href="./digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
                 </li>
             </ul>
             <a class="cabecalho__menu__texto" href="#">Produção</a>
             <a class="cabecalho__menu__texto" href="http://msc01065329:9888/ecarta/form/getMovimento_frm.ect" target="_blank">Consulta e-Carta</a>
             <a class="cabecalho__menu__texto" href="https://sgd.correios.com.br/sgd/app/" target="_blank">SGD</a>
             <a class="cabecalho__menu__texto" href="https://cas.correios.com.br/login?service=https%3A%2F%2Fapp.correiosnet.int%2Fecarta%2Fpages%2F" target="_blank">e-Carta</a>
-            <a class="cabecalho__menu__texto" href="/fadpd/">Home</a>
+            <a class="cabecalho__menu__texto" href="./">Home</a>
         </nav>
     </header>
     <main class="container__corpo"></main>

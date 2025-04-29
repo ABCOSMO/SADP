@@ -9,7 +9,7 @@ class SessaoUsuario
         if (!isset($_SESSION['logado']) || empty($_SESSION['logado'])) 
         {
             // Usuário não está logado, redirecionar para a página de login
-            header('Location: /fadpd/login/');
+            header('Location: ./login/');
             exit();
         }    
     }   
@@ -22,7 +22,7 @@ class SessaoUsuario
         {
             session_unset();
             session_destroy();
-            header("Location: /fadpd/login/"); 
+            header("Location: ./login/"); 
             exit;
         } else 
         {
