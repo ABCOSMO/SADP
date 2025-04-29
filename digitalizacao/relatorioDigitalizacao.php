@@ -17,6 +17,9 @@ $escolherData = new SelecionarData();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
+date_default_timezone_set('America/Sao_Paulo');
+$data = new DateTime('now');
+$LancarData = $data->format('d/m/Y');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -86,23 +89,18 @@ $unidade = $_SESSION['unidade'];
                         Relatório Digitalização
                     </h1>
                 </div>
-                <div>
-                    <select class="selecionar" type="checkbox" name="novaUnidade" size="1" id="unidade">
+                <div class="container__calendario"> 
+                    <label for="unidade">Unidade:</label>
+                    <select class="selecionar" type="checkbox" name="unidade" size="1" id="unidade">
                         <option value="" selected disabled="disabled" id="selecionar__unidade"> - Escolher Unidade - </option>
                         <?php $escolherUnidade->obterUnidade(); ?>
-                    </select>
-                    <select class="selecionar" type="checkbox" name="novoMes" size="1" id="mes">
-                        <option value="" selected disabled="disabled" id="selecionar__mes"> - Escolher Mês - </option>
-                        <?php $escolherData->obterMes(); ?>
-                    </select>
-                    <select class="selecionar" type="checkbox" name="novoAno" size="1" id="ano">
-                        <option value="" selected disabled="disabled" id="selecionar__Ano"> - Escolher Ano - </option>
-                        <?php $escolherData->obterAno(); ?>
-                    </select>
-                    <label for="aniversario">Data Inicial:</label>
-                    <input type="date" id="aniversario" name="aniversario" min="2000-01-01" max="2025-12-31" value="2025-04-28">
+                    </select>                   
+                    <label for="dataInicial">Data Inicial:</label>
+                    <input class="calendario" type="date" id="dataInicial" name="dataInicial" min="2022-01-01" max="2035-12-31" value="2025-04-25">
+                    <label for="dataFinal">Data Final:</label>
+                    <input class="calendario" type="date" id="dataFinal" name="dataFinal" min="2022-01-01" max="2035-12-31" value="2025-04-25">
                 </div>
-                <div>
+                <div class="container__botao_calendario">
                     <input value="Gerar Relatório" type="submit" id="login-button">
                 </div>
             </div>            
@@ -114,5 +112,7 @@ $unidade = $_SESSION['unidade'];
             <h3 class="rodape">Desenvolvido pelos CDIPs</h3>
         </div>
     </footer>
+    <script src="../script/dataAtual.js" defer></script>
+    <script src="../script/relatorioDiarioDigitalizacao.js" defer></script>
 </body>
 </html>

@@ -432,4 +432,22 @@ table, th, td {
   tr:hover {
     background-color: #d1d5db;
   }
-    
+
+.container__calendario {
+    display: inline;
+    justify-items: center;
+    padding-left: 25%;
+}
+
+.calendario {
+    border-radius: 7px;
+    border: 1px solid #d1d5db;
+    padding: 0.71em;
+    background-color: #f9fafb;
+    margin-bottom: 1em;
+}
+
+.container__botao_calendario {
+    display: flex;
+    justify-content: center;
+}
