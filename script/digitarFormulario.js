@@ -1,3 +1,38 @@
+function mascaraDigitarData(digitaData) {
+    // Remove todos os caracteres não numéricos
+    digitaData = digitaData.replace(/\D/g, "");
+
+    // Verifica se o data contém até 8 dígitos
+    if (digitaData.length !== 8) {
+        return digitaData;
+    }
+    digitaData = digitaData.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3"); // Retorna a data com formatação de 10 digitos
+    return digitaData;
+}
+
+function mascaraDigitarCarga(carga) {
+    // Remove todos os caracteres não numéricos
+    carga = carga.replace(/\D/g, "");
+
+    // Verifica se o carga contém até 6 dígitos
+    if (carga.length === 6) {
+        carga = carga.replace(/(\d{3})(\d{3})/, "$1.$2"); // Retorna o carga com formatação de 6 digitos
+        return carga;
+    }
+    if (carga.length === 5) {
+        carga = carga.replace(/(\d{2})(\d{3})/, "$1.$2"); // Retorna o carga com formatação de 5 digitos
+        return carga;
+    }
+    if (carga.length === 4) {
+        carga = carga.replace(/(\d{1})(\d{3})/, "$1.$2"); // Retorna o carga com formatação de 4 digitos
+        return carga;
+    }
+    if (carga.length !== 4) {
+        carga = carga; // Retorna o carga sem formatação
+        return carga;
+    }    
+}
+
 function digitarFormulario() {
     // Conferindo no input os dados lançados
     let inputData = document.getElementById('inputData');
@@ -94,3 +129,8 @@ function digitarFormularioModal() {
         }
     }, 300);
 }
+
+digitarFormulario();
+
+digitarFormularioModal();
+    

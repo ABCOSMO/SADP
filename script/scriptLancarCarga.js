@@ -1,9 +1,43 @@
-relatorioDigitalizacao();
+function enviarDadosFormulario() {
+    const form = document.getElementById('myForm');
+    const loading = document.querySelector('.loading');
 
-digitarFormulario();
+    // Mostrar a animação
+    loading.style.display = 'block';
+    const formData = new FormData(form);
+    console.log(formData);
 
-digitarFormularioModal();
-    
+    fetch('../cadastro/controllerCadastrarCarga.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+        throw new Error('Rede não responde');
+        }
+        return response.json();
+    }) 
+    // Recebe a resposta como JSON
+    .then(data => {
+        // Ocultar a animação e exibir uma mensagem
+        loading.style.display = 'none';
+        console.log(data);
+        // Processa a resposta JSON, por exemplo, exibindo uma mensagem
+        if (data.success) {
+            alert(data.message);
+            window.location.href = '../digitalizacao/lancarCarga.php';
+        } else {
+            alert('Erro ao enviar os dados: ' + data.error);
+        }
+    })
+    .catch(error => {
+        loading.style.display = 'none';
+        console.error('Erro ao enviar os dados:', error);
+        alert('Erro ao enviar os dados');
+    });
+}
+
+
 //adicionarListenersFormularios();
         const form = document.getElementById('myForm');
         form.addEventListener('submit', (event) => {

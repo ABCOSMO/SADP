@@ -119,3 +119,5 @@ function relatorioDigitalizacao() {
             console.error('Erro:', error);
         });
 }
+
+document.addEventListener('DOMContentLoaded', relatorioDigitalizacao);

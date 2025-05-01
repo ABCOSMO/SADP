@@ -15,7 +15,3 @@ let dataFinal = document.getElementById('dataFinal');
 dataFinal.value = dataFormatadaParaInput;
 
 let unidade = document.getElementById('unidade');
-
-console.log(dataIncial.value);
-console.log(dataFinal.value);
-console.log(unidade.value);

@@ -266,10 +266,11 @@ $LancarData = $data->format('d/m/Y');
             <h3 class="rodape">Desenvolvido pelos CDIPs</h3>
         </div>
     </footer>
+    <script src="../script/abrirFecharModal.js" defer></script>
     <script src="../script/relatorioDigitalizacao.js" defer></script>
     <script src="../script/digitarFormulario.js" defer></script>
     <script src="../script/scriptLancarCarga.js" defer></script>
-    <script src="../script/funcoes.js" defer></script>
+    <script src="../script/validaFormulario.js" defer></script>
     <script src="../script/excluirCargaDigitalizacao.js" defer></script>
     <script src="../header.js" defer></script>
 </html>
