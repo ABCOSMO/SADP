@@ -111,6 +111,7 @@ class GerarRelatorioDigitalizacao extends ConectarBD
             $response = [];
             foreach($resultado as $key => $value) {
                 $response[] = [
+                    'unidade' => $this->getUnidade(),
                     'matricula_usuario' => $this->formatarMatricula($value->matricula),
                     'nome_usuario' => $value->nome,
                     'data_digitalizacao' => $this->alterarFormatoData($value->data_digitalizacao),

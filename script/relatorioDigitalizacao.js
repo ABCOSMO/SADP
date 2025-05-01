@@ -10,6 +10,7 @@ function relatorioDigitalizacao() {
                                     <div class="input-group">
                                         <table>
                                             <tr>
+                                                <th class='usuario'>Unidade</th>
                                                 <th class='usuario'>Matrícula</th>
                                                 <th class='usuario'>Usuário</th>
                                                 <th class='usuario'>Data</th>
@@ -25,6 +26,7 @@ function relatorioDigitalizacao() {
         
             data.forEach(item => {
                 tabelaHTML += `<tr class=''>
+                                    <td class='' id='unidade${id}'>${item.unidade}</td>
                                     <td class='' id='matricula${id}'>${item.matricula_usuario}</td>
                                     <td class='' id='usuario${id}'>${item.nome_usuario}</td>
                                     <td class='' id='Data${id}'>${item.data_digitalizacao}</td>
