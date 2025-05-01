@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         const teste = document.querySelectorAll('form');        
             
-            for(let i = 2; i < teste.length; i++) {
+            for(let i = 2; i <= teste.length; i++) {
                     
                 const formu = document.getElementById(`myForm${i}`);
                 if(formu) {

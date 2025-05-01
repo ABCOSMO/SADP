@@ -74,7 +74,7 @@ function digitarFormularioModal() {
         const inputModal = document.querySelectorAll('form');
 
         if (inputModal.length > 0) { // Verifica se o modal existe
-            for (let id = 0; id < inputModal.length; id++) {
+            for (let id = 0; id <= inputModal.length; id++) {
                 let inputAnteriorModal = document.getElementById(`inputModalAnterior${id}`);
                 let inputRecebidaModal = document.getElementById(`inputModalRecebida${id}`);
                 let inputImpossibilitadaModal = document.getElementById(`inputModalImpossibilitada${id}`);
