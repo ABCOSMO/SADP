@@ -89,23 +89,15 @@ $LancarData = $data->format('d/m/Y');
                         Relatório Digitalização
                     </h1>
                 </div>
-                <div class="container__calendario"> 
-                    <label for="unidade">Unidade:</label>
-                    <select class="selecionar" type="checkbox" name="unidade" size="1" id="unidade">
-                        <option value="" selected disabled="disabled" id="selecionar__unidade"> - Escolher Unidade - </option>
-                        <?php $escolherUnidade->obterUnidade(); ?>
-                    </select>                   
-                    <label for="dataInicial">Data Inicial:</label>
-                    <input class="calendario" type="date" id="dataInicial" name="dataInicial" min="2022-01-01" max="2035-12-31" value="2025-04-25">
-                    <label for="dataFinal">Data Final:</label>
-                    <input class="calendario" type="date" id="dataFinal" name="dataFinal" min="2022-01-01" max="2035-12-31" value="2025-04-25">
-                </div>
-                <div class="container__botao_calendario">
-                    <input value="Gerar Relatório" type="submit" id="login-button">
-                </div>
+                <div class="botao__apertar">
+                    <button id="botaoCarga-1" onclick="abrirOpcaoMensal(1)" class="botao__carga botao__selecionado">Carga Diária</button>
+                    <button id="botaoCarga-2" onclick="abrirOpcaoMensal(2)" class="botao__carga botao__selecionado" name="mensal">Carga Mensal</button>
+                </div>                
+                <div class="container__calendario" id="diaria" name="diaria"></div>
+                 
             </div>            
             <dialog class="loading"></dialog>
-        </div>
+        </div>  
     </section>
     <footer>
         <div>
@@ -114,5 +106,6 @@ $LancarData = $data->format('d/m/Y');
     </footer>
     <script src="../script/dataAtual.js" defer></script>
     <script src="../script/relatorioDiarioDigitalizacao.js" defer></script>
+    <script src="../script/opcaoCargaMensalAnual.js" defer></script>
 </body>
 </html>
