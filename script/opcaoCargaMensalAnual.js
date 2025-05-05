@@ -8,8 +8,10 @@ function abrirOpcaoMensal(id) {
         botaoClicado.classList.remove('botao__carga');
         botaoClicado.classList.add('botao__selecionado');
         let lista = document.getElementById('diaria');
+        let relatorio = document.getElementById('dadosContainer');
         // Limpa a lista antes de adicionar os itens    
         lista.innerHTML = '';
+        relatorio.innerHTML = '';
 
         fetch('../cadastro/controllerRelatorioUnidade.php')
         .then(response => response.json())
@@ -34,9 +36,19 @@ function abrirOpcaoMensal(id) {
                  <input class="calendario" type="date" id="dataFinal" name="dataFinal" min="2022-01-01" max="2035-12-31" value="2025-04-25">
              </div>
              <div class="container__botao_calendario">
-                 <input value="Gerar Relatório" type="submit" id="login-button">
+                 <input class="botao__diario" value="Gerar Relatório" type="submit" id="login-button">
              </div>`;
             lista.innerHTML = dadosHTML;
+            aplicarDataAtual();
+
+            // Adicionando o event listener para o botão de gerar relatório diário
+            const botaoGerarRelatorio = document.querySelector('.botao__diario');
+            if (botaoGerarRelatorio) {
+                botaoGerarRelatorio.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita o comportamento padrão de submit
+                    relatorioDiarioDigitalizacao(); // Chama a sua função
+                });
+            }
         })
     }
 
@@ -47,9 +59,10 @@ function abrirOpcaoMensal(id) {
         botaoClicado.classList.remove('botao__carga');
         botaoClicado.classList.add('botao__selecionado');
         let lista = document.getElementById('diaria');
-
+        let relatorio = document.getElementById('dadosContainer');
         // Limpa a lista antes de adicionar os itens    
         lista.innerHTML = '';
+        relatorio.innerHTML = '';
         fetch('../cadastro/controllerRelatorioUnidade.php')
         .then(response => response.json())
         .then(data => {
@@ -72,7 +85,7 @@ function abrirOpcaoMensal(id) {
                     </select>
                     </div>
                     <div class="container__botao_calendario">
-                        <input value="Gerar Relatório" type="submit" id="login-button">
+                        <input class="botao__mensal" value="Gerar Relatório" type="submit" id="login-button">
                     </div>`;
 
             lista.innerHTML = dadosHTML;

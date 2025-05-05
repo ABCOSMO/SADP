@@ -212,21 +212,21 @@ footer {
     background-color: white;
     color: var(--cor-preta);
     text-align: justify;
-    width: 90rem;
+    width: 190vh;
     border-radius: 4vh;  
     padding: 1rem 1rem;
     margin-top: 2vw;
 }
 
 .usuario {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     color: #9ca3af;
     margin: 0;
 }
 
 .usuarioDesabilitado {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     color: red;
     padding: 0 0.3rem;
@@ -236,6 +236,7 @@ footer {
 .botao__alterar_excluir {
     border: none;
     cursor: pointer;
+    background-color: none;
 }
 
 .botao__alterar_excluir:hover {

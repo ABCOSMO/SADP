@@ -13,4 +13,4 @@
         $unidade,
     );
 
-    $gerarRelatorioDigitalizacao->relatorioUnidade();
+    $gerarRelatorioDigitalizacao->relatorioUnidade(); 

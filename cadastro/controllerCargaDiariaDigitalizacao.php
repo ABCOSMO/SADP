@@ -1,18 +1,18 @@
 <?php
 session_start();
-require 'autoload.php';
+require '../autoload.php';
 
 use FADPD\ConectarUsuario\ConectarBD;
 use FADPD\Relatorios\GerarRelatorioDiarioDigitalizacao;
 
-//$dadosJson = file_get_contents('php://input');
-//$dados = json_decode($dadosJson, true);
+$dadosJson = file_get_contents('php://input');
+$dados = json_decode($dadosJson, true);
 
-//if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados)) {
+if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados)) {
     // Os dados são válidos e podem ser processados
-    $unidade = '';
-    $dataInicial = '2025-04-01';
-    $dataFinal = '2025-05-03';
+    $unidade = $dados['unidade'];
+    $dataInicial = $dados['dataInicial'];
+    $dataFinal = $dados['dataFinal'];
     $informar = $unidade ." ". $dataInicial ." ". $dataFinal;
     file_put_contents(__DIR__ . '/dados.txt', $informar);
 
@@ -24,9 +24,9 @@ use FADPD\Relatorios\GerarRelatorioDiarioDigitalizacao;
 
     $relatorioDiarioDigitalizacao->relatorioDiarioDigitalizacao();   
     
-// else {
+} else {
     // Tratar erros de decodificação ou dados inválidos
-    //$errou =  'Erro ao processar os dados: ' . json_last_error_msg();
-//}
+    $errou =  'Erro ao processar os dados: ' . json_last_error_msg();
+}
 
 ?>

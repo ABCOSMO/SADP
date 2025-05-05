@@ -12,27 +12,21 @@ use FADPD\Lista\{
 $autenticandoUsuario = new SessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
-$escolherUnidade = new SelecionarUnidade();
-$escolherData = new SelecionarData();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
-date_default_timezone_set('America/Sao_Paulo');
-$data = new DateTime('now');
-$LancarData = $data->format('d/m/Y');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styleCadastro.css">
+    <link rel="stylesheet" href="../css/relatorioDigitalizacao.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="scriptExcluirCadastro.js" defer></script>
     <script src="../header.js" defer></script>
     <title>FADPD - DELOG</title>
 </head>
@@ -94,18 +88,19 @@ $LancarData = $data->format('d/m/Y');
                     <button id="botaoCarga-2" onclick="abrirOpcaoMensal(2)" class="botao__carga botao__selecionado" name="mensal">Carga Mensal</button>
                 </div>                
                 <div class="container__calendario" id="diaria" name="diaria"></div>
-                 
+                <div id="dadosContainer"></div>
             </div>            
             <dialog class="loading"></dialog>
         </div>  
     </section>
     <footer>
-        <div>
-            <h3 class="rodape">Desenvolvido pelos CDIPs</h3>
-        </div>
+        
     </footer>
+    <script src="../script/abrirFecharModal.js" defer></script>
+    <script src="../script/digitarFormulario.js" defer></script>
+    <script src="../script/opcaoCargaMensalAnual.js" defer></script>
     <script src="../script/dataAtual.js" defer></script>
     <script src="../script/relatorioDiarioDigitalizacao.js" defer></script>
-    <script src="../script/opcaoCargaMensalAnual.js" defer></script>
+    <script src="../script/excluirCargaDiariaDigitalizacao.js" defer></script>
 </body>
 </html>

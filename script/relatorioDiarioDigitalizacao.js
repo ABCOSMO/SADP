@@ -1,15 +1,28 @@
 function relatorioDiarioDigitalizacao() {
+    const unidade = document.getElementById('unidade').value;
+    const dataInicial = document.getElementById('dataInicial').value;
+    const dataFinal = document.getElementById('dataFinal').value;
     let id = 2;
     let resultado = document.getElementById('dadosContainer');
     resultado.innerHTML = ''; // Limpa o conteúdo existente
 
-    fetch('../cadastro/controllerCargaDigitalizacao.php')
-        .then(response => response.json())
+    fetch('../cadastro/controllerCargaDiariaDigitalizacao.php', {
+        method: 'POST',
+        body: JSON.stringify({ 
+            unidade: unidade, 
+            dataInicial: dataInicial, 
+            dataFinal: dataFinal 
+        })
+    })
+        .then(response => {
+            return response.json(); // Converter a resposta para JSON
+        })
         .then(data => {
             let tabelaHTML = `<section class="modal-body">
                                     <div class="input-group">
                                         <table>
                                             <tr>
+                                                <th class='usuario'>Unidade</th>
                                                 <th class='usuario'>Matrícula</th>
                                                 <th class='usuario'>Usuário</th>
                                                 <th class='usuario'>Data</th>
@@ -19,12 +32,13 @@ function relatorioDiarioDigitalizacao() {
                                                 <th class='usuario'>Carga Digitalizada</th>
                                                 <th class='usuario'>Resto do dia</th>
                                                 <th class='usuario'>Alterar</th>
-                                                <!--<th class='usuario'>Excluir</th>-->
+                                                <th class='usuario'>Excluir</th>
                                             </tr>`;
 
         
             data.forEach(item => {
                 tabelaHTML += `<tr class=''>
+                                    <td class='' id='unidade${id}'>${item.unidade}</td>
                                     <td class='' id='matricula${id}'>${item.matricula_usuario}</td>
                                     <td class='' id='usuario${id}'>${item.nome_usuario}</td>
                                     <td class='' id='Data${id}'>${item.data_digitalizacao}</td>
@@ -35,16 +49,14 @@ function relatorioDiarioDigitalizacao() {
                                     <td class='' id='Resto${id}'>${mascaraDigitarCarga(item.resto.toString())}</td>
                                     <td>
                                         <button type="button" class='open-modal botao__alterar_excluir' data-modal="modal-${id}" 
-                                            id="login-button-cadastro"><i class='fa-solid fa-pencil'></i>
+                                            id="login-cadastro"><i class='fa-solid fa-pencil'></i>
                                         </button>
                                     </td>
-                                <!--
                                     <td>
                                         <button class='botao botao__excluir${id} botao__alterar_excluir'>
                                             <i class='fa-solid fa-trash'></i>
                                         </button>
                                     </td>
-                                -->
                                 </tr>`;
                 id++;
             });
@@ -114,6 +126,7 @@ function relatorioDiarioDigitalizacao() {
 
             resultado.innerHTML += modalHTML; 
             adicionarListenersModal();
+            excluirCargaDigitalizacao();
         })
         .catch(error => {
             console.error('Erro:', error);
