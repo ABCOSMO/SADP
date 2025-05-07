@@ -91,7 +91,7 @@ class GerarRelatorioDiarioDigitalizacao extends ConectarBD
                         tb_digitalizacao.data_digitalizacao >= :data_inicial
                         AND tb_digitalizacao.data_digitalizacao <= :data_final
                     ORDER BY
-                        tb_unidades.nome_unidade AND tb_digitalizacao.data_digitalizacao";
+                        tb_unidades.nome_unidade, tb_digitalizacao.data_digitalizacao";
                     $dados = array(
                         ":data_inicial" => $dataInicial, 
                         ":data_final" => $dataFinal,
@@ -128,7 +128,9 @@ class GerarRelatorioDiarioDigitalizacao extends ConectarBD
                     $mcuUnidade = $linha->mcu_unidade; 
                 }
                  // Verifica se a carga já foi lançada
-                $sql = "SELECT tb_digitalizacao.*, tb_funcionarios.nome, tb_funcionarios.matricula FROM tb_digitalizacao INNER JOIN tb_funcionarios
+                $sql = "SELECT tb_digitalizacao.*, tb_funcionarios.nome, tb_funcionarios.matricula 
+                FROM tb_digitalizacao 
+                INNER JOIN tb_funcionarios
                 ON tb_digitalizacao.matricula = tb_funcionarios.matricula 
                 AND tb_digitalizacao.data_digitalizacao >= :data_inicial AND tb_digitalizacao.data_digitalizacao <= :data_final
                 AND tb_digitalizacao.mcu_unidade = :mcu_unidade 

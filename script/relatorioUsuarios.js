@@ -101,8 +101,8 @@ function relatorioUsuarios() {
             id = 2;
 
             usuarios.forEach(item => {
-                modalHTML += `<dialog class="container__botao contar" id="modal-${id}">
-                                    <div class="menuAlterarCadastro">
+                modalHTML += `<dialog class="manter__aberto" id="modal-${id}">
+                                    <div class="menuAlterar">
                                         <form method="post" id="myForm${id}" name="autenticar">
                                             <div class="modal-header">
                                                 <h1 class="modal-title">Alterar dados usuário</h1>
@@ -110,39 +110,50 @@ function relatorioUsuarios() {
                                                     <i class="fa-solid fa-xmark"></i>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
+                                            <section class="modal-body">
                                                 <div class="input-group">
                                                     <label for="nome">Alterar Nome</label>
-                                                    <input type="text" id="inputAlterarNome${id}" name="novoNome" value="${item.usuario}" maxlength="60">
+                                                    <input type="text" class="modal__digitalizacao" id="inputAlterarNome${id}" 
+                                                    name="novoNome" value="${item.usuario}" maxlength="60">
                                                 </div>
                                                 <div class="input-group">
                                                     <label for="matricula">Alterar Matrícula</label>
-                                                    <input type="text" id="inputAlterarMatricula${id}" name="novaMatricula" value="${item.matricula}" maxlength="11">
+                                                    <input type="text" class="modal__digitalizacao" id="inputAlterarMatricula${id}" 
+                                                    name="novaMatricula" value="${item.matricula}" maxlength="11">
                                                 </div>
                                                 <div class="input-group">
                                                     <label for="email">Alterar e-mail</label>
-                                                    <input type="email" id="inputAlterarEmail${id}" name="novoEmail" value="${item.email}" maxlength="60">
+                                                    <input type="email" class="modal__digitalizacao" id="inputAlterarEmail${id}" 
+                                                    name="novoEmail" value="${item.email}" maxlength="60">
                                                 </div>
                                                 <div class="input-group">
                                                     <label for="telefone">Alterar Telefone</label>
-                                                    <input type="text" id="inputAlterarTelefone${id}" name="novoTelefone" value="${item.telefone}" maxlength="11">
+                                                    <input type="text" class="modal__digitalizacao" id="inputAlterarTelefone${id}" 
+                                                    name="novoTelefone" value="${item.telefone}" maxlength="11">
                                                 </div>
                                                 <div class="input-group">
                                                     <label for="celular">Alterar Celular</label>
-                                                    <input type="text" id="inputAlterarCelular${id}" name="novoCelular" value="${item.celular}" maxlength="11">
+                                                    <input type="text" class="modal__digitalizacao" id="inputAlterarCelular${id}" 
+                                                    name="novoCelular" value="${item.celular}" maxlength="11">
                                                 </div>
                                                 <div class="input-group">
                                                     <label for="unidade">Alterar Unidade</label>
-                                                    <select class="selecionar" type="checkbox" name="novaUnidade" size="1" id="alterarUnidade${id}">
+                                                    <select class="selecionar modal__digitalizacao" type="checkbox" 
+                                                    name="novaUnidade" size="1" id="alterarUnidade${id}">
                                                     </select>
                                                 </div>
                                                 <div class="input-group">
                                                     <label for="perfil">Alterar Perfil</label>
-                                                    <select class="selecionar" type="checkbox" name="novoPerfil" size="1" id="alterarPerfil${id}">
+                                                    <select class="selecionar modal__digitalizacao" type="checkbox" 
+                                                    name="novoPerfil" size="1" id="alterarPerfil${id}">
                                                     </select>
                                                 </div>
-                                                <input value="Alterar" type="submit" id="login-button">
-                                            </div>
+                                             </section>
+                                             <section class="modal-body">
+                                                <div class="alterar__dados">
+                                                    <input value="Alterar" type="submit" id="login-button">
+                                                </div>
+                                            </section>
                                         </form>
                                     </div>
                                 </dialog>`;

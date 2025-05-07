@@ -10,7 +10,7 @@
 
     $gerarRelatorioDigitalizacao = new GerarRelatorioUnidade(
         $matricula,
-        $unidade,
+        $unidade
     );
 
     $gerarRelatorioDigitalizacao->relatorioUnidade(); 

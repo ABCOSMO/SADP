@@ -179,11 +179,13 @@ footer {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+    margin-right: 8px;
 }
 
 .modal-title {
     font-size: 20px;
     font-weight: 500;
+    padding-left: 2rem;
 }
 
 .close-modal {
@@ -202,7 +204,7 @@ footer {
 
 .modal-body {
     display: flex;
-    flex-direction: column;
+    
     gap: 8px;
 }
 
@@ -386,6 +388,7 @@ footer {
 dialog {
     z-index: 1000;
     padding: 0;
+    width: 80%;
     border: none;
 }
 
@@ -402,8 +405,8 @@ dialog:not([open]) {
 dialog[open] {
     display: block;
     position: fixed;
-    top: 100%;
-    left: 25%;
+    top: 40%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
     /* Seus estilos adicionais aqui */
