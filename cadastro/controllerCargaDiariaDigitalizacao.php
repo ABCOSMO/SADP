@@ -13,13 +13,15 @@ if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados))
     $unidade = $dados['unidade'];
     $dataInicial = $dados['dataInicial'];
     $dataFinal = $dados['dataFinal'];
+	$perfil = $_SESSION['privilegio'];
     /*$informar = $unidade ." ". $dataInicial ." ". $dataFinal;
     file_put_contents(__DIR__ . '/dados.txt', $informar);*/
 
     $relatorioDiarioDigitalizacao = new GerarRelatorioDiarioDigitalizacao(
         $unidade,
         $dataInicial,
-        $dataFinal
+        $dataFinal,
+		$perfil
     );
 
     $relatorioDiarioDigitalizacao->relatorioDiarioDigitalizacao();   

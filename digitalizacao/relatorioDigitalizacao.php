@@ -15,6 +15,7 @@ $autenticandoUsuario->tempoLoginUsuario();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
+$perfil = $_SESSION['privilegio'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -86,6 +87,8 @@ $unidade = $_SESSION['unidade'];
                 <div class="botao__apertar">
                     <button id="botaoCarga-1" onclick="abrirOpcaoMensal(1)" class="botao__carga botao__selecionado">Carga Diária</button>
                     <button id="botaoCarga-2" onclick="abrirOpcaoMensal(2)" class="botao__carga botao__selecionado" name="mensal">Carga Mensal</button>
+					<input type="hidden" id="perfil" name="perfil" value=<?php echo $perfil; ?>>
+					<input type="hidden" id="secao_unidade" name="secao_unidade" value='<?php echo $unidade; ?>'>
                 </div>                
                 <div class="container__calendario" id="diaria" name="diaria"></div>
                 <div id="dadosContainer"></div>
@@ -101,6 +104,9 @@ $unidade = $_SESSION['unidade'];
     <script src="../script/opcaoCargaMensalAnual.js" defer></script>
     <script src="../script/dataAtual.js" defer></script>
     <script src="../script/relatorioDiarioDigitalizacao.js" defer></script>
+	 <script src="../script/relatorioMensalDigitalizacao.js" defer></script>
+	<script src="../script/validaFormulario.js" defer></script>
+	<script src="../script/alterarCargaDigitalizacao.js" defer></script>
     <script src="../script/excluirCargaDiariaDigitalizacao.js" defer></script>
 </body>
 </html>

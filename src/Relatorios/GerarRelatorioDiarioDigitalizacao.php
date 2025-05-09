@@ -11,17 +11,20 @@ class GerarRelatorioDiarioDigitalizacao extends ConectarBD
     private $unidade;
     private $dataInicial;
     private $dataFinal;
+	private $perfil;
     
 	function __construct(
 		$unidade, 
 		$dataInicial, 
-		$dataFinal
+		$dataFinal,
+		$perfil
 	)
     {
         parent::__construct();
         $this->unidade = $unidade;
         $this->dataInicial = $dataInicial;
         $this->dataFinal = $dataFinal;
+		$this->perfil = $perfil;
     }
 
     //Informar unidade
@@ -40,6 +43,11 @@ class GerarRelatorioDiarioDigitalizacao extends ConectarBD
     public function getDataFinal()
     {
         return $this->dataFinal;
+    }
+	
+	public function getPerfil()
+    {
+        return $this->perfil;
     }
 
     //Aterar a data no formato brasileiro
@@ -73,8 +81,9 @@ class GerarRelatorioDiarioDigitalizacao extends ConectarBD
             $unidade = $this->getUnidade();
             $dataInicial = $this->getDataInicial();
             $dataFinal = $this->getDataFinal();
+			$perfil = $this->getPerfil();
 
-            if($unidade==""){ 
+            if($unidade=="" AND $perfil == "01"){ 
                     // Verifica se a carga já foi lançada
                     $sql = "SELECT
                     tb_digitalizacao.*,
@@ -102,6 +111,7 @@ class GerarRelatorioDiarioDigitalizacao extends ConectarBD
                     $response = [];
                     foreach($resultado as $key => $value) {
                         $response[] = [
+							'perfil' => $this->getPerfil(),
                             'unidade' => $value->nome_unidade,
                             'matricula_usuario' => $this->formatarMatricula($value->matricula),
                             'nome_usuario' => $value->nome,
@@ -146,6 +156,7 @@ class GerarRelatorioDiarioDigitalizacao extends ConectarBD
                 $response = [];
                 foreach($resultado as $key => $value) {
                     $response[] = [
+						'perfil' => $this->getPerfil(),
                         'unidade' => $this->getUnidade(),
                         'matricula_usuario' => $this->formatarMatricula($value->matricula),
                         'nome_usuario' => $value->nome,

@@ -57,7 +57,7 @@ class GerarRelatorioUnidade extends ConectarBD
             $unidade = $this->getUnidade();
             $matricula = $this->getMatricula();
 
-            $sqlUnidade = "SELECT * FROM tb_unidades WHERE nome_unidade LIKE 'CDIP%'";
+            $sqlUnidade = "SELECT * FROM tb_unidades WHERE nome_unidade LIKE 'CDIP%' AND nome_unidade <> 'CDIP BELO HORIZONTE'";
             $dadosUnidade = array();
             $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
             $resultadoUnidade = $queryUnidade->fetchAll(PDO::FETCH_OBJ);

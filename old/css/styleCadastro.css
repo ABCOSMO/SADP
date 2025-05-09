@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('../css/header.css');
+
+*:not(dialog) {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --cor-branca: #FFFFFF;
+    --cor-preta: #000000;
+    --cor-terciaria: #1C1C1C;
+    --cor-quarta: #DCDCDC;
+    --fonte-principal: 'Inter';
+    --cor-azul: blue;
+    --cor-amarelo: yellow;
+    --cor-cinza: gray;
+}
+
+body {
+    background-image: url("/sadp/assets/FAPI.png");
+    background-color: var(--cor-quarta);
+    height: 100vh;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.container__caminho {
+    display: flex;
+    flex-direction: row;
+}
+
+.caminhos {    
+    background-color: transparent;
+    font-family: var(--fonte-principal);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--cor-preta);
+    padding: 0.2em;
+    text-decoration: none;
+    padding: 0;
+    margin: 0 0.2em;
+}
+
+.caminhos:hover {
+    border-bottom: 2px solid var(--cor-preta);
+    color: var(--cor-preta);
+    padding: 0;
+}
+
+
+.linha {
+    display: flex;
+    flex-direction: row;
+}
+
+.seta {
+    background-color: transparent;
+    font-family: var(--fonte-principal);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--cor-preta);
+    padding: 0.2em;
+    text-decoration: none;
+    padding: 0;
+    margin: 0 0.2em;
+}
+
+.container__margem a{
+    display: block;
+    border-radius: 8px;
+    border: 2px solid var(--cor-branca);
+    background-color: transparent;
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cor-branca);
+    padding: 0.5em;
+    margin: 0.5em;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+}
+
+.container__margem a:hover {    
+    border-radius: 8px;
+    background-color: var(--cor-quarta);
+    font-family: var(--fonte-principal);
+    color: var(--cor-preta);
+}
+
+.container__margem a:active {
+    color: var(--cor-azul);
+}
+
+.open-modal {
+    display: block;
+    border-radius: 8px;
+    border: 2px solid var(--cor-branca);
+    background-color: transparent;
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cor-branca);
+    padding: 0.5em;
+    margin: 0.5em;
+    width: 108%;
+    text-decoration: none;
+    text-align: center;
+}
+
+.open-modal:hover {
+    border-radius: 8px;
+    background-color: var(--cor-quarta);
+    font-family: var(--fonte-principal);
+    color: var(--cor-preta);
+}
+
+.container__botao {
+    display: flex;
+    justify-content: center;
+    height: 60%;
+}
+
+.container__margem{
+    margin-left: 0%;
+}
+
+.container__cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24vh;
+    margin-left: 45vh;
+    height: 80%;
+}
+.corpo {
+    font-family: var(--fonte-principal);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--cor-branca);
+    text-align: justify;
+    margin-top: 8vh;    
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+dialog {
+    border: none;
+    width: 25.5%;
+    border-radius: 24px;
+    padding: 18px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape {
+    font-family: var(--fonte-principal);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cor-preta);
+    padding: 10vh 0;
+}
+
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.close-modal {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #9ca3af;
+    font-size: 18px;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menuAlterarUsuario {
+    display: grid;
+    grid-template-columns: 100%;
+    background-color: white;
+    color: var(--cor-preta);
+    text-align: justify;
+    width: 70rem;
+    border-radius: 4vh;  
+    padding: 1rem 1rem;
+    margin-top: 2vw;
+}
+
+.usuario {
+    font-size: 12px;
+    font-weight: 500;
+    color: #9ca3af;
+    border: 1px solid #9ca3af;
+    padding: 0 0.3rem;
+    margin: 0;
+}
+
+.usuarioDesabilitado {
+    font-size: 12px;
+    font-weight: 500;
+    color: red;
+    border: 1px solid #9ca3af;
+    padding: 0 0.3rem;
+    margin: 0;
+}
+
+.botao__alterar_excluir {
+    border: none;
+    cursor: pointer;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+.input-group input {
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 10px 16px;
+}
+
+.input-group input:focus {
+    outline: 1px solid #6366f1;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.passaword-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remember-passaword {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+}
+
+.forgot-passaword {
+    font-size: 12px;
+    color: #1c64f2;
+    text-decoration: nome;
+}
+
+#login-button {
+    background-color: #00008B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#login-button-cadastro {
+    background-color: #00008B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 16%;
+    text-align: center;
+    padding: 0.6em;
+}
+
+.register {
+    font-size: 14px;
+    color: red;
+}
+
+.register a {
+    font-size: 14px;
+    color: #1c64f2;
+    text-decoration: nome;
+}
+
+.selecionar {
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 10px 16px;
+}
+
+#selecionar__unidade {
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 10px 16px;
+}
+
+.loading {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.menuCadastro {
+    background-color: white;
+    text-align: justify;
+    width: 25rem;
+    height:42rem;
+    border-radius: 4vh;  
+    padding: 3vh;
+}
+
+.menuAlterarCadastro {
+    background-color: white;
+    text-align: justify;
+    width: 25rem;
+    height:37rem;
+    border-radius: 4vh;  
+    padding: 3vh;
+}
+
+.fundoTransparente {
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: sepia(100%);
+    backdrop-filter: sepia(100%);
+    height: 100%;
+    width: 100%;
+
+}
+
+.menuAlterarUsuario__botao_cadastro {
+    display: flex;
+    justify-content: end;
+}

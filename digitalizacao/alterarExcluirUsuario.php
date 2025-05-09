@@ -167,9 +167,6 @@ $unidade = $_SESSION['unidade'];
             </div>
     </dialog>
     <footer>
-        <div>
-            <h3 class="rodape">Desenvolvido pelos CDIPs</h3>
-        </div>
     </footer>
     <script src="../script/relatorioUsuarios.js" defer></script>
     <script src="../script/scriptExcluirCadastro.js" defer></script>

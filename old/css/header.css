@@ -1,0 +1,122 @@
+.cabecalho {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.cabecalho__links {
+        margin: 1.5%;
+        height: 20%;    
+}
+
+.cabecalho__texto {
+    font-family: var(--fonte-branca);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--cor-cinza);
+    padding-top: 0.35em;
+    text-decoration: none;
+}
+
+.cabecalho__texto:hover {
+    border-bottom: 2px solid var(--cor-cinza);
+}
+
+.lista-logoff {
+    display: none;
+    position: absolute;
+    top: 8%;
+    width: 13vw;
+}
+ 
+.lista-logoff__item {
+    background: transparent;
+    display: flex;
+    justify-content: center;
+}
+
+.lista-logoff__link {
+    padding: 0.5em 0;
+    background-color: var(--branco);
+    text-decoration: none;
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    color: var(--cor-branca);
+}
+
+.lista-logoff__link:hover {
+    border-bottom: 2px solid var(--cor-cinza);
+}
+
+.cabecalho__logoff:checked ~ .lista-logoff {
+    display: block;
+}
+
+.cabecalho__logoff {
+    display: none;
+}
+
+.cabecalho__menu__texto {
+    background-color: transparent;
+    font-family: var(--fonte-branca);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--cor-preta);
+    padding: 0.5em;
+    text-decoration: none;
+    padding: 0;
+    margin: 0 2em;
+}
+
+.cabecalho__menu__texto:hover {
+    border-bottom: 2px solid var(--cor-preta);
+    cursor: pointer;
+}
+
+.lista-digitalizacao {
+    display: none;
+    position: absolute;
+    top: 8%;
+    width: 13vw;
+}
+ 
+
+.lista-digitalizacao__item {
+    background: var(--cor-branca);
+    display: flex;
+    justify-content: center;
+}
+
+.lista-digitalizacao__link {
+    background-color: var(--branco);
+    text-decoration: none;
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    color: var(--cor-preta);
+    margin: 0.6em 0;
+}
+
+.lista-digitalizacao__link:hover {
+    border-bottom: 2px solid var(--cor-cinza);
+}
+
+.cabecalho__digitalizacao:checked ~ .lista-digitalizacao {
+    display: block;
+}
+
+.cabecalho__digitalizacao {
+    display: none;
+}
+
+.container__corpo {
+    height: 33vw;
+}
+
+.rodape {
+    display: flex;
+    justify-content: center;
+    font-family: var(--fonte-branca);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cor-preta);
+    padding: 10vh 0;
+}

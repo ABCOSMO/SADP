@@ -73,14 +73,14 @@ function relatorioUsuarios() {
 
             usuarios.forEach(item => {
                 tabelaHTML += `<tr class='linha__tabela ${item.status === 0 ? 'usuarioDesabilitado' : ''}'>
-                                    <td class='${item.status === 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputUnidade${id}'>${item.unidade}</td>
-                                    <td class='${item.status === 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputNome${id}'>${item.usuario}</td>
-                                    <td class='${item.status === 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputMatricula${id}'>${item.matricula}</td>
-                                    <td class='${item.status === 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputEmail${id}'>${item.email}</td>
-                                    <td class='${item.status === 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputTelefone${id}'>${item.telefone}</td>
-                                    <td class='${item.status === 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputCelular${id}'>${item.celular}</td>
-                                    <td class='${item.status === 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputPerfil${id}'>${item.perfil}</td>
-                                    <td class='${item.status === 0 ? 'usuarioDesabilitado' : 'usuario'}' id="alterar">
+                                    <td class='${item.status == 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputUnidade${id}'>${item.unidade}</td>
+                                    <td class='${item.status == 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputNome${id}'>${item.usuario}</td>
+                                    <td class='${item.status == 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputMatricula${id}'>${item.matricula}</td>
+                                    <td class='${item.status == 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputEmail${id}'>${item.email}</td>
+                                    <td class='${item.status == 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputTelefone${id}'>${item.telefone}</td>
+                                    <td class='${item.status == 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputCelular${id}'>${item.celular}</td>
+                                    <td class='${item.status == 0 ? 'usuarioDesabilitado' : 'usuario'}' id='inputPerfil${id}'>${item.perfil}</td>
+                                    <td class='${item.status == 0 ? 'usuarioDesabilitado' : 'usuario'}' id="alterar">
                                         <button class='open-modal botao__alterar_excluir' data-modal="modal-${id}">
                                             <i class='fa-solid fa-pencil'></i>
                                         </button>

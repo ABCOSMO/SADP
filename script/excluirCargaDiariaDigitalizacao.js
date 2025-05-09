@@ -8,7 +8,6 @@ function excluirCargaDigitalizacao() {
             const clicaBotaoExcluir = document.querySelectorAll(`.${bExcluir}`);
             const excluirMatricula = document.querySelectorAll(`#matricula${botoesExcluir+2}`);
             const excluirData = document.querySelectorAll(`#Data${botoesExcluir+2}`);
-            console.log(excluirData);
 
             clicaBotaoExcluir.forEach(botao => {
                 botao.addEventListener('click', () => {

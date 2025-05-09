@@ -204,8 +204,8 @@ footer {
 
 .modal-body {
     display: flex;
-    
     gap: 8px;
+	padding: 0 0 2rem 2rem;
 }
 
 .menuAlterarUsuario {
@@ -388,7 +388,7 @@ footer {
 dialog {
     z-index: 1000;
     padding: 0;
-    width: 80%;
+    width: 67%;
     border: none;
 }
 
@@ -405,7 +405,7 @@ dialog:not([open]) {
 dialog[open] {
     display: block;
     position: fixed;
-    top: 40%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
@@ -487,4 +487,11 @@ table, th, td {
 
 .botao__selecionado {
     margin-right: 2em;
+}
+
+.container__botao_alterar_dados {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 2rem;
 }

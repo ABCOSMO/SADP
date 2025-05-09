@@ -9,25 +9,34 @@ function abrirOpcaoMensal(id) {
         botaoClicado.classList.add('botao__selecionado');
         let lista = document.getElementById('diaria');
         let relatorio = document.getElementById('dadosContainer');
+		let perfil = parseInt(document.getElementById('perfil').value);
+		let secaoUnidade = document.getElementById('secao_unidade').value;
+		
         // Limpa a lista antes de adicionar os itens    
         lista.innerHTML = '';
         relatorio.innerHTML = '';
+		let dadosHTML = '';
 
         fetch('../cadastro/controllerRelatorioUnidade.php')
         .then(response => response.json())
         .then(data => {
-            let dadosHTML = `
-                 <label for="unidade">Unidade:</label>
-                 <select class="selecionar" type="checkbox" name="unidade" size="1" id="unidade">
-                     <option value="" selected disabled="disabled" id="selecionar__unidade"> - Escolher Unidade - </option>`;
-
-            let num = 1; // Inicializa a variável num
-
-            data.forEach(item => {
-                dadosHTML += `<option value="${item.unidade}">${num} - ${item.unidade}</option>`;
-                num++;
-            });
-
+				
+				if(perfil != 01) {
+					dadosHTML = `
+					<input type="hidden" id="unidade" name="unidade" value='${secaoUnidade}'>`;
+				}else{
+					dadosHTML = `
+						<label for="unidade">Unidade:</label>
+						<select class="selecionar" type="checkbox" name="unidade" size="1" id="unidade">
+							<option value="" selected disabled="disabled" id="selecionar__unidade"> - Escolher Unidade - </option>`;
+		
+					let num = 1; // Inicializa a variável num
+		
+					data.forEach(item => {
+						dadosHTML += `<option value="${item.unidade}">${num} - ${item.unidade}</option>`;
+						num++;
+					});
+				}
             dadosHTML += `
                  </select>
                  <label for="dataInicial">Data Inicial:</label>
@@ -97,7 +106,15 @@ function abrirOpcaoMensal(id) {
                 option.textContent = ano;
                 selectAno.appendChild(option);
                 }
-            }        
+            }
+			// Adicionando o event listener para o botão de gerar relatório mensal
+            const botaoGerarRelatorio = document.querySelector('.botao__mensal');
+            if (botaoGerarRelatorio) {
+                botaoGerarRelatorio.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita o comportamento padrão de submit
+                    relatorioMensalDigitalizacao(); // Chama a sua função
+                });
+            }
         })
     }    
 }

@@ -1,0 +1,215 @@
+<?php
+
+namespace FADPD\Relatorios;
+
+use FADPD\ConectarUsuario\ConectarBD;
+use PDO;
+use PDOException;
+
+class GerarRelatorioMensalDigitalizacao extends ConectarBD
+{
+    private $unidade;
+    private $ano;
+	private $perfil;
+    
+	function __construct(
+		$unidade, 
+		$ano, 
+		$perfil
+	)
+    {
+        parent::__construct();
+        $this->unidade = $unidade;
+        $this->ano = $ano;
+		$this->perfil = $perfil;
+    }
+
+    //Informar unidade
+    public function getUnidade()
+    {
+        return $this->unidade;
+    }
+    
+    //Informar data de 15 dias antrás
+    public function getAno()
+    {
+        return $this->ano;
+    }
+   
+	public function getDataInicial()
+	{
+		return $this->getAno() . "-01-01";
+	}
+   
+    public function getDataFinal()
+	{
+		return $this->getAno() . "-12-31";
+	}
+	
+	public function getPerfil()
+    {
+        return $this->perfil;
+    }
+
+    public function formatarMatricula($matricula) 
+    {
+        // Remove todos os caracteres não numéricos
+        $matricula = preg_replace('/[^0-9]/', '', $matricula);
+    
+        // Divide a matrícula em partes para facilitar a formatação
+        $parte1 = substr($matricula, 0, 1);
+        $parte2 = substr($matricula, 1, 3);
+        $parte3 = substr($matricula, 4, 3);
+        $parte4 = substr($matricula, 7, 1);
+    
+        // Junta as partes com os pontos e hífen
+        $matriculaFormatada = $parte1 . '.' . $parte2 . '.' . $parte3 . '-' . $parte4;
+    
+        return $matriculaFormatada;
+    }
+
+    public function relatorioMensalDigitalizacao() {
+        try{
+
+            $unidade = $this->getUnidade();
+            $dataInicial = $this->getDataInicial();
+            $dataFinal = $this->getDataFinal();
+			$perfil = $this->getPerfil();
+
+            if($perfil == "01"){ 
+                    // Verifica se a carga já foi lançada
+                    $sql = "SELECT
+                    tb_unidades.nome_unidade,
+					MONTH(tb_digitalizacao.data_digitalizacao) AS mes,
+					SUM(tb_digitalizacao.qtd_imagens_dia_anterior) AS qtd_imagens_dia_anterior,
+					SUM(tb_digitalizacao.qtd_imagens_recebidas_dia) AS qtd_imagens_recebidas_dia,
+					SUM(tb_digitalizacao.qtd_imagens_incorporadas) AS qtd_imagens_incorporadas,
+					SUM(tb_digitalizacao.qtd_imagens_impossibilitadas) AS qtd_imagens_impossibilitadas,
+					SUM(tb_digitalizacao.qtd_imagens_resto) AS qtd_imagens_resto
+                    FROM
+                        tb_digitalizacao
+                    INNER JOIN
+                        tb_unidades ON tb_digitalizacao.mcu_unidade = tb_unidades.mcu_unidade
+                    WHERE
+                        tb_digitalizacao.data_digitalizacao >= :data_inicial                        
+					AND 
+						tb_digitalizacao.data_digitalizacao <= :data_final
+                    GROUP BY
+                        tb_unidades.nome_unidade, mes";
+                    $dados = array(
+                        ":data_inicial" => $dataInicial, 
+                        ":data_final" => $dataFinal,
+                    );
+                    $query = parent::executarSQL($sql,$dados);
+                    $resultado = $query->fetchAll(PDO::FETCH_OBJ);
+
+                    $response = [];
+                    foreach($resultado as $key => $value) {
+						$nomeMes = '';
+    switch ($value->mes) {
+        case 1:
+            $nomeMes = 'Janeiro';
+            break;
+        case 2:
+            $nomeMes = 'Fevereiro';
+            break;
+        case 3:
+            $nomeMes = 'Março';
+            break;
+        case 4:
+            $nomeMes = 'Abril';
+            break;
+        case 5:
+            $nomeMes = 'Maio';
+            break;
+        case 6:
+            $nomeMes = 'Junho';
+            break;
+        case 7:
+            $nomeMes = 'Julho';
+            break;
+        case 8:
+            $nomeMes = 'Agosto';
+            break;
+        case 9:
+            $nomeMes = 'Setembro';
+            break;
+        case 10:
+            $nomeMes = 'Outubro';
+            break;
+        case 11:
+            $nomeMes = 'Novembro';
+            break;
+        case 12:
+            $nomeMes = 'Dezembro';
+            break;
+        default:
+            $nomeMes = 'Mês Desconhecido';
+            break;
+    }
+                        $response[] = [
+							'perfil' => $this->getPerfil(),
+                            'unidade' => $value->nome_unidade,
+                            'data_digitalizacao' => $nomeMes,
+                            'imagens_anterior' => $value->qtd_imagens_dia_anterior,
+                            'imagens_recebidas' => $value->qtd_imagens_recebidas_dia,
+                            'imagens_incorporadas' => $value->qtd_imagens_incorporadas,
+                            'imagens_impossibilitadas' => $value->qtd_imagens_impossibilitadas,
+                            'resto' => $value->qtd_imagens_resto
+                        ];
+                    }
+                    
+                    header('Content-Type: application/json');				
+                    echo json_encode($response);
+                
+            }else{
+                $sqlUnidade = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
+                $dadosUnidade = array(
+                    ":nome_unidade" => $unidade
+                );
+                $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
+                $resultadoUnidade = $queryUnidade->fetchAll(PDO::FETCH_OBJ);
+                foreach($resultadoUnidade as $linha){
+                    $mcuUnidade = $linha->mcu_unidade; 
+                }
+                 // Verifica se a carga já foi lançada
+                $sql = "SELECT tb_digitalizacao.*, tb_funcionarios.nome, tb_funcionarios.matricula 
+                FROM tb_digitalizacao 
+                INNER JOIN tb_funcionarios
+                ON tb_digitalizacao.matricula = tb_funcionarios.matricula 
+                AND tb_digitalizacao.data_digitalizacao >= :data_inicial AND tb_digitalizacao.data_digitalizacao <= :data_final
+                AND tb_digitalizacao.mcu_unidade = :mcu_unidade 
+                ORDER BY tb_digitalizacao.data_digitalizacao";
+                $dados = array(
+                    ":data_inicial" => $dataInicial, 
+                    ":data_final" => $dataFinal,
+                    ":mcu_unidade" => $mcuUnidade
+                );
+                $query = parent::executarSQL($sql,$dados);
+                $resultado = $query->fetchAll(PDO::FETCH_OBJ);
+
+                $response = [];
+                foreach($resultado as $key => $value) {
+                    $response[] = [
+						'perfil' => $this->getPerfil(),
+                        'unidade' => $this->getUnidade(),
+                        'data_digitalizacao' => $this->buscarMes($value->data_digitalizacao),
+                        'imagens_anterior' => $value->qtd_imagens_dia_anterior,
+                        'imagens_recebidas' => $value->qtd_imagens_recebidas_dia,
+                        'imagens_incorporadas' => $value->qtd_imagens_incorporadas,
+                        'imagens_impossibilitadas' => $value->qtd_imagens_impossibilitadas,
+                        'resto' => $value->qtd_imagens_resto
+                    ];
+                }
+                
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            }          
+
+        }catch(\Exception $e) {
+            $response = array('success' => false, 'error' => $e->getMessage());
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }
+}
