@@ -1,5 +1,7 @@
 function abrirOpcaoMensal(id) {    
     let botaoClicado = document.getElementById(`botaoCarga-${id}`);
+    let perfil = parseInt(document.getElementById('perfil').value);
+	let secaoUnidade = document.getElementById('secao_unidade').value;
     
     if (botaoClicado.classList.contains('botao__carga') && id === 1) {
         let botao = document.getElementById('botaoCarga-2');
@@ -9,9 +11,7 @@ function abrirOpcaoMensal(id) {
         botaoClicado.classList.add('botao__selecionado');
         let lista = document.getElementById('diaria');
         let relatorio = document.getElementById('dadosContainer');
-		let perfil = parseInt(document.getElementById('perfil').value);
-		let secaoUnidade = document.getElementById('secao_unidade').value;
-		
+				
         // Limpa a lista antes de adicionar os itens    
         lista.innerHTML = '';
         relatorio.innerHTML = '';
@@ -21,7 +21,7 @@ function abrirOpcaoMensal(id) {
         .then(response => response.json())
         .then(data => {
 				
-				if(perfil != 01) {
+				if(perfil != "01") {
 					dadosHTML = `
 					<input type="hidden" id="unidade" name="unidade" value='${secaoUnidade}'>`;
 				}else{
@@ -72,20 +72,26 @@ function abrirOpcaoMensal(id) {
         // Limpa a lista antes de adicionar os itens    
         lista.innerHTML = '';
         relatorio.innerHTML = '';
+        let dadosHTML = '';
         fetch('../cadastro/controllerRelatorioUnidade.php')
         .then(response => response.json())
         .then(data => {
-            let dadosHTML = `
+            if(perfil != "01") {
+                dadosHTML = `
+                <input type="hidden" id="unidade" name="unidade" value='${secaoUnidade}'>`;
+            }else{
+                dadosHTML = `
                  <label for="unidade">Unidade:</label>
                  <select class="selecionar" type="checkbox" name="unidade" size="1" id="unidade">
                      <option value="" selected disabled="disabled" id="selecionar__unidade"> - Escolher Unidade - </option>`;
+            
+                let num = 1; // Inicializa a variável num
 
-            let num = 1; // Inicializa a variável num
-
-            data.forEach(item => {
-                dadosHTML += `<option value="${item.unidade}">${num} - ${item.unidade}</option>`;
-                num++;
-            });
+                data.forEach(item => {
+                    dadosHTML += `<option value="${item.unidade}">${num} - ${item.unidade}</option>`;
+                    num++;
+                });
+            }
                 dadosHTML += `
                 </select>                   
                     <label for="Ano">Selecionar Ano:</label>

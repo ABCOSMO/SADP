@@ -10,8 +10,8 @@ use FADPD\Relatorios\GerarRelatorioMensalDigitalizacao;
 
 //if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados)) {
     // Os dados são válidos e podem ser processados
-    $unidade = "";
-    $ano = "2024";
+    $unidade = "CDIP BRASÍLIA";
+    $ano = "2025";
 	$perfil = "01";
     /*$informar = $unidade ." ". $dataInicial ." ". $dataFinal;
     file_put_contents(__DIR__ . '/dados.txt', $informar);*/
@@ -22,9 +22,7 @@ use FADPD\Relatorios\GerarRelatorioMensalDigitalizacao;
 		$perfil
     );
 	
-    $relatorioMensalDigitalizacao->relatorioMensalDigitalizacao();   
-	$jsonData = ob_get_clean(); // Captura a saída JSON do buffer
-	$dadosDecodificados = json_decode($jsonData, true); // Decodifica 
+    $relatorioMensalDigitalizacao->relatorioCargaTotalDigitalizacao();   
     
 //} else {
     // Tratar erros de decodificação ou dados inválidos

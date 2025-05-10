@@ -15,6 +15,10 @@ function mascaraDigitarCarga(carga) {
     carga = carga.replace(/\D/g, "");
 
     // Verifica se o carga contém até 6 dígitos
+    if (carga.length === 7) {
+        carga = carga.replace(/(\d{1})(\d{3})(\d{3})/, "$1.$2.$3"); // Retorna o carga com formatação de 7 digitos
+        return carga;
+    }
     if (carga.length === 6) {
         carga = carga.replace(/(\d{3})(\d{3})/, "$1.$2"); // Retorna o carga com formatação de 6 digitos
         return carga;

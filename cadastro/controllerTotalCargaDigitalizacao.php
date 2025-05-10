@@ -22,7 +22,7 @@ if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados))
 		$perfil
     );
 
-    $relatorioMensalDigitalizacao->relatorioMensalDigitalizacao();   
+    $relatorioMensalDigitalizacao->relatorioCargaTotalDigitalizacao();   
     
 } else {
     // Tratar erros de decodificação ou dados inválidos

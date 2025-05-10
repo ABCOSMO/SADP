@@ -151,7 +151,7 @@ function relatorioUsuarios() {
                                              </section>
                                              <section class="modal-body">
                                                 <div class="alterar__dados">
-                                                    <input value="Alterar" type="submit" id="login-button">
+                                                    <input class="contar" value="Alterar" type="submit" id="login-button">
                                                 </div>
                                             </section>
                                         </form>
