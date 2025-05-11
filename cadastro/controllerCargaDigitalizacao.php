@@ -8,6 +8,7 @@
 
     $unidade = $_SESSION['unidade'];
     $matricula = $_SESSION['matricula'];
+    $perfil = $_SESSION['privilegio'];
     date_default_timezone_set('America/Sao_Paulo');
     $data = new DateTime('now');
     
@@ -17,6 +18,7 @@
     $dataPosterior = $selecionarData->calcaularDataPosterior($data);
 
     $gerarRelatorioDigitalizacao = new GerarRelatorioDigitalizacao(
+        $perfil,
         $matricula,
         $unidade,
         $dataAnterior,

@@ -240,3 +240,7 @@ table, th, td {
   tr:hover {
     background-color: #d1d5db;
   }
+
+  #inputBuscarCdip{
+    margin-bottom: 2rem;
+  }

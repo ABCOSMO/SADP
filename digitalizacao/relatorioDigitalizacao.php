@@ -87,7 +87,7 @@ $perfil = $_SESSION['privilegio'];
                 <div class="botao__apertar">
                     <button id="botaoCarga-1" onclick="abrirOpcaoMensal(1)" class="botao__carga botao__selecionado">Carga Diária</button>
                     <button id="botaoCarga-2" onclick="abrirOpcaoMensal(2)" class="botao__carga botao__selecionado" name="mensal">Carga Mensal</button>
-					<input type="hidden" id="perfil" name="perfil" value=<?php echo $perfil; ?>>
+					<input type="hidden" id="perfil" name="perfil" value='<?php echo $perfil; ?>'>
 					<input type="hidden" id="secao_unidade" name="secao_unidade" value='<?php echo $unidade; ?>'>
                 </div>                
                 <div class="container__calendario" id="diaria" name="diaria"></div>
