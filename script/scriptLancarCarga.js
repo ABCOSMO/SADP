@@ -39,7 +39,7 @@ function enviarDadosFormulario() {
 
 
 //adicionarListenersFormularios();
-        const form = document.getElementById('myForm');
+        const form = document.getElementById('myForm'); //myForm
         form.addEventListener('submit', (event) => {
             event.preventDefault(); // Impede o envio padrão do formulário
             if (validaFormulario()) {

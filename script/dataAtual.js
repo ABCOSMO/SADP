@@ -7,6 +7,7 @@ function aplicarDataAtual() {
 
     let dataInicial = document.getElementById('dataInicial');
     let dataFinal = document.getElementById('dataFinal');
+    let inputData = document.getElementById('inputData');
 
     if (dataInicial) {
         dataInicial.value = dataFormatadaParaInput;
@@ -16,5 +17,11 @@ function aplicarDataAtual() {
         dataFinal.value = dataFormatadaParaInput;
     }
 
+    if (inputData) {
+        inputData.value = dataFormatadaParaInput;
+    }
+
     // Você pode adicionar lógica semelhante para outros elementos, se necessário
 }
+
+aplicarDataAtual();

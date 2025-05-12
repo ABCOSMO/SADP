@@ -46,9 +46,9 @@ function digitarFormulario() {
     let inputDigitalizada = document.getElementById('inputDigitalizada');
     let inputResto = document.getElementById('inputResto');
 
-    inputData.addEventListener('input', () => {
+    /*inputData.addEventListener('input', () => {
         inputData.value = mascaraDigitarData(inputData.value);
-    });
+    });*/
 
     inputAnterior.addEventListener('input', () => {
         inputAnterior.value = mascaraDigitarCarga(inputAnterior.value);

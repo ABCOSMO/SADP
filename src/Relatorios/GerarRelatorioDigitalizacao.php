@@ -107,15 +107,39 @@ class GerarRelatorioDigitalizacao extends ConectarBD
 
             if($perfil != "01") {
                 // Verifica se a carga já foi lançada
-                $sql = "SELECT tb_digitalizacao.*, tb_funcionarios.nome, tb_funcionarios.matricula FROM tb_digitalizacao INNER JOIN tb_funcionarios
-                    ON tb_digitalizacao.matricula = tb_funcionarios.matricula 
-                    AND tb_digitalizacao.data_digitalizacao >= :data_anterior AND tb_digitalizacao.data_digitalizacao <= :data_posterior
-                    AND tb_digitalizacao.mcu_unidade = :mcu_unidade 
-                    ORDER BY tb_digitalizacao.data_digitalizacao";
+                $sql = "SELECT
+                td.*,
+                tf.nome,
+                tf.matricula
+                FROM
+                    tb_digitalizacao td
+                INNER JOIN
+                    tb_funcionarios tf 
+                ON 
+                    td.matricula = tf.matricula
+                INNER JOIN (
+                    SELECT id_digitalizacao
+                    FROM tb_digitalizacao
+                    WHERE mcu_unidade = :mcu_unidade_sub
+                    ORDER BY id_digitalizacao DESC
+                    LIMIT 5
+                ) AS 
+                    ultimos_ids 
+                ON 
+                    td.id_digitalizacao = ultimos_ids.id_digitalizacao
+                WHERE
+                    td.data_digitalizacao >= :data_anterior
+                AND 
+                    td.data_digitalizacao <= :data_posterior
+                AND 
+                    td.mcu_unidade = :mcu_unidade_principal
+                ORDER BY
+                    td.data_digitalizacao ASC";
                 $dados = array(
-                    ":data_anterior" => $dataAnterior, 
+                    ":data_anterior" => $dataAnterior,
                     ":data_posterior" => $dataPosterior,
-                    ":mcu_unidade" => $mcuUnidade
+                    ":mcu_unidade_principal" => $mcuUnidade,
+                    ":mcu_unidade_sub" => $mcuUnidade
                 );
                 $query = parent::executarSQL($sql,$dados);
                 $resultado = $query->fetchAll(PDO::FETCH_OBJ);

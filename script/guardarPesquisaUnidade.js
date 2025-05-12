@@ -17,9 +17,9 @@ function relatorioDigitalizacao() {
                 inputBuscarCdipHTML =
                     ` <section class="modal-body">
                         <div class="input-group">
-                            <label for="data">Pesquisar Data</label>
+                            <label for="data">Pesquisar CDIP</label>
                             <input type="text" class="modal__digitalizacao" id="inputBuscarCdip"
-                                name="buscarCdip" value="" maxlength="10" placeholder="DD/MM/AAAA">
+                                name="buscarCdip" value="" maxlength="10">
                         </div>
                     </section>`;
             }
@@ -44,7 +44,7 @@ function relatorioDigitalizacao() {
                                         </tr>`;
 
             data.forEach(item => {
-                tabelaHTML += `<tr class='item-tabela' id='linha-${id}'>
+                tabelaHTML += `<tr class='item-tabela'>
                                     <td class='unidade' id='unidade${id}'>${item.unidade}</td>
                                     <td class='' id='matricula${id}'>${item.matricula_usuario}</td>
                                     <td class='' id='usuario${id}'>${item.nome_usuario}</td>
@@ -154,16 +154,16 @@ function relatorioDigitalizacao() {
 
 function filtrarTabela(valor, dataOriginal) {
     const tabela = document.querySelector('#dadosContainer table');
-    const linhas = tabela.querySelectorAll('tbody tr.item-tabela');
+    const linhas = tabela.querySelectorAll('tbody tr.item-tabela'); // Assumindo que cada linha de dado tem essa classe
 
     linhas.forEach(linha => {
-        const colunaData = linha.querySelector('#Data' + linha.id.replace(/[^0-9]/g, ''));
-        if (colunaData) {
-            const textoData = colunaData.textContent.toLowerCase();
-            if (textoData.includes(valor)) {
-                linha.style.display = '';
+        const colunaUnidade = linha.querySelector('.unidade');
+        if (colunaUnidade) {
+            const textoUnidade = colunaUnidade.textContent.toLowerCase();
+            if (textoUnidade.includes(valor)) {
+                linha.style.display = ''; // Mostra a linha se a unidade corresponde
             } else {
-                linha.style.display = 'none';
+                linha.style.display = 'none'; // Oculta a linha se não corresponde
             }
         }
     });

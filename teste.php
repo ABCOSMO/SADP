@@ -2,32 +2,30 @@
 session_start();
 require 'autoload.php';
 
-use FADPD\ConectarUsuario\ConectarBD;
-use FADPD\Relatorios\GerarRelatorioMensalDigitalizacao;
+    use FADPD\ConectarUsuario\ConectarBD;
+    use FADPD\Relatorios\CalcularData;
+    use FADPD\Relatorios\GerarRelatorioDigitalizacao;
 
-//$dadosJson = file_get_contents('php://input');
-//$dados = json_decode($dadosJson, true);
-
-//if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados)) {
-    // Os dados são válidos e podem ser processados
     $unidade = "CDIP BRASÍLIA";
+    $matricula = "88888888";
     $ano = "2025";
-	$perfil = "01";
-    /*$informar = $unidade ." ". $dataInicial ." ". $dataFinal;
-    file_put_contents(__DIR__ . '/dados.txt', $informar);*/
+	$perfil = "02";
 
-    $relatorioMensalDigitalizacao = new GerarRelatorioMensalDigitalizacao(
-        $unidade,
-        $ano,
-		$perfil
-    );
-	
-    $relatorioMensalDigitalizacao->relatorioCargaTotalDigitalizacao();   
+    date_default_timezone_set('America/Sao_Paulo');
+    $data = new DateTime('now');
     
-//} else {
-    // Tratar erros de decodificação ou dados inválidos
-    //$errou =  'Erro ao processar os dados: ' . json_last_error_msg();
-//}
+    $selecionarData = new CalcularData;
 
+    $dataAnterior = $selecionarData->calcularDataAnterior($data);
+    $dataPosterior = $selecionarData->calcaularDataPosterior($data);
 
+    $gerarRelatorioDigitalizacao = new GerarRelatorioDigitalizacao(
+        $perfil,
+        $matricula,
+        $unidade,
+        $dataAnterior,
+        $dataPosterior
+    );
+
+    $gerarRelatorioDigitalizacao->relatorioDiarioDigitalizacao();
 ?>
