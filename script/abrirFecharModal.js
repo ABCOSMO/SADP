@@ -1,4 +1,16 @@
 function adicionarListenersModal() {
+    let botaoLancarCarga = document.getElementById('login-button-inicial');
+    
+    if(botaoLancarCarga){
+        botaoLancarCarga.addEventListener('click', function(event){
+            if(validaFormulario() == false){
+                event.preventDefault(); 
+                event.stopPropagation();
+                window.location.href = '../digitalizacao/lancarCarga.php';
+            }
+        });
+    }
+
     // Impedir que eventos se propaguem para elementos pais
     document.addEventListener('click', function(e) {
         if (e.target.closest('.open-modal') || e.target.closest('.close-modal')) {

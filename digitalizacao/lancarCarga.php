@@ -130,7 +130,7 @@ $LancarData = $data->format('d/m/Y');
                             <input type="text" id="inputResto" name="cargaResto" placeholder="" maxlength="7">
                         </div>
                     </section>
-                <!--
+                
                     <dialog class="manter__aberto" id="modal-1">
                         <form method="post" id="myModalForm" name="autenticar">
                             <div class="modal-header">
@@ -139,122 +139,183 @@ $LancarData = $data->format('d/m/Y');
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
                             </div>
-                            <section>
-                                <input class="estados" type="button" id="acr" name="acr" value="Não recebido">
-                                <label class="caixa" for="ACR">
-                                    SE/ACR
-                                </label>
-                                <input class="estados" type="checkbox" id="al" name="al">
-                                <label class="caixa" for="AL">
-                                    SE/AL
-                                </label>
-                                <input class="estados" type="checkbox" id="am" name="am">
-                                <label class="caixa" for="AM">
-                                    SE/AM
-                                </label>
-                                <input class="estados" type="checkbox" id="ap" name="ap">
-                                <label class="caixa" for="AP">
-                                    SE/AP
-                                </label>
-                                <input class="estados" type="checkbox" id="ba" name="ba">
-                                <label class="caixa" for="BA">
-                                    SE/BA
-                                </label>
-                                <input class="estados" type="checkbox" id="bsb" name="bsb">
-                                <label class="caixa" for="BSB">
-                                    SE/BSB
-                                </label>
-                                <input class="estados" type="checkbox" id="ce" name="ce">
-                                <label class="caixa" for="CE">
-                                    SE/CE
-                                </label>
-                                <input class="estados" type="checkbox" id="es" name="es">
-                                <label class="caixa" for="ES">
-                                    SE/ES
-                                </label>
-                                <input class="estados" type="checkbox" id="go" name="go">
-                                <label class="caixa" for="GO">
-                                    SE/GO
-                                </label>
-                                <input class="estados" type="checkbox" id="ma" name="ma">
-                                <label class="caixa" for="MA">
-                                    SE/MA
-                                </label>
-                                <input class="estados" type="checkbox" id="mg" name="mg">
-                                <label class="caixa" for="MG">
-                                    SE/MG
-                                </label>
-                                <input class="estados" type="checkbox" id="ms" name="ms">
-                                <label class="caixa" for="MS">
-                                    SE/MS
-                                </label>
-                                <input class="estados" type="checkbox" id="mt" name="mt">
-                                <label class="caixa" for="MT">
-                                    SE/MT
-                                </label>
-                                <input class="estados" type="checkbox" id="pa" name="pa">
-                                <label class="caixa" for="PA">
-                                    SE/PA
-                                </label>
-                                <input class="estados" type="checkbox" id="pb" name="pb">
-                                <label class="caixa" for="PB">
-                                    SE/PB
-                                </label>
-                                <input class="estados" type="checkbox" id="pe" name="pe">
-                                <label class="caixa" for="PE">
-                                    SE/PE
-                                </label>
-                                <input class="estados" type="checkbox" id="pi" name="pi">
-                                <label class="caixa" for="PI">
-                                    SE/PI
-                                </label>
-                                <input class="estados" type="checkbox" id="pr" name="pr">
-                                <label class="caixa" for="PR">
-                                    SE/PR
-                                </label>
-                                <input class="estados" type="checkbox" id="rj" name="rj">
-                                <label class="caixa" for="RJ">
-                                    SE/RJ
-                                </label>
-                                <input class="estados" type="checkbox" id="rn" name="rn">
-                                <label class="caixa" for="RN">
-                                    SE/RN
-                                </label>
-                                <input class="estados" type="checkbox" id="ro" name="ro">
-                                <label class="caixa" for="RO">
-                                    SE/RO
-                                </label>
-                                <input class="estados" type="checkbox" id="rr" name="rr">
-                                <label class="caixa" for="RR">
-                                    SE/RR
-                                </label>
-                                <input class="estados" type="checkbox" id="rs" name="rs">
-                                <label class="caixa" for="RS">
-                                    SE/RS
-                                </label>
-                                <input class="estados" type="checkbox" id="sc" name="sc">
-                                <label class="caixa" for="SC">
-                                    SE/SC
-                                </label>
-                                <input class="estados" type="checkbox" id="se" name="se">
-                                <label class="caixa" for="SE">
-                                    SE/SE
-                                </label>
-                                <input class="estados" type="checkbox" id="spi" name="spi">
-                                <label class="caixa" for="SPI">
-                                    SE/SPI
-                                </label>
-                                <input class="estados" type="checkbox" id="spm" name="spm">
-                                <label class="caixa" for="SPM">
-                                    SE/SPM
-                                </label>
-                                <input class="estados" type="checkbox" id="to" name="to">
-                                <label class="caixa" for="TO">
-                                    SE/TO
-                                </label>
+                            <section class="container__se">
+                                <div class="coluna__se">
+                                    <label class="caixa" for="ACR">
+                                        ACR
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-1" name="acr" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="AL">
+                                        AL
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-2" name="al" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="AM">
+                                        AM
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-3" name="am" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="AP">
+                                        AP
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-4" name="ap" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="BA">
+                                        BA
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-5" name="ba" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="BSB">
+                                        BSB
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-6" name="bsb" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="CE">
+                                        CE
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-7" name="ce" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="ES">
+                                        ES
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-8" name="es" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="GO">
+                                        GO
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-9" name="go" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="MA">
+                                        MA
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-10" name="ma" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="MG">
+                                        MG
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-11" name="mg" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="MS">
+                                        MS
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-12" name="ms" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="MT">
+                                        MT
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-13" name="mt" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="PA">
+                                        PA
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-14" name="pa" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="PB">
+                                        PB
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-15" name="pb" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="PE">
+                                        PE
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-16" name="pe" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="PI">
+                                        PI
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-17" name="pi" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="PR">
+                                        PR
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-18" name="pr" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="RJ">
+                                        RJ
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-19" name="rj" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="RN">
+                                        RN
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-20" name="rn" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="RO">
+                                        RO
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-21" name="ro" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="RR">
+                                        RR
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-22" name="rr" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="RS">
+                                        RS
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-23" name="rs" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="SC">
+                                        SC
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-24" name="sc" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="SE">
+                                        SE
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-25" name="se" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="SPI">
+                                        SPI
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-26" name="spi" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="SPM">
+                                        SPM
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-27" name="spm" value="Não recebido">
+                                </div>
+                                <div class="coluna__se">
+                                    <label class="caixa" for="TO">
+                                        SE/TO
+                                    </label>
+                                    <input class="estados estado__alterado" type="button" id="se-28" name="to" value="Não recebido">
+                                </div>
                             </section>
-                            <section>
-                            <textarea class="estados" id="ocorrencias" name="ocorrencias"></textarea>
+                            <section class="container__ocorrencias">
+                                <div>
+                                <label class="areatexto" for="texto">
+                                        Registrar Ocorrências
+                                </label>
+                                <textarea class="ocorrencias" id="ocorrencias" name="ocorrencias"></textarea>
+                                </div>
                             </section>
                             <section class="modal-body">
                                 <div class="container__cadastro__envio">
@@ -269,12 +330,14 @@ $LancarData = $data->format('d/m/Y');
                             Enviar dados
                             </button>
                         </div>
-                -->        
-                        <section class="modal-body">
+                    </section>
+                <!--       
+                    <section class="modal-body">
                         <div class="container__cadastro__envio">
                             <input value="Enviar dados" type="submit" id="login-button"></input>
                         </div>
                     </section>
+                -->
                 </form>
                 <div id="dadosContainer"></div>
             </div>
