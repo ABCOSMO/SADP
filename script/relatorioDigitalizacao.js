@@ -92,6 +92,8 @@ function relatorioDigitalizacao() {
                                                     <label for="data">Data</label>
                                                     <input type="text" class="modal__digitalizacao" id="inputModalData${id}"
                                                         name="novaData" value="${item.data_digitalizacao}" maxlength="10" disabled>
+													<input type="hidden" class="modal__digitalizacao" id="inputModalUnidade${id}"
+                                                        name="unidade" value="${item.unidade}" maxlength="10" disabled>
                                                 </div>
                                                 <div class="input-group">
                                                     <label for="cargaAnterior">Carga dia anterior</label>

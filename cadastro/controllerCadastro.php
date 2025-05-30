@@ -14,8 +14,9 @@
         $newCelular = $_POST['novoCelular'];
         $newUnidade = $_POST['novaUnidade'];
         $newPerfil = $_POST['novoPerfil'];
-        $newSenha = $_POST['newPassword'];
-
+        $newSenha = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+		//$teste = $_POST['newPassword'];
+		//file_put_contents(__DIR__ . "/meu_arquivo_login.txt", $teste);
         $novoUsuario = new CadastrarUsuario(
             $newUsuario,
             $newMatricula,

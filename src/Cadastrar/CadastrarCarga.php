@@ -88,9 +88,16 @@ class CadastrarCarga extends ConectarBD
      }
 
      //Aterar a data no formato para o banco de daddos
-     public function alterarData() 
-    {
-        $novaData = $this->getNovaData();        
+     public function alterarData($novaData) 
+    {        
+        $data = explode("-", $novaData);
+        return $data[2] . "/" . $data[1] . "/" . $data[0];
+              
+    }
+	
+	 public function alterarDatas() 
+    {   
+		$novaData = $this->getNovaData();
         $data = explode("/", $novaData);
         return $data[2] . "-" . $data[1] . "-" . $data[0];
               
@@ -99,7 +106,7 @@ class CadastrarCarga extends ConectarBD
     public function lancamentoDaCarga() 
     {
         try {
-            $novaData = $this->alterarData();
+            $novaData = $this->getNovaData();
             $unidade = $this->getNovaUnidade();
             $matricula = $this->getNovaMatricula();
             $cargaAnterior = str_replace(['.'], '', $this->getCargaAnterior());
@@ -148,7 +155,7 @@ class CadastrarCarga extends ConectarBD
                 
 
                 if ($query) {
-                    $this->responderJSON(true,'Carga do dia ' . $this->getNovaData() . ' cadastrada com sucesso.');
+                    $this->responderJSON(true,'Carga do dia ' . $novaData . ' cadastrada com sucesso.');
                 } else {
 					$erroInfo = $query->errorInfo();
                     $this->responderJSON(false, 'error' . $erroInfo);
@@ -165,7 +172,7 @@ class CadastrarCarga extends ConectarBD
 
     public function alterarDadosCarga() {
         try {
-            $novaData = $this->alterarData();
+            $novaData = $this->alterarDatas();
             $unidade = $this->getNovaUnidade();
             $matricula = $this->getNovaMatricula();
             $cargaAnterior = str_replace(['.'], '', $this->getCargaAnterior());
@@ -216,7 +223,7 @@ class CadastrarCarga extends ConectarBD
                 $query = parent::executarSQL($sql,$dados);
 
                 if ($query) {
-                    $this->responderJSON(true, 'Carga do dia ' . $this->getNovaData() . ' alterada com sucesso.');
+                    $this->responderJSON(true, 'Carga do dia ' . $novaData . ' alterada com sucesso.');
                 } else {
 					$erroInfo = $query->errorInfo();
                     $this->responderJSON(false, 'error' . $erroInfo);
@@ -232,6 +239,7 @@ class CadastrarCarga extends ConectarBD
     public function responderJSON($success, $message)
     {
         header('Content-Type: application/json');
-        echo json_encode(['success' => $success, 'message' => $message]);
+		$response = array('success' => $success, 'message' => $message);
+        echo json_encode($response);
     }
 }

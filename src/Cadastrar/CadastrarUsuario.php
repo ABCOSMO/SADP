@@ -128,7 +128,7 @@ class CadastrarUsuario extends ConectarBD
         $celular = str_replace(['(', ')', ' ', '-'], '', $tratarCelular);
         $unidade = $this->alterarUnidade();
         $perfil = $this->alterarPerfil();
-        $newSenha = $this->getSenha();
+        $newSenha = trim($this->getSenha());
     
         // Prepare e execute a consulta SQL para verificar a existência do usuário
         $sqlVerifica = "SELECT * FROM tb_funcionarios WHERE matricula = :matricula";
@@ -179,7 +179,7 @@ class CadastrarUsuario extends ConectarBD
         if ($queryInsere) {
             $this->responderJSON(true, 'Usuário cadastrado com sucesso.');
         } else {
-            $this->responderJSON(false, 'Erro ao cadastrar usuário: ' . $queryInsere->error);
+            $this->responderJSON(false, 'Erro ao cadastrar usuário: ');
         }
     }
 
@@ -195,6 +195,7 @@ class CadastrarUsuario extends ConectarBD
         $telefone = str_replace(['(', ')', ' ', '-'], '', $tratarTelefone);
         $tratarCelular = $this->getCelular();
         $celular = str_replace(['(', ')', ' ', '-'], '', $tratarCelular);
+		$newSenha = trim($this->getSenha());
         
 		$sqlConsultarUnidades = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
         $dadosUnidades = array(":nome_unidade" => $unidade);
@@ -217,7 +218,8 @@ class CadastrarUsuario extends ConectarBD
 		celular = :celular, 
 		se = :se, 
 		mcu_unidade = :mcu_unidade,
-		perfil = :perfil
+		perfil = :perfil,
+		senha = :senha
 		WHERE matricula = :matricula";
         $dados = array(
 		":matricula" => $matricula, 
@@ -227,7 +229,8 @@ class CadastrarUsuario extends ConectarBD
 		":celular" => $celular, 
 		":se" => $se,
 		":mcu_unidade" => $mcu_unidade,
-		":perfil" => $idPerfil
+		":perfil" => $idPerfil,
+		":senha" => $newSenha
 		);
         $query = parent::executarSQL($sql,$dados);
         $resultado = parent::lastidSQL();

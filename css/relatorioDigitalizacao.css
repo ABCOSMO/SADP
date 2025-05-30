@@ -495,3 +495,16 @@ table, th, td {
 	justify-content: center;
 	margin-bottom: 2rem;
 }
+
+.centralizar__tabela{
+	display: flex;
+	justify-content: center;
+}
+
+.botao__diario{
+	margin-bottom: 2rem;
+}
+
+.botao__mensal{
+	margin-bottom: 2rem;
+}

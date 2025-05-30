@@ -16,10 +16,10 @@
         $newCargaDigitalizada = $_POST['cargaDigitalizada'];
         $newCargaResto = $_POST['cargaResto'];
 
-        $conteudo = $newData . " " . $newUnidade . " " . $newMatricula . " " . $newCargaAnterior . " " . $newCargaRecebida . " " . 
+        /*$conteudo = $newData . " " . $newUnidade . " " . $newMatricula . " " . $newCargaAnterior . " " . $newCargaRecebida . " " . 
         $newCargaImpossibilitada . " " . $newCargaDigitalizada . " " . $newCargaResto;
 		
-		file_put_contents(__DIR__ . "/meu_arquivo.txt", $conteudo);
+		file_put_contents(__DIR__ . "/meu_arquivo.txt", $conteudo);*/
 		
         $novaCarga = new CadastrarCarga(
             $newData,

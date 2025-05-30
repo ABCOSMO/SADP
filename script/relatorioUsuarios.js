@@ -148,6 +148,13 @@ function relatorioUsuarios() {
                                                     name="novoPerfil" size="1" id="alterarPerfil${id}">
                                                     </select>
                                                 </div>
+												<div class="input-group">
+													<label for="password">
+														Alterar Senha
+													</label>
+													<input type="text" id="password2" name="newPassword2" value="123456" maxlength="9" disabled>
+													<input type="hidden" id="password" name="newPassword" value="123456" maxlength="9">
+												</div>
                                              </section>
                                              <section class="modal-body">
                                                 <div class="alterar__dados">

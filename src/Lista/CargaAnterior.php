@@ -61,28 +61,36 @@ class CargaAnterior extends ConectarBD
         $tratarMatricula = $this->getMatricula();
         $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
         $unidade = $this->getUnidade();
-
-        $sql = "SELECT tb_funcionarios.*, tb_unidades.nome_unidade FROM tb_funcionarios INNER JOIN tb_unidades 
-        ON tb_funcionarios.mcu_unidade = tb_unidades.mcu_unidade 
-        AND tb_unidades.nome_unidade = :nome_unidade AND tb_funcionarios.matricula = :matricula";
-        $dados = array(
-            ":matricula" => $matricula,
-            ":nome_unidade" => $unidade
-        );
-        $query = parent::executarSQL($sql,$dados);
-        $resultado = $query->fetchAll(PDO::FETCH_OBJ);
-       
-        foreach($resultado as $key => $value) {
-            $mcuUnidade = $value->mcu_unidade;
-            // Autenticação bem-sucedida
-            $sqlResto = "SELECT * FROM tb_digitalizacao WHERE mcu_unidade = :mcu_unidade ORDER BY id_digitalizacao DESC LIMIT 1";
-            $dadosResto = array(":mcu_unidade" => $mcuUnidade);
-            $queryResto = parent::executarSQL($sqlResto,$dadosResto);
-            $resultadoResto = $queryResto->fetchAll(PDO::FETCH_OBJ);
-
-            $resto = $this->formatarNumeroComPonto($resultadoResto[0]->qtd_imagens_resto);
-            return $resto;
-        }
+		
+		$UnidadeCdip = explode(" ", $unidade);
+		
+		if($UnidadeCdip[0] != "CDIP" OR $unidade == "CDIP BELO HORIZONTE") {
+			$resto = 0;
+			return $resto;
+		}else{
+		
+			$sql = "SELECT tb_funcionarios.*, tb_unidades.nome_unidade FROM tb_funcionarios INNER JOIN tb_unidades 
+			ON tb_funcionarios.mcu_unidade = tb_unidades.mcu_unidade 
+			AND tb_unidades.nome_unidade = :nome_unidade AND tb_funcionarios.matricula = :matricula";
+			$dados = array(
+				":matricula" => $matricula,
+				":nome_unidade" => $unidade
+			);
+			$query = parent::executarSQL($sql,$dados);
+			$resultado = $query->fetchAll(PDO::FETCH_OBJ);
+		
+			foreach($resultado as $key => $value) {
+				$mcuUnidade = $value->mcu_unidade;
+				// Autenticação bem-sucedida
+				$sqlResto = "SELECT * FROM tb_digitalizacao WHERE mcu_unidade = :mcu_unidade ORDER BY id_digitalizacao DESC LIMIT 1";
+				$dadosResto = array(":mcu_unidade" => $mcuUnidade);
+				$queryResto = parent::executarSQL($sqlResto,$dadosResto);
+				$resultadoResto = $queryResto->fetchAll(PDO::FETCH_OBJ);
+	
+				$resto = $this->formatarNumeroComPonto($resultadoResto[0]->qtd_imagens_resto);
+				return $resto;
+			}
+		}
     }
 }
 

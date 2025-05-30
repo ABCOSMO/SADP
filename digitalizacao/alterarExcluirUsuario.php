@@ -17,6 +17,7 @@ $listarUsuarios = new ListarUsuario();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
+$perfil = $_SESSION['privilegio'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,6 +35,7 @@ $unidade = $_SESSION['unidade'];
 <body>
 <header class="cabecalho">
     <nav class="cabecalho__links">
+			<input type="hidden" id="perfilOculto" value=<?php echo $perfil; ?>>
             <input type="checkbox" id="logoff" class="cabecalho__logoff">
             <label for="logoff">
                 <span class="cabecalho__texto" id="menuLogoff"><?php echo $nome." - ".$unidade;?></span>
@@ -50,7 +52,7 @@ $unidade = $_SESSION['unidade'];
                 <span class="cabecalho__menu__texto" id="digitalizacao">Digitalização</span>
             </label>
             <ul class="lista-digitalizacao" id="lista">
-                <li class="lista-digitalizacao__item">
+                <li id="cadastrarUsuario" class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
@@ -158,7 +160,8 @@ $unidade = $_SESSION['unidade'];
                         <label for="password">
                             Criar Senha
                         </label>
-                        <input type="text" id="password" name="newPassword" placeholder="••••••••" maxlength="9">
+                        <input type="text" id="password2" name="newPassword2" value="123456" maxlength="9" disabled>
+						<input type="hidden" id="password" name="newPassword" value="123456" maxlength="9">
                     </div>
                     <input value="Cadastrar" type="submit" id="login-button">
                     </input>
@@ -173,5 +176,6 @@ $unidade = $_SESSION['unidade'];
     <script src="../script/scriptCadastro.js" defer></script>
     <script src="../script/scriptAlterarCadastro.js" defer></script>
     <script src="../header.js" defer></script>
+	<script src="script/excluirPerfil.js" defer></script>
 </body>
 </html>

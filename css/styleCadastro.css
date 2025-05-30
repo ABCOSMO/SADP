@@ -351,12 +351,25 @@ footer {
 }
 
 .menuCadastro {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
     background-color: white;
-    text-align: justify;
     width: 25rem;
     height:42rem;
-    border-radius: 4vh;  
-    padding: 3vh;
+    border-radius: 4vh;
+	padding: 3vh 0 3vh 9vh;
+}
+
+.menuAlterar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    background-color: white;
+    width: 25rem;
+    height:42rem;
+    border-radius: 4vh;
+	padding: 3vh 0 3vh 9vh;
 }
 
 .menuAlterarCadastro {
@@ -401,7 +414,7 @@ dialog:not([open]) {
 dialog[open] {
     display: block;
     position: fixed;
-    top: 100%;
+    top: 75%;
     left: 25%;
     transform: translate(-50%, -50%);
     z-index: 1000;

@@ -9,6 +9,7 @@ $autenticandoUsuario->tempoLoginUsuario();
 $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
+$perfil = $_SESSION['privilegio'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -40,7 +41,7 @@ $unidade = $_SESSION['unidade'];
                 <span class="cabecalho__menu__texto" id="digitalizacao">Digitalização</span>
             </label>
             <ul class="lista-digitalizacao" id="lista">
-                <li class="lista-digitalizacao__item">
+                <li id="cadastrarUsuario" class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/cadastrarUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
@@ -90,5 +91,6 @@ $unidade = $_SESSION['unidade'];
     </footer>
     <script src="../script.js" defer></script>
     <script src="../header.js" defer></script>
+	<script src="../script/excluirPerfil.js" defer></script>
 </body>
 </html>

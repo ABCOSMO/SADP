@@ -21,6 +21,8 @@ $nome = $separarNome[0]." ".$separarNome[1];
 date_default_timezone_set('America/Sao_Paulo');
 $data = new DateTime('now');
 $LancarData = $data->format('d/m/Y');
+$perfil = $_SESSION['privilegio'];
+$codificarPefil = hash('sha256', $perfil)
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -39,6 +41,7 @@ $LancarData = $data->format('d/m/Y');
 <body>
 <header class="cabecalho">
     <nav class="cabecalho__links">
+			<input type="hidden" id="perfilOculto" value=<?php echo $codificarPefil; ?>>
             <input type="checkbox" id="logoff" class="cabecalho__logoff">
             <label for="logoff">
                 <span class="cabecalho__texto" id="menuLogoff"><?php echo $nome . " - " . $unidade;?></span>
@@ -55,7 +58,7 @@ $LancarData = $data->format('d/m/Y');
                 <span class="cabecalho__menu__texto" id="digitalizacao">Digitalização</span>
             </label>
             <ul class="lista-digitalizacao" id="lista">
-                <li class="lista-digitalizacao__item">
+                <li id="cadastrarUsuario" class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
@@ -89,7 +92,7 @@ $LancarData = $data->format('d/m/Y');
                             Lançar Dados Digitalização
                         </h1>
                     </div>
-                    <section class="modal-body">
+                    <section class="modal-body" id="lancaDados">
                         <div class="input-group">
                             <label for="data">
                                 Data
@@ -144,177 +147,178 @@ $LancarData = $data->format('d/m/Y');
                                     <label class="caixa" for="ACR">
                                         ACR
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-1" name="acr" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-1" name="acr" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="AL">
                                         AL
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-2" name="al" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-2" name="al" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="AM">
                                         AM
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-3" name="am" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-3" name="am" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="AP">
                                         AP
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-4" name="ap" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-4" name="ap" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="BA">
                                         BA
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-5" name="ba" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-5" name="ba" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="BSB">
                                         BSB
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-6" name="bsb" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-6" name="bsb" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="CE">
                                         CE
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-7" name="ce" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-7" name="ce" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="ES">
                                         ES
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-8" name="es" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-8" name="es" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="GO">
                                         GO
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-9" name="go" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-9" name="go" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="MA">
                                         MA
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-10" name="ma" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-10" name="ma" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="MG">
                                         MG
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-11" name="mg" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-11" name="mg" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="MS">
                                         MS
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-12" name="ms" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-12" name="ms" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="MT">
                                         MT
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-13" name="mt" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-13" name="mt" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PA">
                                         PA
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-14" name="pa" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-14" name="pa" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PB">
                                         PB
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-15" name="pb" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-15" name="pb" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PE">
                                         PE
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-16" name="pe" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-16" name="pe" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PI">
                                         PI
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-17" name="pi" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-17" name="pi" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PR">
                                         PR
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-18" name="pr" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-18" name="pr" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RJ">
                                         RJ
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-19" name="rj" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-19" name="rj" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RN">
                                         RN
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-20" name="rn" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-20" name="rn" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RO">
                                         RO
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-21" name="ro" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-21" name="ro" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RR">
                                         RR
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-22" name="rr" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-22" name="rr" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RS">
                                         RS
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-23" name="rs" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-23" name="rs" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="SC">
                                         SC
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-24" name="sc" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-24" name="sc" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="SE">
                                         SE
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-25" name="se" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-25" name="se" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="SPI">
                                         SPI
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-26" name="spi" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-26" name="spi" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="SPM">
                                         SPM
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-27" name="spm" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-27" name="spm" value="Pendente">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="TO">
                                         SE/TO
                                     </label>
-                                    <input class="estados estado__alterado" type="button" id="se-28" name="to" value="Não recebido">
+                                    <input class="estados estado__alterado" type="button" id="se-28" name="to" value="Pendente">
                                 </div>
                             </section>
                             <section class="container__ocorrencias">
-                                <div>
-                                <label class="areatexto" for="texto">
-                                        Registrar Ocorrências
-                                </label>
-                                <textarea class="ocorrencias" id="ocorrencias" name="ocorrencias"></textarea>
+                                <div class="coluna__ocorrencias">
+									<label class="areatexto" for="texto">
+										Registrar Ocorrências
+									</label>
+									<textarea class="ocorrencias" id="ocorrencia" name="ocorrencia"
+									placeholder="Escreva a ocorrência aqui..." autofocus></textarea>
                                 </div>
                             </section>
                             <section class="modal-body">
@@ -355,5 +359,7 @@ $LancarData = $data->format('d/m/Y');
     <script src="../script/validaFormulario.js" defer></script>
     <script src="../script/excluirCargaDigitalizacao.js" defer></script>
     <script src="../script/dataAtual.js" defer></script>
+	<script src="../script/registrarSE.js" defer></script>
     <script src="../header.js" defer></script>
+	<script src="../script/excluirPerfil.js" defer></script>
 </html>

@@ -14,7 +14,7 @@
 		$newCelular = $_POST['novoCelular'];
         $newUnidade = $_POST['novaUnidade'];
         $newPerfil = $_POST['novoPerfil'];
-        $newSenha = '';
+        $newSenha = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
 		
 		$conteudo = $newUsuario . " " . $newMatricula . " " . $newEmail . " " . $newTelefone . " " . $newCelular . " " . 
         $newUnidade . " " . $newPerfil . " " . $newSenha;

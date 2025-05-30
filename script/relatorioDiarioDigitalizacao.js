@@ -25,7 +25,7 @@ function relatorioDiarioDigitalizacao() {
                 usuarioPerfil = null; // Caso a resposta esteja vazia
             }
 
-            let tabelaHTML = `<section class="modal-body">
+            let tabelaHTML = `<section class="modal-body centralizar__tabela">
                                     <div class="input-group">
                                         <table>
                                             <tr>
@@ -39,8 +39,8 @@ function relatorioDiarioDigitalizacao() {
                                                 <th class='usuario'>Carga Digitalizada</th>
                                                 <th class='usuario'>Resto do dia</th>
                                                 ${usuarioPerfil == '01' ? `
-                                                    <th id='colunaAlterar' class='usuario'>Alterar</th>
-                                                    <th id='colunaExcluir' class='usuario'>Excluir</th>
+                                                    <!--<th id='colunaAlterar' class='usuario'>Alterar</th>
+                                                    <th id='colunaExcluir' class='usuario'>Excluir</th>-->
                                                 ` : ''}
                                             </tr>`;
 
@@ -59,7 +59,7 @@ function relatorioDiarioDigitalizacao() {
                                         <td class='' id='Digitalizada${id}'>${mascaraDigitarCarga(item.imagens_incorporadas.toString())}</td>
                                         <td class='' id='Resto${id}'>${mascaraDigitarCarga(item.resto.toString())}</td>
                                         ${usuarioPerfil == '01' ? `
-                                            <td>
+                                            <!--<td>
                                                 <button type="button" class='open-modal botao__alterar_excluir' data-modal="modal-${id}"
                                                         id="login-cadastro"><i class='fa-solid fa-pencil'></i>
                                                 </button>
@@ -68,7 +68,7 @@ function relatorioDiarioDigitalizacao() {
                                                 <button class='botao botao__excluir${id} botao__alterar_excluir'>
                                                     <i class='fa-solid fa-trash'></i>
                                                 </button>
-                                            </td>
+                                            </td>-->
                                         ` : ''}
                                     </tr>`;
                 id++;

@@ -16,6 +16,7 @@ $separarNome = explode (" ",$_SESSION['nome']);
 $nome = $separarNome[0]." ".$separarNome[1];
 $unidade = $_SESSION['unidade'];
 $perfil = $_SESSION['privilegio'];
+$codificarPefil = hash('sha256', $perfil)
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,6 +35,7 @@ $perfil = $_SESSION['privilegio'];
 <body>
 <header class="cabecalho">
     <nav class="cabecalho__links">
+			<input type="hidden" id="perfilOculto" value=<?php echo $codificarPefil; ?>>
             <input type="checkbox" id="logoff" class="cabecalho__logoff">
             <label for="logoff">
                 <span class="cabecalho__texto" id="menuLogoff"><?php echo $nome." - ".$unidade;?></span>
@@ -50,7 +52,7 @@ $perfil = $_SESSION['privilegio'];
                 <span class="cabecalho__menu__texto" id="digitalizacao">Digitalização</span>
             </label>
             <ul class="lista-digitalizacao" id="lista">
-                <li class="lista-digitalizacao__item">
+                <li id="cadastrarUsuario" class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li class="lista-digitalizacao__item">
@@ -108,5 +110,6 @@ $perfil = $_SESSION['privilegio'];
 	<script src="../script/validaFormulario.js" defer></script>
 	<script src="../script/alterarCargaDigitalizacao.js" defer></script>
     <script src="../script/excluirCargaDiariaDigitalizacao.js" defer></script>
+	<script src="../script/excluirPerfil.js" defer></script>
 </body>
 </html>

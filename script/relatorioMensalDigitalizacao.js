@@ -4,7 +4,7 @@ function relatorioMensalDigitalizacao() {
     let id = 2;
     let resultado = document.getElementById('dadosContainer');
     resultado.innerHTML = ''; // Limpa o conteúdo existente
-    let tabelaHTML = `<section class="modal-body">
+    let tabelaHTML = `<section class="modal-body centralizar__tabela">
                             <div class="input-group">
                                 <table>
                                     <tr>

@@ -15,7 +15,7 @@
         echo json_encode(['success' => false, 'error' => 'Dados JSON inválidos']);
         exit;
     }
-
+		$unidade  = $data['unidade'];
         $dataCadastrada = $data['novaData'];
         $cargaAnterior = $data['cargaAnterior'];
         $cargaRecebida = $data['cargaRecebida'];
@@ -24,7 +24,6 @@
         $cargaResto = $data['cargaResto'];
 
     if(isset($_SESSION['matricula'])) {  
-		$unidade = $_SESSION['unidade'];
         $matricula = $_SESSION['matricula'];
          // Agora você pode acessar os dados usando $data
         
