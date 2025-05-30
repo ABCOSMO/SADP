@@ -25,7 +25,13 @@ function relatorioDiarioDigitalizacao() {
                 usuarioPerfil = null; // Caso a resposta esteja vazia
             }
 
-            let tabelaHTML = `<section class="modal-body centralizar__tabela">
+            let tabelaHTML =   `<section>
+                                    <div>
+                                        <a href="../cadastro/controllerGerarPdf.php?dataInicial=${dataInicial}
+                                        &dataFinal=${dataFinal}&unidade=${unidade}">XLS</a>
+                                    </div>
+                                </section>
+                                <section class="modal-body centralizar__tabela">
                                     <div class="input-group">
                                         <table>
                                             <tr>
