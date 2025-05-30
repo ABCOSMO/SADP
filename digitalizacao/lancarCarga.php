@@ -362,4 +362,5 @@ $codificarPefil = hash('sha256', $perfil)
 	<script src="../script/registrarSE.js" defer></script>
     <script src="../header.js" defer></script>
 	<script src="../script/excluirPerfil.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 </html>

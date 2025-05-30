@@ -27,8 +27,7 @@ function relatorioDiarioDigitalizacao() {
 
             let tabelaHTML =   `<section>
                                     <div>
-                                        <a href="../cadastro/controllerGerarPdf.php?dataInicial=${dataInicial}
-                                        &dataFinal=${dataFinal}&unidade=${unidade}">XLS</a>
+                                        <a href="../cadastro/controllerGerarPdf.php?dataInicial=${dataInicial}&dataFinal=${dataFinal}&unidade=${unidade}">Gerar arquivo XLS</a>
                                     </div>
                                 </section>
                                 <section class="modal-body centralizar__tabela">

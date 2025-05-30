@@ -4,7 +4,12 @@ function relatorioMensalDigitalizacao() {
     let id = 2;
     let resultado = document.getElementById('dadosContainer');
     resultado.innerHTML = ''; // Limpa o conteúdo existente
-    let tabelaHTML = `<section class="modal-body centralizar__tabela">
+    let tabelaHTML = 	`<section>
+                            <div>
+                                <a href="../cadastro/controllerGerarPdfMensal.php?ano=${ano}&unidade=${unidade}">Gerar arquivo XLS</a>
+                            </div>
+                        </section>
+						<section class="modal-body centralizar__tabela">
                             <div class="input-group">
                                 <table>
                                     <tr>

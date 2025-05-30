@@ -111,5 +111,6 @@ $codificarPefil = hash('sha256', $perfil)
 	<script src="../script/alterarCargaDigitalizacao.js" defer></script>
     <script src="../script/excluirCargaDiariaDigitalizacao.js" defer></script>
 	<script src="../script/excluirPerfil.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 </body>
 </html>
