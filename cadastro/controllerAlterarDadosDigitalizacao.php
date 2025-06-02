@@ -22,6 +22,8 @@
         $cargaImpossibilitada = $data['cargaImpossibilitada'];
         $cargaDigitalizada = $data['cargaDigitalizada'];
         $cargaResto = $data['cargaResto'];
+        $superintendencia = '';
+        $ocorrencia = '';
 
     if(isset($_SESSION['matricula'])) {  
         $matricula = $_SESSION['matricula'];
@@ -40,7 +42,9 @@
 			$cargaRecebida,
             $cargaImpossibilitada,
             $cargaDigitalizada,
-            $cargaResto
+            $cargaResto,
+            $superintendencia,
+            $ocorrencia
         );
         
         $alterarDadosDigitalizacao->alterarDadosCarga();

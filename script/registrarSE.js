@@ -20,3 +20,9 @@ for(let i = 1; i <= 28; i++){
 	}
 
 }
+
+let contarSEModal = document.querySelectorAll('.contar__modal_se');
+
+for(let i = 2; i <= contarSEModal.length; i++) {
+
+}

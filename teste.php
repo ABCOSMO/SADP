@@ -1,28 +1,28 @@
 <?php
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment; filename="dados.xls"');
+    require 'autoload.php';
+    
+    
+    use FADPD\ConectarUsuario\ConectarBD;
+    use FADPD\Relatorios\CalcularData;
+    use FADPD\Relatorios\GerarRelatorioDigitalizacao;
 
-echo '<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>E-mail</th>
-        <th>Telefone</th>
-        <th>Data Cadastro</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>João Silva</td>
-        <td>joao@exemplo.com</td>
-        <td>(11) 9999-8888</td>
-        <td>2023-01-15</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>Maria Souza</td>
-        <td>maria@exemplo.com</td>
-        <td>(21) 8888-7777</td>
-        <td>2023-02-20</td>
-    </tr>
-</table>';
-?>
+    $unidade = 'CDIP BRASÍLIA';
+    $matricula = '81342497';
+    $perfil = '01';
+    date_default_timezone_set('America/Sao_Paulo');
+    $data = new DateTime('now');
+    
+    $selecionarData = new CalcularData;
+
+    $dataAnterior = $selecionarData->calcularDataAnterior($data);
+    $dataPosterior = $selecionarData->calcaularDataPosterior($data);
+
+    $gerarRelatorioDigitalizacao = new GerarRelatorioDigitalizacao(
+        $perfil,
+        $matricula,
+        $unidade,
+        $dataAnterior,
+        $dataPosterior
+    );
+
+    $gerarRelatorioDigitalizacao->relatorioDiarioDigitalizacao();

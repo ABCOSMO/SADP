@@ -16,6 +16,8 @@ class CadastrarCarga extends ConectarBD
     private $cargaImpossibilitada;
     private $cargaDigitalizada;
     private $resto;
+    private $superintendencia;
+    private $ocorrencia;
     
 	function __construct(
 		$novaData, 
@@ -25,7 +27,9 @@ class CadastrarCarga extends ConectarBD
 		$cargaRecebida,
         $cargaImpossibilitada,
 		$cargaDigitalizada, 
-		$resto
+		$resto,
+        $superintendencia,
+        $ocorrencia
 	)
     {
         parent::__construct();
@@ -37,6 +41,8 @@ class CadastrarCarga extends ConectarBD
         $this->cargaImpossibilitada = $cargaImpossibilitada;
         $this->cargaDigitalizada = $cargaDigitalizada;
         $this->resto = $resto;
+        $this->superintendencia = $superintendencia;
+        $this->ocorrencia = $ocorrencia;
     }
 
      //Cadastra nova data
@@ -85,6 +91,19 @@ class CadastrarCarga extends ConectarBD
      public function getCargaResto()
      {
          return $this->resto;
+     }
+
+     //Cadastrar laçamento das Superintendências
+     public function getTodasSE()
+     {
+         return $this->superintendencia;
+     }
+
+     
+     //Cadastrar laçamento das Ocorrencias
+     public function getCadastrarOcorrencia()
+     {
+         return $this->ocorrencia;
      }
 
      //Aterar a data no formato para o banco de daddos
@@ -155,7 +174,10 @@ class CadastrarCarga extends ConectarBD
                 
 
                 if ($query) {
-                    $this->responderJSON(true,'Carga do dia ' . $novaData . ' cadastrada com sucesso.');
+                    $dataBrasil = $this->alterarData($novaData);
+                    $this->cadastrarSuperintendencia();
+                    $this->cadastrarOcorrencia();
+                    $this->responderJSON(true,'Carga do dia ' . $dataBrasil . ' cadastrada com sucesso.');
                 } else {
 					$erroInfo = $query->errorInfo();
                     $this->responderJSON(false, 'error' . $erroInfo);
@@ -241,5 +263,113 @@ class CadastrarCarga extends ConectarBD
         header('Content-Type: application/json');
 		$response = array('success' => $success, 'message' => $message);
         echo json_encode($response);
+    }
+
+    public function cadastrarSuperintendencia()
+    {
+        try {
+            $novaData = $this->getNovaData();
+            $conferirMatricula = $this->getNovaMatricula();
+            $sqlConferir = "SELECT * FROM tb_digitalizacao WHERE data_digitalizacao = :data_digitalizacao AND matricula = :matricula";
+                $dadosConferir = array(
+                    ":data_digitalizacao" => $novaData, 
+                    ":matricula" => $conferirMatricula
+                );
+            $queryConferir = parent::executarSQL($sqlConferir,$dadosConferir);
+            $conferir = $queryConferir->fetch(PDO::FETCH_OBJ);
+            $dataDigitalizacao = $conferir->data_digitalizacao;
+            $matricula = $conferir->matricula;
+            $idDigitalizacao = $conferir->id_digitalizacao;
+
+            if($dataDigitalizacao){
+                $superintendencia = $this->getTodasSE();
+                foreach($superintendencia[0] as $chave => $valor){
+                    $extrairSE = explode('_', $valor);
+                    if($extrairSE[0] == "Recebido"){
+                        $sql = "INSERT INTO tb_carga_origem_recebida (id_digitalizacao, matricula, data_recebimento, se) 
+                        VALUES (:id_digitalizacao, :matricula, :data_recebimento, :se)";
+                        $dados = array( 
+                            ":id_digitalizacao" => $idDigitalizacao, 
+                            ":matricula" => $matricula, 
+                            ":data_recebimento" => $dataDigitalizacao,
+                            ":se" => $extrairSE[1]
+                        );
+                        $query = parent::executarSQL($sql,$dados);
+                        if (!$query || $query->rowCount() === 0) {
+                            // Logar ou lidar com o erro de inserção de superintendência individual
+                            error_log("Erro ao inserir superintendência $chave: " . print_r($query ? $query->errorInfo() : "Erro desconhecido", true));
+                            // Opcional: throw new \Exception("Erro ao cadastrar superintendência $chave.");
+                        }else {
+                            error_log("Formato de array de superintendência inesperado.");
+                        }
+                    }else {
+                        error_log("Registro de digitalização não encontrado para data: $novaData e matrícula: $conferirMatricula");
+                    }
+                }
+                
+            }
+        }catch (\Exception $e) {
+            error_log("Erro na função cadastrarSuperintendencia: " . $e->getMessage());
+            // Você pode decidir como responder ao usuário em caso de erro na superintendência
+            // Ex: $this->responderJSON(false, 'Erro ao cadastrar superintendências: ' . $e->getMessage());
+        }    
+    }
+
+    public function cadastrarOcorrencia()
+    {
+        try {
+            $novaData = $this->getNovaData();
+            $conferirMatricula = $this->getNovaMatricula();
+
+            // 1. Confere se o registro de digitalização existe
+            $sqlConferir = "SELECT id_digitalizacao, data_digitalizacao, matricula FROM tb_digitalizacao WHERE data_digitalizacao = :data_digitalizacao AND matricula = :matricula";
+            $dadosConferir = array(
+                ":data_digitalizacao" => $novaData,
+                ":matricula" => $conferirMatricula
+            );
+            $queryConferir = parent::executarSQL($sqlConferir, $dadosConferir);
+            $conferir = $queryConferir->fetch(PDO::FETCH_OBJ);
+
+            if ($conferir) {
+                $dataDigitalizacao = $conferir->data_digitalizacao;
+                $matricula = $conferir->matricula;
+                $idDigitalizacao = $conferir->id_digitalizacao;
+
+                $ocorrencia = $this->getCadastrarOcorrencia();
+
+                // 2. Verifica se a ocorrência não está vazia antes de tentar inserir
+                if (!empty($ocorrencia)) {
+                    $sql = "INSERT INTO tb_ocorrencias (id_digitalizacao, matricula, data_recebimento, ocorrencia)
+                            VALUES (:id_digitalizacao, :matricula, :data_recebimento, :ocorrencia)";
+                    $dados = array(
+                        ":id_digitalizacao" => $idDigitalizacao,
+                        ":matricula" => $matricula,
+                        ":data_recebimento" => $dataDigitalizacao,
+                        ":ocorrencia" => $ocorrencia
+                    );
+                    $query = parent::executarSQL($sql, $dados);
+                    
+                    // 3. Verifica o resultado da inserção
+                    if (!$query || $query->rowCount() === 0) {
+                        // Loga erro se a inserção falhou
+                        error_log("Erro ao inserir ocorrência: " . print_r($query ? $query->errorInfo() : "Erro desconhecido", true));
+                        // Opcional: throw new \Exception("Erro ao cadastrar ocorrência.");
+                    } else {
+                        // Opcional: Loga sucesso se a inserção foi bem-sucedida
+                        // error_log("Ocorrência cadastrada com sucesso para ID Digitalização: $idDigitalizacao");
+                    }
+                } else {
+                    // Loga se a string de ocorrência estiver vazia
+                    error_log("A ocorrência a ser cadastrada está vazia para o registro de digitalização [Data: $novaData, Matrícula: $conferirMatricula].");
+                }
+            } else {
+                // Loga se o registro de digitalização não foi encontrado
+                error_log("Registro de digitalização não encontrado para data: $novaData e matrícula: $conferirMatricula. Não foi possível cadastrar a ocorrência.");
+            }
+        } catch (\Exception $e) {
+            error_log("Erro na função cadastrarOcorrencia: " . $e->getMessage());
+            // Você pode decidir como responder ao usuário em caso de erro
+            // Ex: $this->responderJSON(false, 'Erro ao cadastrar ocorrência: ' . $e->getMessage());
+        }
     }
 }

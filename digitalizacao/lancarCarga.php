@@ -135,7 +135,6 @@ $codificarPefil = hash('sha256', $perfil)
                     </section>
                 
                     <dialog class="manter__aberto" id="modal-1">
-                        <form method="post" id="myModalForm" name="autenticar">
                             <div class="modal-header">
                                 <p class="modal-title titulo">Carga recebida por Superintendência</p>
                                 <button class="close-modal" data-modal="modal-1" type="button">
@@ -307,7 +306,7 @@ $codificarPefil = hash('sha256', $perfil)
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="TO">
-                                        SE/TO
+                                        TO
                                     </label>
                                     <input class="estados estado__alterado" type="button" id="se-28" name="to" value="Pendente">
                                 </div>
@@ -326,11 +325,10 @@ $codificarPefil = hash('sha256', $perfil)
                                     <input value="Incluir SEs" type="submit" id="login-button-modal"></input>
                                 </div>
                             </section>
-                        </form>
                     </dialog>
                     <section class="modal-body">
                         <div class="container__cadastro__envio">
-                            <button class="open-modal" value="Enviar dados" type="submit" id="login-button-inicial" data-modal="modal-1">
+                            <button class="open-modal" value="Enviar dados" type="button" id="login-button-inicial" data-modal="modal-1">
                             Enviar dados
                             </button>
                         </div>
