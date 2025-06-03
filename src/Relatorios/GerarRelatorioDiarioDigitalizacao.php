@@ -83,7 +83,7 @@ class GerarRelatorioDiarioDigitalizacao extends ConectarBD
             $dataFinal = $this->getDataFinal();
 			$perfil = $this->getPerfil();
 
-            if($unidade=="" AND $perfil == "01"){ 
+            if($unidade=="" AND $perfil == "01" OR $unidade=="" AND $perfil == "05"){ 
                     // Verifica se a carga já foi lançada
                     $sql = "SELECT
                     tb_digitalizacao.*,

@@ -19,11 +19,11 @@ function enviarDadosCarga() {
     if (modal) {
         // Adicionar os valores dos botões de superintendência (ACR, AL, etc.)
         // Seleciona botões que têm 'estados' OU 'estado__alterado' para garantir que todos sejam pegos.
-        const estadosButtons = modal.querySelectorAll('.estados, .estado__alterado'); 
+        const estadosButtons = modal.querySelectorAll('.Estado__nao_recebida, .Estado__recebida'); 
         estadosButtons.forEach(button => {
             // Garante que o botão tem um atributo 'name' para ser enviado
             if (button.name) {
-                formData.append(button.name, button.value); // Ex: 'acr': 'Pendente' ou 'acr': 'Recebido'
+                formData.append(button.name, button.value); // Ex: 'acr': 'Não recebida' ou 'acr': 'Recebida'
             }
         });
 

@@ -15,7 +15,11 @@ $autenticandoUsuario->tempoLoginUsuario();
 $escolherUnidade = new SelecionarUnidade();
 $listarUsuarios = new ListarUsuario();
 $separarNome = explode (" ",$_SESSION['nome']);
-$nome = $separarNome[0]." ".$separarNome[1];
+if($separarNome[0] != "Visitante"){
+	$nome = $separarNome[0]." ".$separarNome[1];
+}else{
+	$nome = $separarNome[0];
+}
 $unidade = $_SESSION['unidade'];
 $perfil = $_SESSION['privilegio'];
 ?>

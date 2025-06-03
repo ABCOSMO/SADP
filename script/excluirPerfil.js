@@ -15,7 +15,7 @@ function generateSha256Hash(text) {
   // Converta o hash para uma string hexadecimal
   return hash.toString(CryptoJS.enc.Hex);
 }
-for(let s=1; s <= 4; s++){
+for(let s=1; s <= 5; s++){
 	let conferirPerfil = "0" + s;
 	//console.log(conferirPerfil);
 	const hashJS = generateSha256Hash(conferirPerfil);
@@ -37,6 +37,18 @@ for(let s=1; s <= 4; s++){
 			let menuCadastrarUsuario = document.getElementById('cadastrarUsuario');
 			if(menuCadastrarUsuario){
 				menuCadastrarUsuario.remove();
+			}
+		}
+		
+		if(conferirPerfil == "05"){
+			let menuCadastrarUsuario = document.getElementById('cadastrarUsuario');
+			let menuLancarDados = document.getElementById('lancarDados');
+			if(menuCadastrarUsuario){
+				menuCadastrarUsuario.remove();
+			}
+			
+			if(menuLancarDados){
+				menuLancarDados.remove();
 			}
 		}
 

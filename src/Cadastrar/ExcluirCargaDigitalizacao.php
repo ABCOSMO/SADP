@@ -40,15 +40,64 @@ class ExcluirCargaDigitalizacao extends ConectarBD
         return $data[2] . "-" . $data[1] . "-" . $data[0];
               
     }
+
+    public function excluirSEOcorrencias()
+    {
+        $dataDigitalizacao = $this->alterarData();
+        $matricula = $this->getMatricula();
+        
+        $sqlMcu = 
+                    "SELECT 
+                        tb_digitalizacao.*,
+                        tb_funcionarios.*
+                    FROM 
+                        tb_digitalizacao 
+                    INNER JOIN
+                        tb_funcionarios
+                    ON
+                        tb_digitalizacao.mcu_unidade = tb_funcionarios.mcu_unidade
+                    WHERE 
+                        tb_digitalizacao.matricula = :matricula 
+                    AND 
+                        tb_digitalizacao.data_digitalizacao = :data_digitalizacao";
+
+                $dadosMcu = array(
+                    ":data_digitalizacao" => $dataDigitalizacao, 
+                    ":matricula" => $matricula
+                );
+            $queryMcu = parent::executarSQL($sqlMcu,$dadosMcu);
+            $conferir = $queryMcu->fetch(PDO::FETCH_OBJ);
+            $idDigitalizacao = $conferir->id_digitalizacao;
+
+        $sqlSE = "DELETE FROM tb_carga_origem_recebida WHERE id_digitalizacao = :id_digitalizacao AND data_recebimento = :dataDigitalizacao";
+        $dadosSE =    array(
+                        ":id_digitalizacao" => $idDigitalizacao,
+                        ":dataDigitalizacao" => $dataDigitalizacao
+                    );
+        $querySE = parent::executarSQL($sqlSE, $dadosSE);
+
+        $sqlOcorrencia = "DELETE FROM tb_ocorrencias WHERE id_digitalizacao = :id_digitalizacao AND data_recebimento = :dataDigitalizacao";
+        $dadosOcorrencia =    array(
+                        ":id_digitalizacao" => $idDigitalizacao,
+                        ":dataDigitalizacao" => $dataDigitalizacao
+                    );
+        $queryOcorrencia = parent::executarSQL($sqlOcorrencia, $dadosOcorrencia);
+
+        if($querySE && $queryOcorrencia){
+            $this->alterarDados();
+        }else{
+            echo "erro";
+        }         
+    }
     
     public function alterarDados() 
     {
-        $data = $this->alterarData();
+        $dataDigitalizacao = $this->alterarData();
 
         $sql = "DELETE FROM tb_digitalizacao WHERE matricula = :matricula AND data_digitalizacao = :novaData";
         $dados = array(
                         ":matricula" => $this->getMatricula(),
-                        ":novaData" => $data
+                        ":novaData" => $dataDigitalizacao
                         );
         try {
             $query = parent::executarSQL($sql, $dados);

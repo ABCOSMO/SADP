@@ -13,7 +13,11 @@ $autenticandoUsuario = new SessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
 $separarNome = explode (" ",$_SESSION['nome']);
-$nome = $separarNome[0]." ".$separarNome[1];
+if($separarNome[0] != "Visitante"){
+	$nome = $separarNome[0]." ".$separarNome[1];
+}else{
+	$nome = $separarNome[0];
+}
 $unidade = $_SESSION['unidade'];
 $perfil = $_SESSION['privilegio'];
 $codificarPefil = hash('sha256', $perfil)
@@ -55,7 +59,7 @@ $codificarPefil = hash('sha256', $perfil)
                 <li id="cadastrarUsuario" class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
-                <li class="lista-digitalizacao__item">
+                <li id="lancarDados" class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
                 </li>
                 <li class="lista-digitalizacao__item">

@@ -21,7 +21,7 @@ function abrirOpcaoMensal(id) {
         .then(response => response.json())
         .then(data => {
 				
-				if(perfil != "01") {
+				if(perfil != "01" && perfil != "05") {
 					dadosHTML = `
 					<input type="hidden" id="unidade" name="unidade" value='${secaoUnidade}'>`;
 				}else{
@@ -76,7 +76,7 @@ function abrirOpcaoMensal(id) {
         fetch('../cadastro/controllerRelatorioUnidade.php')
         .then(response => response.json())
         .then(data => {
-            if(perfil != "01") {
+            if(perfil != "01" && perfil != "05") {
                 dadosHTML = `
                 <input type="hidden" id="unidade" name="unidade" value='${secaoUnidade}'>`;
             }else{

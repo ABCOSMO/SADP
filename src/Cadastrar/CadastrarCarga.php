@@ -285,7 +285,7 @@ class CadastrarCarga extends ConectarBD
                 $superintendencia = $this->getTodasSE();
                 foreach($superintendencia[0] as $chave => $valor){
                     $extrairSE = explode('_', $valor);
-                    if($extrairSE[0] == "Recebido"){
+                    if($extrairSE[0] == "Recebida"){
                         $sql = "INSERT INTO tb_carga_origem_recebida (id_digitalizacao, matricula, data_recebimento, se) 
                         VALUES (:id_digitalizacao, :matricula, :data_recebimento, :se)";
                         $dados = array( 

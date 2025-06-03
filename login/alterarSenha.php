@@ -49,7 +49,7 @@
                             <label for="password">
                                 Senha
                             </label>
-                            <input type="password" id="password2" name="password2" value= <?php echo $senhaCadastrada; ?> maxlength="9">
+                            <input type="password" id="password2" name="password2" value= <?php echo $senhaCadastrada; ?> maxlength="9" disabled>
                         </div>
 						<div class="input-group">
                             <label for="password">

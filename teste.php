@@ -1,28 +1,16 @@
 <?php
     require 'autoload.php';
     
-    
     use FADPD\ConectarUsuario\ConectarBD;
-    use FADPD\Relatorios\CalcularData;
-    use FADPD\Relatorios\GerarRelatorioDigitalizacao;
+    use FADPD\Cadastrar\ExcluirCargaDigitalizacao;
 
-    $unidade = 'CDIP BRASÍLIA';
-    $matricula = '81342497';
-    $perfil = '01';
-    date_default_timezone_set('America/Sao_Paulo');
-    $data = new DateTime('now');
-    
-    $selecionarData = new CalcularData;
+    $matricula = '88888888';
+    $dataDigitalizacao = '25/05/2025';
 
-    $dataAnterior = $selecionarData->calcularDataAnterior($data);
-    $dataPosterior = $selecionarData->calcaularDataPosterior($data);
 
-    $gerarRelatorioDigitalizacao = new GerarRelatorioDigitalizacao(
-        $perfil,
+    $excluirCargaDigitalizacao = new ExcluirCargaDigitalizacao(
         $matricula,
-        $unidade,
-        $dataAnterior,
-        $dataPosterior
+        $dataDigitalizacao
     );
-
-    $gerarRelatorioDigitalizacao->relatorioDiarioDigitalizacao();
+    $excluirCargaDigitalizacao->excluirSEOcorrencias();
+    
