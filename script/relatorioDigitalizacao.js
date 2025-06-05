@@ -198,7 +198,7 @@ function relatorioDigitalizacao() {
                                                     seRecebida.data_recebimento === item.data_digitalizacao
                                 );
 
-                                const valorInput = seRecebidaNaData ? "Recebida" : "Não recebida";
+                                const valorInput = seRecebidaNaData ? "Recebida" : "";
                                 const classeEstado = seRecebidaNaData ? "estado__recebida" : "estado__nao_recebida";
 
                                 return `
@@ -362,12 +362,12 @@ function adicionarListenersBotoesSe() {
     function handleSeButtonClick(event) {
         const button = event.target;
         // Toggle the value and class
-        if (button.value === "Não recebida") {
+        if (button.value === "") {
             button.value = "Recebida";
             button.classList.remove("estado__nao_recebida");
             button.classList.add("estado__recebida");
         } else {
-            button.value = "Não recebida";
+            button.value = "";
             button.classList.remove("estado__recebida");
             button.classList.add("estado__nao_recebida");
         }

@@ -139,7 +139,7 @@ class GerarPDFMensalDigitalizacao extends ConectarBD
                             'Resto_do_dia' => $value->qtd_imagens_resto
                         ];
                     }
-                    			
+                    $response = array_merge($response, $this->relatorioCargaTotalDigitalizacao());		
                     return $this->exportarParaExcel($nomeDoArquivo, $response);
                 
             }else{
@@ -218,50 +218,61 @@ class GerarPDFMensalDigitalizacao extends ConectarBD
             
             // Verifica se a carga já foi lançada
             $sql = "SELECT
-            tb_unidades.nome_unidade,
-            SUM(tb_digitalizacao.qtd_imagens_dia_anterior) AS qtd_imagens_dia_anterior,
-            SUM(tb_digitalizacao.qtd_imagens_recebidas_dia) AS qtd_imagens_recebidas_dia,
-            SUM(tb_digitalizacao.qtd_imagens_incorporadas) AS qtd_imagens_incorporadas,
-            SUM(tb_digitalizacao.qtd_imagens_impossibilitadas) AS qtd_imagens_impossibilitadas,
-            SUM(tb_digitalizacao.qtd_imagens_resto) AS qtd_imagens_resto
-            FROM
-                tb_digitalizacao
-            INNER JOIN
-                tb_unidades ON tb_digitalizacao.mcu_unidade = tb_unidades.mcu_unidade
-            WHERE
-                tb_digitalizacao.data_digitalizacao >= :data_inicial                        
-            AND 
-                tb_digitalizacao.data_digitalizacao <= :data_final
-            AND 
-            tb_unidades.nome_unidade = :nome_unidade
-            GROUP BY
-                tb_unidades.nome_unidade";
-            $dados = array(
+                    tb_unidades.nome_unidade,
+                    SUM(tb_digitalizacao.qtd_imagens_dia_anterior) AS qtd_imagens_dia_anterior,
+                    SUM(tb_digitalizacao.qtd_imagens_recebidas_dia) AS qtd_imagens_recebidas_dia,
+                    SUM(tb_digitalizacao.qtd_imagens_incorporadas) AS qtd_imagens_incorporadas,
+                    SUM(tb_digitalizacao.qtd_imagens_impossibilitadas) AS qtd_imagens_impossibilitadas,
+                    SUM(tb_digitalizacao.qtd_imagens_resto) AS qtd_imagens_resto
+                    FROM tb_digitalizacao
+                    INNER JOIN tb_unidades ON tb_digitalizacao.mcu_unidade = tb_unidades.mcu_unidade
+                    WHERE tb_digitalizacao.data_digitalizacao BETWEEN :data_inicial AND :data_final";
+            
+            // Parâmetros base
+            $dados = [
                 ":data_inicial" => $dataInicial, 
-                ":data_final" => $dataFinal,
-                ":nome_unidade" =>$unidade
-            );
-            $query = parent::executarSQL($sql,$dados);
+                ":data_final" => $dataFinal
+            ];
+
+            // Adiciona filtro por unidade se necessário
+            if(!empty($unidade)) {
+                $sql .= " AND tb_unidades.nome_unidade = :nome_unidade";
+                $dados[":nome_unidade"] = $unidade;
+            }
+
+            $sql .= " GROUP BY tb_unidades.nome_unidade";
+
+            $query = parent::executarSQL($sql, $dados);
             $resultado = $query->fetchAll(PDO::FETCH_OBJ);
 
             $responseTotal = [];
-            foreach($resultado as $key => $value) {
-                $responseTotal[] = [
-					'Unidade' => $this->getUnidade(),
-					'Mes' => "Total",
-					'Carga_dia_anterior' => $value->qtd_imagens_dia_anterior,
-					'Carga_Recebida' => $value->qtd_imagens_recebidas_dia,
-					'Carga_Impossibilitada' => $value->qtd_imagens_impossibilitadas,
-					'Carga_Digitalizada' => $value->qtd_imagens_incorporadas,                        
-					'Resto_do_dia' => $value->qtd_imagens_resto
-                ];                        
-            }          
+             $responseTotal = [
+                'unidade' => empty($unidade) ? "--" : $unidade,
+                'Mes' => 'Total',
+                'Carga_dia_anterior' => 0, // Inicialize com zero
+                'Carga_Recebida' => 0, // Inicialize com zero
+                'Carga_Impossibilitada' => 0, // Inicialize com zero
+                'Carga_Digitalizada' => 0, // Inicialize com zero
+                'Resto_do_dia' => 0 // Inicialize com zero
+            ];
+            foreach($resultado as $value) {
+                // Acumule os valores em cada chave
+                $responseTotal['Carga_dia_anterior'] += (int)$value->qtd_imagens_dia_anterior;
+                $responseTotal['Carga_Recebida'] += (int)$value->qtd_imagens_recebidas_dia;                                
+                $responseTotal['Carga_Impossibilitada'] += (int)$value->qtd_imagens_impossibilitadas;
+                $responseTotal['Carga_Digitalizada'] += (int)$value->qtd_imagens_incorporadas;
+                $responseTotal['Resto_do_dia'] += (int)$value->qtd_imagens_resto;
+            }
+
+            $responseTotal = [$responseTotal];
 			return $responseTotal;
+
         }catch(\Exception $e) {
             $responseTotal = array('success' => false, 'error' => $e->getMessage());
             return $responseTotal;
         }
     }
+    
 	public function exportarParaExcel($nomeArquivo = "dados.xls", $dados = []) {
 		// Define os cabeçalhos para download do arquivo Excel
 		header('Content-Type: application/vnd.ms-excel; charset=utf-8');

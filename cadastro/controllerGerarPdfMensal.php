@@ -10,9 +10,9 @@ $ano = $_GET['ano'];
 $perfil = $_SESSION['privilegio'];
 
 $relatorioMensalDigitalizacao = new GerarPDFMensalDigitalizacao(
-        $unidade,
-        $ano,
-		$perfil
+      $unidade,
+      $ano,
+      $perfil
     );
 
 $relatorioMensalDigitalizacao->relatorioMensalDigitalizacaoPDF(); 

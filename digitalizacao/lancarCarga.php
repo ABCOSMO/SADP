@@ -150,169 +150,169 @@ $codificarPefil = hash('sha256', $perfil)
                                     <label class="caixa" for="ACR">
                                         ACR
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-1" name="acr" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-1" name="acr" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="AL">
                                         AL
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-2" name="al" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-2" name="al" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="AM">
                                         AM
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-3" name="am" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-3" name="am" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="AP">
                                         AP
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-4" name="ap" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-4" name="ap" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="BA">
                                         BA
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-5" name="ba" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-5" name="ba" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="BSB">
                                         BSB
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-6" name="bsb" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-6" name="bsb" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="CE">
                                         CE
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-7" name="ce" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-7" name="ce" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="ES">
                                         ES
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-8" name="es" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-8" name="es" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="GO">
                                         GO
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-9" name="go" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-9" name="go" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="MA">
                                         MA
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-10" name="ma" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-10" name="ma" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="MG">
                                         MG
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-11" name="mg" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-11" name="mg" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="MS">
                                         MS
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-12" name="ms" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-12" name="ms" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="MT">
                                         MT
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-13" name="mt" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-13" name="mt" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PA">
                                         PA
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-14" name="pa" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-14" name="pa" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PB">
                                         PB
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-15" name="pb" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-15" name="pb" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PE">
                                         PE
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-16" name="pe" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-16" name="pe" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PI">
                                         PI
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-17" name="pi" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-17" name="pi" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="PR">
                                         PR
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-18" name="pr" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-18" name="pr" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RJ">
                                         RJ
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-19" name="rj" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-19" name="rj" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RN">
                                         RN
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-20" name="rn" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-20" name="rn" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RO">
                                         RO
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-21" name="ro" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-21" name="ro" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RR">
                                         RR
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-22" name="rr" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-22" name="rr" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="RS">
                                         RS
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-23" name="rs" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-23" name="rs" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="SC">
                                         SC
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-24" name="sc" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-24" name="sc" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="SE">
                                         SE
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-25" name="se" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-25" name="se" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="SPI">
                                         SPI
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-26" name="spi" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-26" name="spi" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="SPM">
                                         SPM
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-27" name="spm" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-27" name="spm" value="">
                                 </div>
                                 <div class="coluna__se">
                                     <label class="caixa" for="TO">
                                         TO
                                     </label>
-                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-28" name="to" value="Não recebida">
+                                    <input class="Estado__nao_recebida Estado__recebida" type="button" id="se-28" name="to" value="">
                                 </div>
                             </section>
                             <section class="container__ocorrencias">

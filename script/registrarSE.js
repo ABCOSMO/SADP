@@ -13,7 +13,7 @@ for(let i = 1; i <= 28; i++){
             }else{
                 selecionarSE.classList.remove('Estado__recebida');
                 selecionarSE.classList.add('Estado__nao_recebida');
-                selecionarSE.textContent = "Não recebida"; // ALTERADO AQUI
+                selecionarSE.textContent = ""; // ALTERADO AQUI
             }
         });
     }
