@@ -76,7 +76,7 @@ function enviarDadosCarga() {
             loading.style.display = 'none';
         }
         console.error('Erro ao enviar os dados:', error);
-        alert('Erro ao enviar os dados. Verifique o console do navegador para mais detalhes.');
+        alert('Erro ao enviar os dados. Provavél data ja cadastrada.');
     });
 }
 

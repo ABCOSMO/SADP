@@ -215,15 +215,7 @@ class GerarPDFMensalDigitalizacao extends ConectarBD
             $dataFinal = $this->getDataFinal();
 			$perfil = $this->getPerfil();
             
-            $sqlUnidade = "SELECT * FROM tb_unidades WHERE nome_unidade = :nome_unidade";
-            $dadosUnidade = array(
-                ":nome_unidade" => $unidade
-            );
-            $queryUnidade = parent::executarSQL($sqlUnidade,$dadosUnidade);
-            $resultadoUnidade = $queryUnidade->fetchAll(PDO::FETCH_OBJ);
-            foreach($resultadoUnidade as $linha){
-                    $mcuUnidade = $linha->mcu_unidade; 
-                }
+            
             // Verifica se a carga já foi lançada
             $sql = "SELECT
             tb_unidades.nome_unidade,
@@ -272,8 +264,9 @@ class GerarPDFMensalDigitalizacao extends ConectarBD
     }
 	public function exportarParaExcel($nomeArquivo = "dados.xls", $dados = []) {
 		// Define os cabeçalhos para download do arquivo Excel
-		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Type: application/vnd.ms-excel; charset=utf-8');
 		header('Content-Disposition: attachment; filename="' . $nomeArquivo . '"');
+		echo "\xEF\xBB\xBF"; 
 		
 		// Inicia a tabela HTML
 		echo '<table border="1">';

@@ -302,24 +302,28 @@ function adicionarListenersModal() {
 
     if(botaoLancarCarga){
         botaoLancarCarga.addEventListener('click', function(event){
-            // assuming validaFormulario() is defined elsewhere and returns true/false
-            if(typeof validaFormulario !== 'undefined' && validaFormulario() == false){
+            // Valida o formulário antes de abrir o modal
+            if(typeof validaFormulario !== 'undefined' && !validaFormulario()){
+                // Se a validação falhar, impede a abertura do modal
                 event.preventDefault();
                 event.stopPropagation();
-                window.location.href = '../digitalizacao/lancarCarga.php';
-            } else if (typeof validaFormulario === 'undefined') {
-                // If validaFormulario is not defined, just proceed to redirect
-                event.preventDefault();
-                event.stopPropagation();
-                window.location.href = '../digitalizacao/lancarCarga.php';
+                return false;
+            }
+            // Se a validação passar, abre o modal normalmente
+            const modalId = event.currentTarget.dataset.modal;
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.showModal();
             }
         });
     }
 
-
+    // Restante do código para outros modais...
     openModalButtons.forEach(button => {
-        button.removeEventListener('click', handleOpenModal);
-        button.addEventListener('click', handleOpenModal);
+        if(button.id !== 'login-button-inicial') { // Não adiciona novamente ao botão principal
+            button.removeEventListener('click', handleOpenModal);
+            button.addEventListener('click', handleOpenModal);
+        }
     });
 
     closeModalButtons.forEach(button => {

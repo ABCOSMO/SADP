@@ -46,7 +46,7 @@ function relatorioMensalDigitalizacao() {
                 id++;
             });
 
-            if (unidade !== "") {
+            if (unidade != "" || unidade == "") {
                 return fetch('../cadastro/controllerTotalCargaDigitalizacao.php', {
                     method: 'POST',
                     body: JSON.stringify({

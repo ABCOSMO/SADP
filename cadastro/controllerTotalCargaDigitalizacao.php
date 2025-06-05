@@ -13,9 +13,10 @@ if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados))
     $unidade = $dados['unidade'];
     $ano = $dados['ano'];
 	$perfil = $_SESSION['privilegio'];
-    /*$informar = $unidade ." ". $ano ." ". $perfil;
-    file_put_contents(__DIR__ . '/dados.txt', $informar);*/
-
+    /*
+    $informar = $unidade ." ". $ano ." ". $perfil;
+    file_put_contents(__DIR__ . '/dados.txt', $informar);
+    */
     $relatorioMensalDigitalizacao = new GerarRelatorioMensalDigitalizacao(
         $unidade,
         $ano,

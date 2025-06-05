@@ -179,8 +179,9 @@ class GerarPDFDiarioDigitalizacao extends ConectarBD
 	
 	public function exportarParaExcel($nomeArquivo = "dados.xls", $dados = []) {
 		// Define os cabeçalhos para download do arquivo Excel
-		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Type: application/vnd.ms-excel; charset=utf-8');
 		header('Content-Disposition: attachment; filename="' . $nomeArquivo . '"');
+		echo "\xEF\xBB\xBF"; 
 		
 		// Inicia a tabela HTML
 		echo '<table border="1">';

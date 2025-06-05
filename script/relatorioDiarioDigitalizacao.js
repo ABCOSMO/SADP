@@ -6,6 +6,11 @@ function relatorioDiarioDigitalizacao() {
     let resultado = document.getElementById('dadosContainer');
     resultado.innerHTML = ''; // Limpa o conteúdo existente
     let usuarioPerfil; // Variável para armazenar o perfil do usuário
+	let totalCargaAnterior = 0;
+    let totalCargaRecebidas = 0;
+    let totalCargaImpossibilitada = 0;
+    let totalCargaDigitalizada = 0;
+    let totalResto = 0;
 
     fetch('../cadastro/controllerCargaDiariaDigitalizacao.php', {
         method: 'POST',
@@ -21,6 +26,15 @@ function relatorioDiarioDigitalizacao() {
         .then(data => {
             if (data.length > 0) {
                 usuarioPerfil = data[0].perfil; // Assumindo que o perfil está no primeiro item
+				
+				data.forEach(item => {
+                totalCargaAnterior += Number(item.imagens_anterior) || 0;
+                totalCargaRecebidas += Number(item.imagens_recebidas) || 0;
+                totalCargaImpossibilitada += Number(item.imagens_impossibilitadas) || 0;
+                totalCargaDigitalizada += Number(item.imagens_incorporadas) || 0;
+                totalResto += Number(item.resto) || 0;
+            });
+
             } else {
                 usuarioPerfil = null; // Caso a resposta esteja vazia
             }
@@ -76,10 +90,22 @@ function relatorioDiarioDigitalizacao() {
                                             </td>-->
                                         ` : ''}
                                     </tr>`;
+				
+				
                 id++;
             });
 
-            tabelaHTML += `</table></div></section>`;
+            tabelaHTML += `<tr class=''>
+                                        <td class='' id='unidade'>--</td>
+                                        <td class='' id='matricula'>--</td>
+                                        <td class='' id='usuario'>--</td>
+                                        <td class='' id='Data'>Total</td>
+										<td>${mascaraDigitarCarga(totalCargaAnterior.toString())}</td>
+										<td>${mascaraDigitarCarga(totalCargaRecebidas.toString())}</td>
+										<td>${mascaraDigitarCarga(totalCargaImpossibilitada.toString())}</td>
+										<td>${mascaraDigitarCarga(totalCargaDigitalizada.toString())}</td>
+										<td>${mascaraDigitarCarga(totalResto.toString())}</td></tr>
+							</table></div></section>`;
             resultado.innerHTML = tabelaHTML;
 
             let modalHTML = ''; // Declaração correta da variável

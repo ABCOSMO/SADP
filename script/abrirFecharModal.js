@@ -1,4 +1,4 @@
-function adicionarListenersModal() {
+/*function adicionarListenersModal() {
     let botaoLancarCarga = document.getElementById('login-button-inicial');
     
     if(botaoLancarCarga){
@@ -6,7 +6,8 @@ function adicionarListenersModal() {
             if(validaFormulario() == false){
                 event.preventDefault(); 
                 event.stopPropagation();
-                window.location.href = '../digitalizacao/lancarCarga.php';
+                return;
+				//window.location.href = '../digitalizacao/lancarCarga.php';
             }
         });
     }
@@ -52,3 +53,4 @@ function adicionarListenersModal() {
         });
     });
 }
+*/

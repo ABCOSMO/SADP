@@ -2,15 +2,17 @@
     require 'autoload.php';
     
     use FADPD\ConectarUsuario\ConectarBD;
-    use FADPD\Cadastrar\ExcluirCargaDigitalizacao;
+    use FADPD\Relatorios\GerarRelatorioMensalDigitalizacao;
 
-    $matricula = '88888888';
-    $dataDigitalizacao = '25/05/2025';
+    $unidade = '';
+    $ano = '2025';
+	$perfil = '01';
 
 
-    $excluirCargaDigitalizacao = new ExcluirCargaDigitalizacao(
-        $matricula,
-        $dataDigitalizacao
+    $relatorioMensalDigitalizacao = new GerarRelatorioMensalDigitalizacao(
+        $unidade,
+        $ano,
+		$perfil
     );
-    $excluirCargaDigitalizacao->excluirSEOcorrencias();
-    
+
+    $relatorioMensalDigitalizacao->relatorioCargaTotalDigitalizacao();   
