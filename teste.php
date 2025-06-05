@@ -2,17 +2,20 @@
     require 'autoload.php';
     
     use FADPD\ConectarUsuario\ConectarBD;
-    use FADPD\Relatorios\GerarPDFMensalDigitalizacao;
+    use FADPD\Relatorios\GerarRelatorioDiarioSE;
 
-    $unidade = '';
-    $ano = '2025';
-	$perfil = '01';
+    $unidade = 'CDIP BRASÍLIA';
+	//$unidade = mb_convert_encoding($unidade, 'UTF-8', 'ISO-8859-1');
+    $dataInicial = '2025-03-01';
+	$dataFinal = '2025-05-30';
+	$perfil = '02';
 
 
-    $relatorioMensalDigitalizacao = new GerarPDFMensalDigitalizacao(
+    $relatorioDiarioDigitalizacao = new GerarRelatorioDiarioSE(
         $unidade,
-        $ano,
+        $dataInicial,
+        $dataFinal,
 		$perfil
     );
 
-    $relatorioMensalDigitalizacao->relatorioMensalDigitalizacaoPDF();   
+    $relatorioDiarioDigitalizacao->relatorioDiarioSE();  

@@ -71,6 +71,9 @@ $codificarPefil = hash('sha256', $perfil)
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
                 </li>
+				<li class="lista-digitalizacao__item">
+                    <a class="lista-digitalizacao__link" href="#">Relatório Recebido SEs</a>
+                </li>
             </ul>
             <a class="cabecalho__menu__texto" href="#">Produção</a>
             <a class="cabecalho__menu__texto" href="http://msc01065329:9888/ecarta/form/getMovimento_frm.ect" target="_blank">Consulta e-Carta</a>

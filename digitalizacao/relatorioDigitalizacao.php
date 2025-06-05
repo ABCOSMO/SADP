@@ -27,6 +27,7 @@ $codificarPefil = hash('sha256', $perfil)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/relatorioDigitalizacao.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,6 +65,9 @@ $codificarPefil = hash('sha256', $perfil)
                 </li>
                 <li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="../digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
+                </li>
+				<li class="lista-digitalizacao__item">
+                    <a class="lista-digitalizacao__link" href="#">Relatório Recebido SEs</a>
                 </li>
             </ul>
             <a class="cabecalho__menu__texto" href="#">Produção</a>

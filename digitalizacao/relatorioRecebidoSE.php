@@ -1,11 +1,15 @@
 <?php
 session_start();
+require '../autoload.php';
 
-require 'autoload.php';
+use FADPD\ConectarUsuario\{
+    ConectarBD, SessaoUsuario
+};
+use FADPD\Lista\{
+    SelecionarData, SelecionarUnidade
+};
 
-use FADPD\ConectarUsuario\SessaoUsuario;
-
-$autenticandoUsuario = new sessaoUsuario();
+$autenticandoUsuario = new SessaoUsuario();
 $autenticandoUsuario->autenticarUsuario();
 $autenticandoUsuario->tempoLoginUsuario();
 $separarNome = explode (" ",$_SESSION['nome']);
@@ -23,16 +27,19 @@ $codificarPefil = hash('sha256', $perfil)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/relatorioDigitalizacao.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="../header.js" defer></script>
     <title>FADPD - DELOG</title>
 </head>
 <body>
-    <header class="cabecalho">
-        <nav class="cabecalho__links">
+<header class="cabecalho">
+    <nav class="cabecalho__links">
 			<input type="hidden" id="perfilOculto" value=<?php echo $codificarPefil; ?>>
             <input type="checkbox" id="logoff" class="cabecalho__logoff">
             <label for="logoff">
@@ -40,7 +47,7 @@ $codificarPefil = hash('sha256', $perfil)
             </label>
             <ul class="lista-logoff">
                 <li class="lista-logoff__item">
-                    <a class="lista-logoff__link" href="./login/index.php?logout=logout">Fazer Logoff</a>
+                    <a class="lista-logoff__link" href="../login/index.php?logout=logout">Fazer Logoff</a>
                 </li>
             </ul>
         </nav>
@@ -51,13 +58,13 @@ $codificarPefil = hash('sha256', $perfil)
             </label>
             <ul class="lista-digitalizacao" id="lista">
                 <li id="cadastrarUsuario" class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="./digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
+                    <a class="lista-digitalizacao__link" href="../digitalizacao/alterarExcluirUsuario.php">Cadastrar Usuário</a>
                 </li>
                 <li id="lancarDados" class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="./digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
+                    <a class="lista-digitalizacao__link" href="../digitalizacao/lancarCarga.php">Lançar Dados Digitalização</a>
                 </li>
                 <li class="lista-digitalizacao__item">
-                    <a class="lista-digitalizacao__link" href="./digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
+                    <a class="lista-digitalizacao__link" href="../digitalizacao/relatorioDigitalizacao.php">Relatório Digitalização</a>
                 </li>
 				<li class="lista-digitalizacao__item">
                     <a class="lista-digitalizacao__link" href="#">Relatório Recebido SEs</a>
@@ -67,18 +74,42 @@ $codificarPefil = hash('sha256', $perfil)
             <a class="cabecalho__menu__texto" href="http://msc01065329:9888/ecarta/form/getMovimento_frm.ect" target="_blank">Consulta e-Carta</a>
             <a class="cabecalho__menu__texto" href="https://sgd.correios.com.br/sgd/app/" target="_blank">SGD</a>
             <a class="cabecalho__menu__texto" href="https://cas.correios.com.br/login?service=https%3A%2F%2Fapp.correiosnet.int%2Fecarta%2Fpages%2F" target="_blank">e-Carta</a>
-            <a class="cabecalho__menu__texto" href="./">Home</a>
+            <a class="cabecalho__menu__texto" href="../">Home</a>
         </nav>
     </header>
-    <main class="container__corpo"></main>
-    <footer class="rodape">
-        <p></p>
-        <div>
-            <h3 class="rodape__texto">Desenvolvido pelos CDIPs</h3>
+    <div class="container__caminho">
+        <div class="linha">
+            <a class="caminhos" href="../">Home</a>  
+            <p class="seta"> > </p>
+            <a class="caminhos" href="../digitalizacao/relatorioDigitalizacao.php">Digitalização</a>
+            <p class="seta">  > </p>
+            <a class="caminhos" href="../digitalizacao/relatorioDigitalizacao.php">Relatório Recebido SEs</a>
         </div>
+    </div>
+    <section class="container__botao">
+        <div class="container__cadastro_usuario">
+            <div class="menuAlterarUsuario" id="modal-1">
+               <div class="modal-header">
+                    <h1 class="modal-title">
+                        Relatório Recebido SEs
+                    </h1>
+                </div>
+                <div class="botao__apertar">
+                    <input type="hidden" id="perfil" name="perfil" value='<?php echo $perfil; ?>'>
+					<input type="hidden" id="secao_unidade" name="secao_unidade" value='<?php echo $unidade; ?>'>
+                </div>                
+                <div class="container__calendario" id="diaria" name="diaria"></div>
+                <div id="dadosContainer"></div>
+            </div>            
+            <dialog class="loading"></dialog>
+        </div>  
+    </section>
+    <footer>
+        
     </footer>
-    <script src="header.js" defer></script>
-	<script src="script/excluirPerfil.js" defer></script>
+	<script src="../script/dataAtual.js" defer></script>
+    <script src="../script/opcaoRecebidaSE.js" defer></script>
+	<script src="../script/relatorioDiarioSE.js" defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 </body>
 </html>
