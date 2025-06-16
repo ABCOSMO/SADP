@@ -18,9 +18,9 @@ if (json_last_error() === JSON_ERROR_NONE && is_array($dados) && !empty($dados))
         $newMatricula,
         $newData
     );
-    $excluirCargaDigitalizacao->excluirSEOcorrencias();
+    $excluirCargaDigitalizacao->alterarDados();
 
-    /*file_put_contents(__DIR__ . '/matricula.txt', $informar);*/
+    file_put_contents(__DIR__ . '/matricula.txt', $informar);
     
 } else {
     // Tratar erros de decodificação ou dados inválidos

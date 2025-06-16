@@ -93,6 +93,8 @@ class AlterarSEOcorrencia extends ConectarBD
 								tb_digitalizacao 
 							INNER JOIN
 								tb_unidades
+                            ON 
+                                tb_digitalizacao.mcu_unidade = tb_unidades.mcu_unidade
 							WHERE 
 								tb_digitalizacao.data_digitalizacao = :data_digitalizacao 
 							AND 
@@ -177,6 +179,8 @@ class AlterarSEOcorrencia extends ConectarBD
 								tb_digitalizacao 
 							INNER JOIN
 								tb_unidades
+                            ON 
+                                tb_digitalizacao.mcu_unidade = tb_unidades.mcu_unidade
 							WHERE 
 								tb_digitalizacao.data_digitalizacao = :data_digitalizacao 
 							AND 

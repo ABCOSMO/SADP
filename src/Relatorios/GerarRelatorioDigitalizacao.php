@@ -151,6 +151,7 @@ class GerarRelatorioDigitalizacao extends ConectarBD
                 foreach($resultado as $key => $value) {
                     $digitalizacoes[] = [
                         'unidade' => $this->getUnidade(),
+                        'mcu_unidade_codigo' => $value->mcu_unidade,
                         'matricula_usuario' => $this->formatarMatricula($value->matricula),
                         'nome_usuario' => $value->nome,
                         'data_digitalizacao' => $this->alterarFormatoData($value->data_digitalizacao),
@@ -163,6 +164,7 @@ class GerarRelatorioDigitalizacao extends ConectarBD
                 }
                 $ses_recebidas = $this->relatorioDiarioSE();
 				$ocorrencias = $this->relatorioOcorrencias();
+                $finalResponse['perfil_usuario'] = $perfil;
                 
             } else { // Perfil == "01"
                 // Verifica se a carga já foi lançada
@@ -203,6 +205,7 @@ class GerarRelatorioDigitalizacao extends ConectarBD
 
                     $digitalizacoes[] = [
                         'unidade' => $unidade,
+                        'mcu_unidade_codigo' => $value->mcu_unidade,
                         'matricula_usuario' => $this->formatarMatricula($value->matricula),
                         'nome_usuario' => $value->nome,
                         'data_digitalizacao' => $this->alterarFormatoData($value->data_digitalizacao),
@@ -307,7 +310,7 @@ class GerarRelatorioDigitalizacao extends ConectarBD
             $response = [];
             foreach ($resultado as $value) {
                 $response[] = [
-                   //'unidade' => $this->getUnidade(), // Ou $unidade, se você quiser usar a variável já obtida
+                    'mcu_unidade' => $mcuUnidade, // Ou $unidade, se você quiser usar a variável já obtida
                     'data_recebimento' => $this->alterarFormatoData($value->data_recebimento),
                     'se_recebida' => $value->se, // Ou 'se' se for o nome original
                 ];
@@ -315,36 +318,37 @@ class GerarRelatorioDigitalizacao extends ConectarBD
 
             return $response;
         }else {
-            $sql = 
-                "SELECT 
-                    tb_digitalizacao.*, 
-                    tb_carga_origem_recebida.*
-                FROM 
-                    tb_digitalizacao 
-                INNER JOIN 
-                    tb_carga_origem_recebida
-                ON 
-                    tb_digitalizacao.data_digitalizacao = tb_carga_origem_recebida.data_recebimento
-                AND 
-                    tb_digitalizacao.data_digitalizacao >= :data_anterior 
-                AND 
-                    tb_digitalizacao.data_digitalizacao <= :data_posterior                      
-                ORDER BY 
-                    tb_digitalizacao.data_digitalizacao";
+            $sql = "
+                    SELECT 
+                        d.mcu_unidade,
+                        cor.data_recebimento,
+                        cor.se AS se_recebida
+                    FROM 
+                        tb_digitalizacao d
+                    INNER JOIN 
+                        tb_carga_origem_recebida cor
+                    ON 
+                        d.id_digitalizacao = cor.id_digitalizacao  -- Relaciona pelo ID correto
+                    WHERE 
+                        cor.data_recebimento BETWEEN :data_anterior AND :data_posterior
+                    ORDER BY 
+                        d.mcu_unidade, cor.data_recebimento
+                ";
 
                 $dados = array(
                     ":data_anterior" => $dataAnterior, 
                     ":data_posterior" => $dataPosterior,
                 );
-                $query = parent::executarSQL($sql,$dados);
+
+                $query = parent::executarSQL($sql, $dados);
                 $resultado = $query->fetchAll(PDO::FETCH_OBJ);
 
                 $response = [];
                 foreach ($resultado as $value) {
                     $response[] = [
-                    //'unidade' => $this->getUnidade(), // Ou $unidade, se você quiser usar a variável já obtida
+                        'mcu_unidade' => $value->mcu_unidade, // Ou $unidade, se você quiser usar a variável já obtida
                         'data_recebimento' => $this->alterarFormatoData($value->data_recebimento),
-                        'se_recebida' => $value->se, // Ou 'se' se for o nome original
+                        'se_recebida' => $value->se_recebida, // Ou 'se' se for o nome original
                     ];
                 }
                 return $response;
@@ -425,7 +429,7 @@ class GerarRelatorioDigitalizacao extends ConectarBD
             $response = [];
             foreach ($resultado as $value) {
                 $response[] = [
-                   //'unidade' => $this->getUnidade(), // Ou $unidade, se você quiser usar a variável já obtida
+                    'mcu_unidade' => $mcuUnidade, // Ou $unidade, se você quiser usar a variável já obtida
                     'data_recebimento_ocorrencia' => $this->alterarFormatoData($value->data_recebimento),
                     'ocorrencia' => $value->ocorrencia, // Ou 'se' se for o nome original
                 ];
@@ -435,20 +439,20 @@ class GerarRelatorioDigitalizacao extends ConectarBD
         }else {
             $sql = 
                 "SELECT 
-                    tb_digitalizacao.*, 
-                    tb_ocorrencias.*
-                FROM 
-                    tb_digitalizacao 
-                INNER JOIN 
-                    tb_ocorrencias
-                ON 
-                    tb_digitalizacao.data_digitalizacao = tb_ocorrencias.data_recebimento
-                AND 
-                    tb_digitalizacao.data_digitalizacao >= :data_anterior 
-                AND 
-                    tb_digitalizacao.data_digitalizacao <= :data_posterior                      
-                ORDER BY 
-                    tb_digitalizacao.data_digitalizacao";
+                        d.mcu_unidade,
+                        cor.data_recebimento,
+                        cor.ocorrencia AS se_ocorrencia
+                    FROM 
+                        tb_digitalizacao d
+                    INNER JOIN 
+                        tb_ocorrencias cor
+                    ON 
+                        d.id_digitalizacao = cor.id_digitalizacao  -- Relaciona pelo ID correto
+                    WHERE 
+                        cor.data_recebimento BETWEEN :data_anterior AND :data_posterior
+                    ORDER BY 
+                        d.mcu_unidade, cor.data_recebimento
+                ";
 
                 $dados = array(
                     ":data_anterior" => $dataAnterior, 
@@ -460,9 +464,9 @@ class GerarRelatorioDigitalizacao extends ConectarBD
                 $response = [];
                 foreach ($resultado as $value) {
                     $response[] = [
-                    //'unidade' => $this->getUnidade(), // Ou $unidade, se você quiser usar a variável já obtida
+                        'mcu_unidade' => $value->mcu_unidade, // Ou $unidade, se você quiser usar a variável já obtida
                         'data_recebimento_ocorrencia' => $this->alterarFormatoData($value->data_recebimento),
-                        'ocorrencia' => $value->ocorrencia, // Ou 'se' se for o nome original
+                        'ocorrencia' => $value->se_ocorrencia, // Ou 'se' se for o nome original
                     ];
                 }
                 return $response;

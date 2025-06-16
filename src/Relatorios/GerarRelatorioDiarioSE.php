@@ -75,46 +75,25 @@ class GerarRelatorioDiarioSE extends ConectarBD
         $queryUnidade = parent::executarSQL($sqlUnidade, $dadosUnidade);
         $resultadoUnidade = $queryUnidade->fetch(PDO::FETCH_OBJ); // Use fetch para um único resultado
 
+        
         if (!$resultadoUnidade) {
-            // Lidar com o caso onde a unidade não é encontrada
-            echo "Unidade não encontrada.";
-            exit;
-        }
-
-        $mcuUnidade = $resultadoUnidade->mcu_unidade;
-
-        if ($perfil != "01") {
-            // 2. Obter as últimas 5 id_digitalizacao distintas para a mcu_unidade específica
-            $sqlUltimosIds = "
-                SELECT id_digitalizacao
-				FROM tb_digitalizacao
-				WHERE mcu_unidade = :mcu_unidade
-				AND data_digitalizacao BETWEEN :data_inicial AND :data_final
-				ORDER BY id_digitalizacao DESC
-            ";
-            $dadosUltimosIds = [
-                ":mcu_unidade" => $mcuUnidade,
-				":data_inicial" => $dataInicial,
-				":data_final" => $dataFinal
+            $sqlUnidade = "SELECT mcu_unidade FROM tb_unidades WHERE nome_unidade != :nome_unidade";
+            $dadosUnidade = [
+                ":nome_unidade" => $unidade
             ];
-            $queryUltimosIds = parent::executarSQL($sqlUltimosIds, $dadosUltimosIds);
-            $ultimosIdsDigitalizacao = $queryUltimosIds->fetchAll(PDO::FETCH_COLUMN); // Pega apenas a coluna id_digitalizacao
+            $queryidMcuUnidade = parent::executarSQL($sqlUnidade, $dadosUnidade);
+            $resultadoIdMcuUnidade = $queryidMcuUnidade->fetchAll(PDO::FETCH_COLUMN); // Use fetch para um único resultado
 
-             //$placeholders = implode(',', array_fill(0, count($ultimosIdsDigitalizacao), '?'));
-            
-            if (empty($ultimosIdsDigitalizacao)) {
-                echo "Nenhum registro de digitalização encontrado para a unidade e período.";
-                exit;
-            }
+            $mcuUnidade = implode(',', $resultadoIdMcuUnidade); // Ex: "48,47,46,45,44"
 
-            $cleanIds = array_map('intval', $ultimosIdsDigitalizacao);
-            $idsString = implode(',', $cleanIds); // Ex: "48,47,46,45,44"
-			
-            // 4. Montar a query principal para buscar os dados completos
+        }else{
+            $mcuUnidade = $resultadoUnidade->mcu_unidade;
+        }
+        
             $sql = "
                 SELECT * FROM tb_carga_origem_recebida 
                 WHERE
-                    id_digitalizacao IN ($idsString)
+                    id_digitalizacao IN ($mcuUnidade)
                 AND 
                     data_recebimento 
                 BETWEEN 
@@ -146,43 +125,7 @@ class GerarRelatorioDiarioSE extends ConectarBD
             header('Content-Type: application/json; charset=utf-8');
 			echo json_encode($response, JSON_UNESCAPED_UNICODE);;
 			
-        }else {
-            $sql = 
-                "SELECT 
-                    tb_digitalizacao.*, 
-                    tb_carga_origem_recebida.*
-                FROM 
-                    tb_digitalizacao 
-                INNER JOIN 
-                    tb_carga_origem_recebida
-                ON 
-                    tb_digitalizacao.data_digitalizacao = tb_carga_origem_recebida.data_recebimento
-                AND 
-                    tb_digitalizacao.data_digitalizacao >= :data_inicial 
-                AND 
-                    tb_digitalizacao.data_digitalizacao <= :data_final                     
-                ORDER BY 
-                    tb_digitalizacao.data_digitalizacao";
-
-                $dados = array(
-                    ":data_inicial" => $dataInicial, 
-                    ":data_final" => $dataFinal,
-                );
-                $query = parent::executarSQL($sql,$dados);
-                $resultado = $query->fetchAll(PDO::FETCH_OBJ);
-
-                $response = [];
-                foreach ($resultado as $value) {
-                    $response[] = [
-                    'unidade' => $this->getUnidade(), // Ou $unidade, se você quiser usar a variável já obtida
-                        'data_recebimento' => $this->alterarFormatoData($value->data_recebimento),
-                        'se_recebida' => $value->se, // Ou 'se' se for o nome original
-						'matricula' => $value->matricula
-                    ];
-                }
-                header('Content-Type: application/json; charset=utf-8');
-				echo json_encode($response, JSON_UNESCAPED_UNICODE);;
-        }
+       
     }
 
     public function relatorioOcorrencias()

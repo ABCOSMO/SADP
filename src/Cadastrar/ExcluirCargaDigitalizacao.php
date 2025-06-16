@@ -44,7 +44,8 @@ class ExcluirCargaDigitalizacao extends ConectarBD
     public function excluirSEOcorrencias()
     {
         $dataDigitalizacao = $this->alterarData();
-        $matricula = $this->getMatricula();
+        $tratarMatricula = $this->getMatricula();
+        $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
         
         $sqlMcu = 
                     "SELECT 
@@ -93,10 +94,12 @@ class ExcluirCargaDigitalizacao extends ConectarBD
     public function alterarDados() 
     {
         $dataDigitalizacao = $this->alterarData();
+        $tratarMatricula = $this->getMatricula();
+        $matricula = str_replace(['.', '+', '-'], '', $tratarMatricula);
 
         $sql = "DELETE FROM tb_digitalizacao WHERE matricula = :matricula AND data_digitalizacao = :novaData";
         $dados = array(
-                        ":matricula" => $this->getMatricula(),
+                        ":matricula" => $matricula,
                         ":novaData" => $dataDigitalizacao
                         );
         try {

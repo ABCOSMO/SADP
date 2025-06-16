@@ -1,0 +1,177 @@
+Unidade: CDIP CURITIBA
+Matrícula: 99999999
+Data Digitalizacao: 26/05/2025
+Status SE:
+Array
+(
+    [0] => Array
+        (
+            [se_numero] => 00003
+            [status] => 0
+        )
+
+    [1] => Array
+        (
+            [se_numero] => 00004
+            [status] => 0
+        )
+
+    [2] => Array
+        (
+            [se_numero] => 00005
+            [status] => 0
+        )
+
+    [3] => Array
+        (
+            [se_numero] => 00006
+            [status] => 0
+        )
+
+    [4] => Array
+        (
+            [se_numero] => 00008
+            [status] => 0
+        )
+
+    [5] => Array
+        (
+            [se_numero] => 00012
+            [status] => 0
+        )
+
+    [6] => Array
+        (
+            [se_numero] => 00010
+            [status] => 0
+        )
+
+    [7] => Array
+        (
+            [se_numero] => 00012
+            [status] => 0
+        )
+
+    [8] => Array
+        (
+            [se_numero] => 00016
+            [status] => 0
+        )
+
+    [9] => Array
+        (
+            [se_numero] => 00018
+            [status] => 0
+        )
+
+    [10] => Array
+        (
+            [se_numero] => 00024
+            [status] => 0
+        )
+
+    [11] => Array
+        (
+            [se_numero] => 00022
+            [status] => 0
+        )
+
+    [12] => Array
+        (
+            [se_numero] => 00020
+            [status] => 1
+        )
+
+    [13] => Array
+        (
+            [se_numero] => 00028
+            [status] => 0
+        )
+
+    [14] => Array
+        (
+            [se_numero] => 00030
+            [status] => 0
+        )
+
+    [15] => Array
+        (
+            [se_numero] => 00036
+            [status] => 1
+        )
+
+    [16] => Array
+        (
+            [se_numero] => 00032
+            [status] => 0
+        )
+
+    [17] => Array
+        (
+            [se_numero] => 00034
+            [status] => 0
+        )
+
+    [18] => Array
+        (
+            [se_numero] => 00050
+            [status] => 1
+        )
+
+    [19] => Array
+        (
+            [se_numero] => 00060
+            [status] => 0
+        )
+
+    [20] => Array
+        (
+            [se_numero] => 00064
+            [status] => 0
+        )
+
+    [21] => Array
+        (
+            [se_numero] => 00026
+            [status] => 0
+        )
+
+    [22] => Array
+        (
+            [se_numero] => 00065
+            [status] => 0
+        )
+
+    [23] => Array
+        (
+            [se_numero] => 00068
+            [status] => 0
+        )
+
+    [24] => Array
+        (
+            [se_numero] => 00074
+            [status] => 1
+        )
+
+    [25] => Array
+        (
+            [se_numero] => 00072
+            [status] => 1
+        )
+
+    [26] => Array
+        (
+            [se_numero] => 00070
+            [status] => 0
+        )
+
+    [27] => Array
+        (
+            [se_numero] => 00075
+            [status] => 0
+        )
+
+)
+
+Ocorrencia: Teste CWB 2

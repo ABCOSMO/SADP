@@ -22,12 +22,13 @@
     $seStates = $data['se_states']; // Este é o array que queremos visualizar
     $ocorrencia = $data['ocorrencia']; 
 
-/*
+    /*
     // Converte o array $seStates para uma string legível
     // O 'true' no segundo parâmetro faz com que a função retorne a string, em vez de imprimi-la.
     $seStatesString = print_r($seStates, true); // Você também pode usar var_export($seStates, true);
     
 	$conteudo = "Unidade: " . $unidade . "\n";
+    $conteudo .= "Matrícula: " . $matricula . "\n";
     $conteudo .= "Data Digitalizacao: " . $dataDigitalizacao . "\n";
     $conteudo .= "Status SE:\n" . $seStatesString . "\n"; // Adiciona a string formatada do array
     $conteudo .= "Ocorrencia: " . $ocorrencia;
@@ -35,7 +36,7 @@
     file_put_contents(__DIR__ . "/meu_arquivo.txt", $conteudo);
 
 exit;
-*/   
+    */
         $alterarDadosDigitalizacao = new AlterarSEOcorrencia(
             $unidade,
 			$matricula,

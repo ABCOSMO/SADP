@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    carregarDadosAutomaticamente(); // Chama a função que faz o fetch
+    carregarDadosAutomaticamente(); // Chama a funÃ§Ã£o que faz o fetch
 });
 
 function carregarDadosAutomaticamente() {
@@ -40,7 +40,7 @@ function carregarDadosAutomaticamente() {
 				<label for="dataFinal">Data Final:</label>
 				<input class="calendario" type="date" id="dataFinal" name="dataFinal" min="2022-01-01" max="2035-12-31" value="2025-04-25">
 				<div class="container__botao_calendario">
-					<input class="botao__diario" value="Gerar Relatório" type="submit" id="login-button">
+					<input class="botao__diario" value="Gerar RelatÃ³rio" type="submit" id="login-button">
 				</div>`;
 			
 			lista.innerHTML = dadosHTML;
